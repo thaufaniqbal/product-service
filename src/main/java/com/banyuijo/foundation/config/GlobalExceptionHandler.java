@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -24,5 +25,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         log.error(objectMapper.writeValueAsString(response));
         return new ResponseEntity<>(response, ex.getError().getStatus());
     }
-
+    @ExceptionHandler(Exception.class)
+    public final ResponseEntity<ApiResponseDto> handleException(Exception ex) {
+        ApiResponseDto response = new ApiResponseDto(
+                HttpStatus.INTERNAL_SERVER_ERROR,
+                new HashMap<>(),
+                "Internal Server Error: " + ex.getMessage()
+        );
+        log.error("Error 500 buset, gila lu ya: \n ", ex);
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
