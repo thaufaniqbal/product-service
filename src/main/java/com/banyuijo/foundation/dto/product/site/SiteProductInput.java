@@ -1,22 +1,20 @@
-package com.banyuijo.foundation.dto.product;
+package com.banyuijo.foundation.dto.product.site;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
-public class SiteProductCreateRequest {
+public class SiteProductInput {
 
     private String siteProductName;
 
     private String siteProductCode;
 
-    private UUID productTypeId;
+    private String productTypeCode;
 
 }

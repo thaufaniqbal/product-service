@@ -1,6 +1,6 @@
 package com.banyuijo.foundation.service.product.site;
 
-import com.banyuijo.foundation.dto.product.SiteProductDto;
+import com.banyuijo.foundation.dto.product.site.SiteProductDto;
 import com.banyuijo.foundation.entity.SiteProduct;
 import com.banyuijo.foundation.enums.HttpStatusCode;
 import com.banyuijo.foundation.exception.HttpStatusException;

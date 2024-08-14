@@ -1,4 +1,4 @@
-package com.banyuijo.foundation.dto.product;
+package com.banyuijo.foundation.dto.product.site;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

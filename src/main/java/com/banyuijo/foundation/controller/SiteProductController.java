@@ -1,7 +1,7 @@
 package com.banyuijo.foundation.controller;
 
 import com.banyuijo.foundation.dto.base.ApiResponseDto;
-import com.banyuijo.foundation.dto.product.SiteProductCreateRequest;
+import com.banyuijo.foundation.dto.product.site.SiteProductInput;
 import com.banyuijo.foundation.service.product.site.SiteProductService;
 import com.banyuijo.foundation.service.product.site.create.SiteProductCreateService;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class SiteProductController {
         return ApiResponseDto.toResponseEntity(HttpStatus.OK, siteProductService.getProductDetail(productId));
     }
     @GetMapping("/create")
-    public ResponseEntity<ApiResponseDto<Object>> getDetail(@RequestBody SiteProductCreateRequest request,
+    public ResponseEntity<ApiResponseDto<Object>> getDetail(@RequestBody SiteProductInput request,
                                                             @RequestHeader("login-id") String loginId) {
         return ApiResponseDto.toResponseEntity(HttpStatus.CREATED, siteProductCreateService.createProduct(request, loginId));
     }
