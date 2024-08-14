@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/product-type")
 public class ProductTypeController {
     private final ProductTypeService productTypeService;
-    @GetMapping("/code-list")
+    @GetMapping("/list")
     public ResponseEntity<ApiResponseDto<Object>> getProductTypeCodeList() {
         return ApiResponseDto.toResponseEntity(HttpStatus.OK, productTypeService.getAllProductCode());
     }
