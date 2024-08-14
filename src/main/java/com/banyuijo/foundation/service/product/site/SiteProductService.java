@@ -1,0 +1,9 @@
+package com.banyuijo.foundation.service.product.site;
+
+import com.banyuijo.foundation.dto.product.SiteProductDto;
+
+import java.util.UUID;
+
+public interface SiteProductService {
+    SiteProductDto getProductDetail(UUID productId);
+}

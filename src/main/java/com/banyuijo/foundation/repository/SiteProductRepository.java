@@ -7,4 +7,6 @@ import java.util.UUID;
 
 public interface SiteProductRepository extends JpaRepository <SiteProduct, UUID> {
 
+    Boolean existsBySiteProductCodeIgnoreCase(String siteProductCode);
+
 }
