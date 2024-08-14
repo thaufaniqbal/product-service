@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,5 +21,10 @@ public class ApiResponseDto <T> {
         this.status = status;
         this.result = result;
     }
-
+    public ResponseEntity<ApiResponseDto<T>> toResponseEntity() {
+        return ResponseEntity.status(this.status).body(this);
+    }
+    public static <T> ResponseEntity<ApiResponseDto<T>> toResponseEntity(HttpStatus status, T result) {
+        return new ApiResponseDto<>(status, result).toResponseEntity();
+    }
 }
