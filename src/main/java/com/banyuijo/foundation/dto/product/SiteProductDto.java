@@ -15,7 +15,7 @@ public class SiteProductDto {
     private UUID siteProductId;
     private double currentTds;
     private double averageTds;
-    private double pH;
+    private double pH;  
     SiteProductStatus siteProductStatus;
 
     @AllArgsConstructor
