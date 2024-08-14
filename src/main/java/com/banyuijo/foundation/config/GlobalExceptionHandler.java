@@ -1,7 +1,6 @@
 package com.banyuijo.foundation.config;
 
 import com.banyuijo.foundation.dto.base.ApiResponseDto;
-import com.banyuijo.foundation.enums.HttpStatusCode;
 import com.banyuijo.foundation.exception.HttpStatusException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +14,9 @@ import java.util.HashMap;
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(HttpStatusException.class)
-    public final ResponseEntity<ApiResponseDto> error(HttpStatusCode ex) {
-        ApiResponseDto response = new ApiResponseDto(ex.getStatus(), new HashMap<>(), ex.getFormat());
-        return new ResponseEntity<>(response, ex.getStatus());
+    public final ResponseEntity<ApiResponseDto> error(HttpStatusException ex) {
+        ApiResponseDto response = new ApiResponseDto(ex.getError().getStatus(), new HashMap<>(), ex.getError().getFormat());
+        return new ResponseEntity<>(response, ex.getError().getStatus());
     }
 
 }
