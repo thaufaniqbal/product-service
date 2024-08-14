@@ -12,8 +12,11 @@ public class GlobalValidator {
     public void validateRequestLength(String property ,Integer minLength, Integer maxLength) {
         int length = property.length();
         if (length < minLength || length > maxLength) {
-            throw new HttpStatusException(length < minLength ?
-                    HttpStatusCode.MINIMUM_LENGTH_EXCEEDED : HttpStatusCode.MAXIMUM_LENGTH_EXCEEDED, property);
+            throw new HttpStatusException(
+                    length < minLength ?
+                            HttpStatusCode.MINIMUM_LENGTH_EXCEEDED : HttpStatusCode.MAXIMUM_LENGTH_EXCEEDED, property,
+                    length < minLength ?
+                            minLength : maxLength);
         }
     }
 }
