@@ -20,7 +20,7 @@ import java.util.HashMap;
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     private final ObjectMapper objectMapper;
     @ExceptionHandler(HttpStatusException.class)
-    public final ResponseEntity<ApiResponseDto> error(HttpStatusException ex) throws JsonProcessingException {
+    public final ResponseEntity<Object>  error(HttpStatusException ex) throws JsonProcessingException {
         ApiResponseDto response = new ApiResponseDto(ex.getError().getStatus(), new HashMap<>(), ex.getError().getFormat());
         log.error(objectMapper.writeValueAsString(response));
         return new ResponseEntity<>(response, ex.getError().getStatus());
