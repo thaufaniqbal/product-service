@@ -13,21 +13,27 @@ import java.util.UUID;
 @Setter
 @Getter
 @Entity
-@Table(name = "mst_user")
-public class Customer {
+@Table(name = "mst_address")
+public class Address {
 
     @Id
-    @Column(name = "customer_Id")
-    private UUID customerId;
-
-    @Column(name = "customer_name")
-    private String customerName;
-
-    @Column(name = "address_id")
+    @Column(name = "address_Id")
     private UUID addressId;
 
-    @Column(name = "contact_id")
-    private UUID contactId;
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "fax")
+    private String fax;
+
+    @Column(name = "city_code")
+    private String cityCode;
+
+    @Column(name = "state_code")
+    private String stateCode;
+
+    @Column(name = "country_code")
+    private String countryCode;
 
     @Column(name = "created_by")
     private String createdBy;
@@ -40,8 +46,5 @@ public class Customer {
 
     @Column(name = "last_updated_date")
     private LocalDateTime lastUpdatedDate;
-
-    @Column(name = "delete_status")
-    private Integer deleteStatus;
 
 }

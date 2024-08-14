@@ -13,21 +13,21 @@ import java.util.UUID;
 @Setter
 @Getter
 @Entity
-@Table(name = "mst_user")
-public class Customer {
+@Table(name = "mst_site_product")
+public class SiteProduct {
 
     @Id
-    @Column(name = "customer_Id")
-    private UUID customerId;
+    @Column(name = "site_product_Id")
+    private UUID siteProductId;
 
-    @Column(name = "customer_name")
-    private String customerName;
+    @Column(name = "site_product_name")
+    private String siteProductName;
 
-    @Column(name = "address_id")
-    private UUID addressId;
+    @Column(name = "site_product_code")
+    private String siteProductCode;
 
-    @Column(name = "contact_id")
-    private UUID contactId;
+    @Column(name = "product_type_Id")
+    private UUID productTypeId;
 
     @Column(name = "created_by")
     private String createdBy;
