@@ -13,10 +13,14 @@ public class GlobalValidator {
         int length = property.length();
         if (length < minLength || length > maxLength) {
             throw new HttpStatusException(
-                    length < minLength ?
-                            HttpStatusCode.MINIMUM_LENGTH_EXCEEDED : HttpStatusCode.MAXIMUM_LENGTH_EXCEEDED, property,
-                    length < minLength ?
-                            minLength : maxLength);
+                    length < minLength ? HttpStatusCode.MINIMUM_LENGTH_EXCEEDED : HttpStatusCode.MAXIMUM_LENGTH_EXCEEDED,
+                    property,
+                    length < minLength ? minLength : maxLength);
+        }
+    }
+    public void validateRequestMandatory(String property){
+        if (property.isEmpty()){
+            throw new HttpStatusException(HttpStatusCode.MISSING_MANDATORY_PROPERTY);
         }
     }
 }

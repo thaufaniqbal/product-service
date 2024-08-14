@@ -9,4 +9,6 @@ public interface SiteProductRepository extends JpaRepository <SiteProduct, UUID>
 
     Boolean existsBySiteProductCodeIgnoreCase(String siteProductCode);
 
+    SiteProduct findBySiteProductId (UUID siteProductId);
+
 }

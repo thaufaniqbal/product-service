@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class SiteProductInput {
+public class SiteProductCreateInput {
 
     private String siteProductName;
 
