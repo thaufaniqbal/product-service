@@ -16,13 +16,12 @@ public class SiteProductServiceImpl implements SiteProductService {
     }
     private SiteProductDto getDetail(UUID siteId){
         if (Objects.isNull(siteId)){
-            SiteProductDto.SiteProductStatus status = new SiteProductDto().new SiteProductStatus(true, false, true, false);
             SiteProductDto siteProductDto = new SiteProductDto(
                     UUID.randomUUID(),
                     7.8,
                     7.5,
                     6.5,
-                    status
+                    null
             );
             return siteProductDto;
         }
