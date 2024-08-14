@@ -16,6 +16,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(HttpStatusException.class)
     public final ResponseEntity<ApiResponseDto> error(HttpStatusException ex) {
         ApiResponseDto response = new ApiResponseDto(ex.getError().getStatus(), new HashMap<>(), ex.getError().getFormat());
+        log.error(response.toString());
         return new ResponseEntity<>(response, ex.getError().getStatus());
     }
 
