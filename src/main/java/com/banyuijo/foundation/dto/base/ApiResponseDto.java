@@ -15,7 +15,7 @@ public class ApiResponseDto <T> {
 
     private HttpStatus status;
     private T result;
-    private String error;
+    private String message;
 
     public ApiResponseDto(HttpStatus status, T result) {
         this.status = status;
