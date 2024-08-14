@@ -16,6 +16,6 @@ public class SiteProductController {
     private final SiteProductService siteProductService;
     @GetMapping("/id")
     public ResponseEntity<ApiResponseDto<Object>> getDetail() {
-        return ApiResponseDto.toResponseEntity(HttpStatus.OK, siteProductService.getProductDetail());
+        return ApiResponseDto.toResponseEntity(HttpStatus.CREATED, siteProductService.getProductDetail());
     }
 }
