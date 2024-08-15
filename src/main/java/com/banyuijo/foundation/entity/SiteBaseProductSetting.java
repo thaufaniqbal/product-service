@@ -20,9 +20,6 @@ public class SiteBaseProductSetting {
     @Column(name = "site_base_product_setting_id")
     private UUID siteBaseProductSettingId;
 
-    @Column(name = "site_base_product_setting_name")
-    private String siteBaseProductSettingName;
-
     @Column(name = "site_base_product_setting_type_id")
     private UUID siteBaseProductSettingTypeId;
 

@@ -6,6 +6,7 @@ import com.banyuijo.foundation.entity.SiteProduct;
 import com.banyuijo.foundation.enums.BooleanStatus;
 import com.banyuijo.foundation.repository.ProductTypeRepository;
 import com.banyuijo.foundation.repository.SiteProductRepository;
+import com.banyuijo.foundation.service.product.site.structure.builder.SiteProductStructureBuilder;
 import com.banyuijo.foundation.service.product.site.validator.SiteProductValidator;
 import com.banyuijo.foundation.util.CustomLogger;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -22,6 +23,7 @@ public class SiteProductCreateServiceImpl implements SiteProductCreateService {
 
     private final SiteProductRepository siteProductRepository;
     private final ProductTypeRepository productTypeRepository;
+    private final SiteProductStructureBuilder structureBuilder;
     private final SiteProductValidator validator;
     private final CustomLogger customLogger;
 
@@ -31,6 +33,7 @@ public class SiteProductCreateServiceImpl implements SiteProductCreateService {
         SiteProduct siteProduct = build(request, loginId);
         customLogger.setLogObject(siteProduct, "createSiteProduct", loginId);
         saveProduct(siteProduct);
+        structureBuilder.init(siteProduct.getSiteProductId(), siteProduct.getProductTypeId(), siteProduct.getSiteProductName());
         return request;
     }
     @Transactional
