@@ -20,6 +20,7 @@ public class ApiResponseDto <T> {
     public ApiResponseDto(HttpStatus status, T result) {
         this.status = status;
         this.result = result;
+        this.message = "";
     }
     public ResponseEntity<ApiResponseDto<T>> toResponseEntity() {
         return ResponseEntity.status(this.status).body(this);
