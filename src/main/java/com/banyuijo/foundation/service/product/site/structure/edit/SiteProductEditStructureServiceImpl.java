@@ -38,6 +38,8 @@ public class SiteProductEditStructureServiceImpl implements SiteProductEditStruc
         siteProductValidator.validateSiteProductId(siteProductId);
         SiteBaseProductParent productParent = parentRepository.findBySiteProductId(siteProductId);
 
+        deleteStructure(productParent);
+
         SiteProductStructureEditWrapper wrapper = new SiteProductStructureEditWrapper();
 
         buildStructure(productParent, request, wrapper);
@@ -47,6 +49,19 @@ public class SiteProductEditStructureServiceImpl implements SiteProductEditStruc
         save(wrapper);
 
         return request;
+    }
+    @Transactional
+    private void deleteStructure (SiteBaseProductParent productParent){
+        List<SiteBaseProductStructure> structures = structureRepository.findAllBySiteBaseProductParentId(productParent.getSiteBaseProductParentId());
+        for (SiteBaseProductStructure structure: structures){
+            List<SiteBaseProductSetting> settings = settingRepository.findAllBySiteBaseProductStructureId(structure.getSiteBaseProductStructureId());
+            for (SiteBaseProductSetting setting : settings){
+                List<SiteBaseProductSettingData> settingDataList = settingDataRepository.findAllBySiteBaseProductSettingId(setting.getSiteBaseProductSettingId());
+                settingDataRepository.deleteAll(settingDataList);
+            }
+            settingRepository.deleteAll(settings);
+        }
+        structureRepository.deleteAll(structures);
     }
     @Transactional
     private void save (SiteProductStructureEditWrapper wrapper){
