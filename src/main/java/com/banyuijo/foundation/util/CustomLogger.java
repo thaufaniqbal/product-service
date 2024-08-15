@@ -12,6 +12,6 @@ import org.springframework.stereotype.Component;
 public class CustomLogger {
     private final ObjectMapper objectMapper;
     public void setLogObject(Object object) throws JsonProcessingException {
-        log.error(objectMapper.writeValueAsString(object));
+        log.info(objectMapper.writeValueAsString(object));
     }
 }
