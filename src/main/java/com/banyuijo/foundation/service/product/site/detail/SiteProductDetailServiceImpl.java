@@ -1,4 +1,4 @@
-package com.banyuijo.foundation.service.product.site;
+package com.banyuijo.foundation.service.product.site.detail;
 
 import com.banyuijo.foundation.dto.product.site.SiteProductDto;
 import com.banyuijo.foundation.entity.SiteProduct;
@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class SiteProductServiceImpl implements SiteProductService {
+public class SiteProductDetailServiceImpl implements SiteProductDetailService {
     private final SiteProductRepository siteProductRepository;
     private final ObjectMapper objectMapper;
     @Override
