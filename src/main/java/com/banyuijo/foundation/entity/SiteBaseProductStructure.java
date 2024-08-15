@@ -26,9 +26,6 @@ public class SiteBaseProductStructure {
     @Column(name = "site_base_product_parent_id")
     private UUID siteBaseProductParentId;
 
-    @Column(name = "site_base_product_structure_type_id")
-    private UUID siteBaseProductStructureTypeId;
-
     @Column(name = "seq")
     private Integer seq;
 
