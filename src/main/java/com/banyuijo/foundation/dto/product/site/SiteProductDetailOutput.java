@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Setter
 @Getter
-public class SiteProductDto {
+public class SiteProductDetailOutput {
     private UUID siteProductId;
 
     private String siteProductName;
