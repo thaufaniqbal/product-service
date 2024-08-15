@@ -21,18 +21,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     private final ObjectMapper objectMapper;
     @ExceptionHandler(HttpStatusException.class)
     public final ResponseEntity<Object>  error(HttpStatusException ex) throws JsonProcessingException {
-        ApiResponseDto response = new ApiResponseDto(ex.getError().getStatus(), new HashMap<>(), ex.getError().getFormat());
+        ApiResponseDto response = new ApiResponseDto(ex.getError().getStatus(), "new HashMap<>()", ex.getError().getFormat());
         log.error(objectMapper.writeValueAsString(response));
         return new ResponseEntity<>(response, ex.getError().getStatus());
     }
     @ExceptionHandler(Exception.class)
-    public final ResponseEntity<ApiResponseDto> handleException(Exception ex) {
+    public final ResponseEntity<ApiResponseDto> handleException(Exception ex) throws JsonProcessingException {
         ApiResponseDto response = new ApiResponseDto(
                 HttpStatus.INTERNAL_SERVER_ERROR,
                 new HashMap<>(),
                 "Internal Server Error: " + ex.getMessage()
         );
-        log.error("Error 500 buset, gila lu ya: \n ", ex);
+        log.error("Error 500 buset, gila lu ya: \n ", objectMapper.writeValueAsString(response),"\n"+ ex);
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
