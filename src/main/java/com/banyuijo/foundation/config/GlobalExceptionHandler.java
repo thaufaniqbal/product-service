@@ -26,12 +26,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         log.error(objectMapper.writeValueAsString(response));
         return new ResponseEntity<>(response, ex.getError().getStatus());
     }
-    @ExceptionHandler(HttpStatusException.class)
-    public final ResponseEntity<Object>  errorList(HttpStatusException ex) throws JsonProcessingException {
-        ApiResponseDto response = new ApiResponseDto(ex.getError().getStatus(), new ArrayList<>(), ex.getError().getFormat());
-        log.error(objectMapper.writeValueAsString(response));
-        return new ResponseEntity<>(response, ex.getError().getStatus());
-    }
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<ApiResponseDto> handleException(Exception ex) throws JsonProcessingException {
         ApiResponseDto response = new ApiResponseDto(
