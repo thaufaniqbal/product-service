@@ -108,8 +108,8 @@ public class SiteProductStructureBuilderImpl implements SiteProductStructureBuil
         if (object){
             result.setValue("{init.format}");
         }else {
-            result.setLowerBond("{init.lower}");
-            result.setUpperBond("{init.upper}");
+            result.setLowerBond("{init.lower"+seq+"}");
+            result.setUpperBond("{init.upper"+seq+"}");
         }
         return result;
     }
