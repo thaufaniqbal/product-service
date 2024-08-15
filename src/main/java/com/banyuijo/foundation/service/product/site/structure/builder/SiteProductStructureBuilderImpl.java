@@ -46,7 +46,8 @@ public class SiteProductStructureBuilderImpl implements SiteProductStructureBuil
         settingDataRepository.save(productSettingDataSecondT);
     }
 
-    private SiteBaseProductParent buildParent(UUID sideProductId, UUID productTypeId, String productName){
+    @Override
+    public SiteBaseProductParent buildParent(UUID sideProductId, UUID productTypeId, String productName){
         SiteBaseProductParent result = new SiteBaseProductParent();
         result.setSiteBaseProductParentId(UUID.randomUUID());
         result.setSiteBaseProductParentName(productName);
@@ -59,7 +60,7 @@ public class SiteProductStructureBuilderImpl implements SiteProductStructureBuil
         return result;
     }
 
-    private SiteBaseProductStructure buildStructure(UUID parentId, Integer seq, String structureName){
+    public SiteBaseProductStructure buildStructure(UUID parentId, Integer seq, String structureName){
         SiteBaseProductStructure result = new SiteBaseProductStructure();
         result.setSiteBaseProductStructureId(UUID.randomUUID());
         result.setSiteBaseProductStructureName(structureName);
@@ -72,7 +73,7 @@ public class SiteProductStructureBuilderImpl implements SiteProductStructureBuil
         return result;
     }
 
-    private SiteBaseProductSetting buildStructureSetting(UUID structureId, UUID settingTypeId){
+    public SiteBaseProductSetting buildStructureSetting(UUID structureId, UUID settingTypeId){
         SiteBaseProductSetting result = new SiteBaseProductSetting();
         result.setSiteBaseProductSettingId(UUID.randomUUID());
         result.setSiteBaseProductSettingTypeId(settingTypeId);
@@ -84,7 +85,7 @@ public class SiteProductStructureBuilderImpl implements SiteProductStructureBuil
         return result;
     }
 
-    private SiteBaseProductSettingData buildStructureSettingData(UUID settingId, Integer seq, boolean object){
+    public SiteBaseProductSettingData buildStructureSettingData(UUID settingId, Integer seq, boolean object){
         SiteBaseProductSettingData result = new SiteBaseProductSettingData();
         result.setSiteBaseProductSettingDataId(UUID.randomUUID());
         result.setSiteBaseProductSettingId(settingId);
