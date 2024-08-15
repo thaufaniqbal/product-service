@@ -7,6 +7,7 @@ import com.banyuijo.foundation.dto.product.site.structure.edit.SiteProductEditSt
 import com.banyuijo.foundation.service.product.site.detail.SiteProductDetailService;
 import com.banyuijo.foundation.service.product.site.create.SiteProductCreateService;
 import com.banyuijo.foundation.service.product.site.edit.SiteProductEditService;
+import com.banyuijo.foundation.service.product.site.list.SiteProductListService;
 import com.banyuijo.foundation.service.product.site.structure.detail.SiteProductDetailStructureService;
 import com.banyuijo.foundation.service.product.site.structure.edit.SiteProductEditStructureService;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ public class SiteProductController {
     private final SiteProductDetailService siteProductDetailService;
     private final SiteProductCreateService siteProductCreateService;
     private final SiteProductEditService siteProductEditService;
+    private final SiteProductListService siteProductListService;
     private final SiteProductDetailStructureService siteProductDetailStructureService;
     private final SiteProductEditStructureService siteProductEditStructureService;
     @GetMapping("/{siteProductId}")
@@ -39,6 +41,13 @@ public class SiteProductController {
                                                                 @RequestHeader("login-id") String loginId,
                                                                 @PathVariable UUID siteProductId) {
         return ApiResponseDto.toResponseEntity(HttpStatus.ACCEPTED, siteProductEditService.editSiteProduct(request, loginId, siteProductId));
+    }
+    @GetMapping("/list")
+    public ResponseEntity<ApiResponseDto<Object>> getSiteProductList() {
+        return ApiResponseDto.toResponseEntity(HttpStatus.OK, siteProductListService.getSiteProductList());
+    }@GetMapping("/list/{productTypeId}")
+    public ResponseEntity<ApiResponseDto<Object>> getSiteProductListByProductType(@PathVariable UUID productTypeId) {
+        return ApiResponseDto.toResponseEntity(HttpStatus.OK, siteProductListService.getSiteProductListByProductType(productTypeId));
     }
     @GetMapping("/structure/{siteProductId}")
     public ResponseEntity<ApiResponseDto<Object>> getSiteProductStructureDetail(@PathVariable UUID siteProductId) {
