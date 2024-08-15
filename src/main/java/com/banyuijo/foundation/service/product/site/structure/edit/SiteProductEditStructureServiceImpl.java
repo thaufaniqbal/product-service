@@ -65,7 +65,8 @@ public class SiteProductEditStructureServiceImpl implements SiteProductEditStruc
                               List<SiteProductEditStructureInput.SiteBaseProductStructure.SiteBaseProductSetting> settingsRequestList,
                                                       SiteProductStructureEditWrapper wrapper){
         for (SiteProductEditStructureInput.SiteBaseProductStructure.SiteBaseProductSetting settingRequest : settingsRequestList){
-            SiteBaseProductSetting setting = builder.buildStructureSetting(structure.getSiteBaseProductStructureId(), settingRequest.getSiteBaseProductSettingTypeId());
+            SiteBaseProductSetting setting;
+            setting = builder.buildStructureSetting(structure.getSiteBaseProductStructureId(), settingRequest.getSiteBaseProductSettingTypeId());
             buildSettingData(setting, settingRequest.getSettingData(), wrapper);
             wrapper.getSettings().add(setting);
         }
@@ -74,9 +75,9 @@ public class SiteProductEditStructureServiceImpl implements SiteProductEditStruc
                                    List<SiteProductEditStructureInput.SiteBaseProductStructure.SiteBaseProductSetting.SiteBaseProductSettingData> settingDataRequestList,
                                    SiteProductStructureEditWrapper wrapper){
         for (SiteProductEditStructureInput.SiteBaseProductStructure.SiteBaseProductSetting.SiteBaseProductSettingData settingDataRequest : settingDataRequestList){
-            SiteBaseProductSettingData settingData =
-                    builder.buildStructureSettingData(setting.getSiteBaseProductSettingId(),
-                            settingDataRequest.getSeq(), BooleanStatus.fromCode(settingDataRequest.getObject()).getBooleanStatus());
+            SiteBaseProductSettingData settingData;
+            settingData = builder.buildStructureSettingData(setting.getSiteBaseProductSettingId(),
+                    settingDataRequest.getSeq(), BooleanStatus.fromCode(settingDataRequest.getObject()).getBooleanStatus());
             wrapper.getSettingData().add(settingData);
         }
     }
