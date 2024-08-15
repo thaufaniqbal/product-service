@@ -2,6 +2,7 @@ package com.banyuijo.foundation.service.product.site.list;
 
 import com.banyuijo.foundation.dto.product.site.SiteProductListOutput;
 import com.banyuijo.foundation.entity.SiteProduct;
+import com.banyuijo.foundation.enums.BooleanStatus;
 import com.banyuijo.foundation.repository.SiteProductRepository;
 import com.banyuijo.foundation.service.product.type.validator.ProductTypeValidator;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ public class SiteProductListServiceImpl implements SiteProductListService {
     private final ProductTypeValidator productTypeValidator;
     @Override
     public List<SiteProductListOutput> getSiteProductList() {
-        return siteProductRepository.findAll().stream()
+        return siteProductRepository.findAllByDeleteStatus(BooleanStatus.NO.getCode()).stream()
                 .map(this::toOutput)
                 .collect(Collectors.toList());
     }
@@ -26,7 +27,7 @@ public class SiteProductListServiceImpl implements SiteProductListService {
     @Override
     public List<SiteProductListOutput> getSiteProductListByProductType(UUID productTypeId) {
         productTypeValidator.validateProductTypeId(productTypeId);
-        return siteProductRepository.findAllByProductTypeId(productTypeId).stream()
+        return siteProductRepository.findAllByProductTypeIdAndDeleteStatus(productTypeId, BooleanStatus.NO.getCode()).stream()
                 .map(this::toOutput)
                 .collect(Collectors.toList());
     }

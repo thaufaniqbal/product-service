@@ -12,5 +12,6 @@ public interface SiteProductRepository extends JpaRepository <SiteProduct, UUID>
 
     SiteProduct findBySiteProductId (UUID siteProductId);
 
-    List<SiteProduct> findAllByProductTypeId(UUID productTypeId);
+    List<SiteProduct> findAllByProductTypeIdAndDeleteStatus(UUID productTypeId, Integer deleteStatus);
+    List<SiteProduct> findAllByDeleteStatus(Integer deleteStatus);
 }
