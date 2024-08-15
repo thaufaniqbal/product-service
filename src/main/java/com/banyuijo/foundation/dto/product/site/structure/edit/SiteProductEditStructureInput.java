@@ -32,8 +32,6 @@ public class SiteProductEditStructureInput {
 
             private UUID siteBaseProductSettingTypeId;
 
-            private UUID settingTypeId;
-
             private List<SiteBaseProductSettingData> settingData;
 
             @AllArgsConstructor
@@ -41,9 +39,6 @@ public class SiteProductEditStructureInput {
             @Setter
             @Getter
             public static class SiteBaseProductSettingData {
-                private UUID siteBaseProductSettingDataId;
-
-                private UUID siteBaseProductSettingId;
 
                 private Integer seq;
 
