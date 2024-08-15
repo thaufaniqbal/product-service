@@ -2,10 +2,8 @@ package com.banyuijo.foundation.service.product.site.list;
 
 import com.banyuijo.foundation.dto.product.site.SiteProductListOutput;
 import com.banyuijo.foundation.entity.SiteProduct;
-import com.banyuijo.foundation.enums.HttpStatusCode;
-import com.banyuijo.foundation.exception.HttpStatusException;
-import com.banyuijo.foundation.repository.ProductTypeRepository;
 import com.banyuijo.foundation.repository.SiteProductRepository;
+import com.banyuijo.foundation.service.product.type.validator.ProductTypeValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +15,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class SiteProductListServiceImpl implements SiteProductListService {
     private final SiteProductRepository siteProductRepository;
-    private final ProductTypeRepository productTypeRepository;
+    private final ProductTypeValidator productTypeValidator;
     @Override
     public List<SiteProductListOutput> getSiteProductList() {
         return siteProductRepository.findAll().stream()
@@ -27,9 +25,7 @@ public class SiteProductListServiceImpl implements SiteProductListService {
 
     @Override
     public List<SiteProductListOutput> getSiteProductListByProductType(UUID productTypeId) {
-        if (!productTypeRepository.existsById(productTypeId)){
-            throw new HttpStatusException(HttpStatusCode.DATA_NOT_FOUND, "product type");
-        }
+        productTypeValidator.validateProductTypeId(productTypeId);
         return siteProductRepository.findAllByProductTypeId(productTypeId).stream()
                 .map(this::toOutput)
                 .collect(Collectors.toList());
