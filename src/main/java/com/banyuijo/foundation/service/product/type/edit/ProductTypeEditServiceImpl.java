@@ -1,8 +1,7 @@
-package com.banyuijo.foundation.service.product.type.create;
+package com.banyuijo.foundation.service.product.type.edit;
 
-import com.banyuijo.foundation.dto.product.type.ProductTypeCreateInput;
+import com.banyuijo.foundation.dto.product.type.ProductTypeEditInput;
 import com.banyuijo.foundation.entity.ProductType;
-import com.banyuijo.foundation.enums.BooleanStatus;
 import com.banyuijo.foundation.repository.ProductTypeRepository;
 import com.banyuijo.foundation.service.product.type.validator.ProductTypeValidator;
 import jakarta.transaction.Transactional;
@@ -11,16 +10,16 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-
 @Service
 @RequiredArgsConstructor
-public class ProductTypeCreateServiceImpl implements ProductTypeCreateService {
+public class ProductTypeEditServiceImpl implements ProductTypeEditService {
     private final ProductTypeRepository productTypeRepository;
     private final ProductTypeValidator validator;
     @Override
-    public Object createProductType(ProductTypeCreateInput request, String loginId) {
-        validator.validateRequest(request, null);
-        ProductType productType = build(request, loginId);
+    public Object editProductType(ProductTypeEditInput request, String loginId, UUID productTypeId) {
+        validator.validateRequest(null, request);
+        validator.validateProductTypeId(productTypeId);
+        ProductType productType = build(request, loginId, productTypeId);
         saveProduct(productType);
         return request;
     }
@@ -28,16 +27,11 @@ public class ProductTypeCreateServiceImpl implements ProductTypeCreateService {
     private void saveProduct(ProductType productType){
         productTypeRepository.save(productType);
     }
-    private ProductType build (ProductTypeCreateInput request, String loginId){
-        ProductType output = new ProductType();
-        output.setProductTypeId(UUID.randomUUID());
-        output.setProductTypeCode(request.getProductTypeCode());
+    private ProductType build (ProductTypeEditInput request, String loginId, UUID productTypeId){
+        ProductType output = productTypeRepository.findByProductTypeId(productTypeId);
         output.setProductTypeName(request.getProductTypeName());
-        output.setCreatedBy(loginId);
-        output.setCreatedDate(LocalDateTime.now());
         output.setLastUpdatedBy(loginId);
         output.setLastUpdatedDate(LocalDateTime.now());
-        output.setDeleteStatus(BooleanStatus.NO.getCode());
         return output;
     }
 }
