@@ -12,5 +12,14 @@ import java.util.HashMap;
 @Setter
 @Getter
 public class SiteProductEditStructureInput {
-    private HashMap<Integer, String> structure;
+    private HashMap<Integer, StructureProduct> structure;
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Setter
+    @Getter
+    public class StructureProduct {
+        private String structureName;
+        private String dataType;
+        private Integer dataStructureType;
+    }
 }

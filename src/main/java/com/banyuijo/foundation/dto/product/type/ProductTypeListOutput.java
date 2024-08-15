@@ -11,7 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Setter
 @Getter
-public class ProductCodeListOutput {
+public class ProductTypeListOutput {
     private UUID productTypeId;
     private String productTypeCode;
 }
