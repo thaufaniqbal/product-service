@@ -27,7 +27,7 @@ public class ProductTypeController {
         return ApiResponseDto.toResponseEntity(HttpStatus.OK, productTypeListService.getAllProductCode());
     }
     @GetMapping("/{productTypeId}")
-    public ResponseEntity<ApiResponseDto<Object>> productTypeDetailService(@PathVariable UUID productTypeId) {
+    public ResponseEntity<ApiResponseDto<Object>> getProductTypeDetail(@PathVariable UUID productTypeId) {
         return ApiResponseDto.toResponseEntity(HttpStatus.OK, productTypeDetailService.getProductTypeDetail(productTypeId));
     }
     @PostMapping("/create")
