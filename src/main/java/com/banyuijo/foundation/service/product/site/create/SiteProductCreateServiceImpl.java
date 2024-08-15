@@ -7,6 +7,8 @@ import com.banyuijo.foundation.enums.BooleanStatus;
 import com.banyuijo.foundation.repository.ProductTypeRepository;
 import com.banyuijo.foundation.repository.SiteProductRepository;
 import com.banyuijo.foundation.service.product.site.validator.SiteProductValidator;
+import com.banyuijo.foundation.util.CustomLogger;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,11 +23,13 @@ public class SiteProductCreateServiceImpl implements SiteProductCreateService {
     private final SiteProductRepository siteProductRepository;
     private final ProductTypeRepository productTypeRepository;
     private final SiteProductValidator validator;
+    private final CustomLogger customLogger;
 
     @Override
-    public Object createSiteProduct(SiteProductCreateInput request, String loginId) {
+    public Object createSiteProduct(SiteProductCreateInput request, String loginId) throws JsonProcessingException {
         validator.validateRequest(request, null);
         SiteProduct siteProduct = build(request, loginId);
+        customLogger.setLogObject(siteProduct);
         saveProduct(siteProduct);
         return request;
     }

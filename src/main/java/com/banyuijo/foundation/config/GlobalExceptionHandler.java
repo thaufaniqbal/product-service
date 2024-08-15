@@ -2,6 +2,7 @@ package com.banyuijo.foundation.config;
 
 import com.banyuijo.foundation.dto.base.ApiResponseDto;
 import com.banyuijo.foundation.exception.HttpStatusException;
+import com.banyuijo.foundation.util.CustomLogger;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +20,11 @@ import java.util.HashMap;
 @RequiredArgsConstructor
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     private final ObjectMapper objectMapper;
+    private final CustomLogger customLogger;
     @ExceptionHandler(HttpStatusException.class)
     public final ResponseEntity<Object>  errorData(HttpStatusException ex) throws JsonProcessingException {
         ApiResponseDto response = new ApiResponseDto(ex.getError().getStatus(), new HashMap<>(), ex.getError().getFormat());
-        log.error(objectMapper.writeValueAsString(response));
+        customLogger.setLogObject(response);
         return new ResponseEntity<>(response, ex.getError().getStatus());
     }
     @ExceptionHandler(Exception.class)

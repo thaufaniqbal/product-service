@@ -5,6 +5,8 @@ import com.banyuijo.foundation.entity.ProductType;
 import com.banyuijo.foundation.enums.BooleanStatus;
 import com.banyuijo.foundation.repository.ProductTypeRepository;
 import com.banyuijo.foundation.service.product.type.validator.ProductTypeValidator;
+import com.banyuijo.foundation.util.CustomLogger;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,10 +19,12 @@ import java.util.UUID;
 public class ProductTypeCreateServiceImpl implements ProductTypeCreateService {
     private final ProductTypeRepository productTypeRepository;
     private final ProductTypeValidator validator;
+    private final CustomLogger customLogger;
     @Override
-    public Object createProductType(ProductTypeCreateInput request, String loginId) {
+    public Object createProductType(ProductTypeCreateInput request, String loginId) throws JsonProcessingException {
         validator.validateRequest(request, null);
         ProductType productType = build(request, loginId);
+        customLogger.setLogObject(productType);
         saveProduct(productType);
         return request;
     }

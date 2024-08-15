@@ -6,6 +6,8 @@ import com.banyuijo.foundation.entity.SiteProduct;
 import com.banyuijo.foundation.repository.ProductTypeRepository;
 import com.banyuijo.foundation.repository.SiteProductRepository;
 import com.banyuijo.foundation.service.product.site.validator.SiteProductValidator;
+import com.banyuijo.foundation.util.CustomLogger;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,11 +20,13 @@ public class SiteProductEditServiceImpl implements SiteProductEditService {
     private final SiteProductRepository siteProductRepository;
     private final ProductTypeRepository productTypeRepository;
     private final SiteProductValidator validator;
+    private final CustomLogger customLogger;
     @Override
-    public Object editSiteProduct(SiteProductEditInput request, String loginId, UUID siteProductId) {
+    public Object editSiteProduct(SiteProductEditInput request, String loginId, UUID siteProductId) throws JsonProcessingException {
         validator.validateRequest(null, request);
         validator.validateSiteProductId(siteProductId);
         SiteProduct siteProduct = build(request, loginId, siteProductId);
+        customLogger.setLogObject(siteProduct);
         saveProduct(siteProduct);
         return request;
     }

@@ -7,6 +7,7 @@ import com.banyuijo.foundation.service.product.type.create.ProductTypeCreateServ
 import com.banyuijo.foundation.service.product.type.detail.ProductTypeDetailService;
 import com.banyuijo.foundation.service.product.type.edit.ProductTypeEditService;
 import com.banyuijo.foundation.service.product.type.list.ProductTypeListService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,13 +33,13 @@ public class ProductTypeController {
     }
     @PostMapping("/create")
     public ResponseEntity<ApiResponseDto<Object>> createProductType(@RequestBody ProductTypeCreateInput request,
-                                                                    @RequestHeader("login-id") String loginId) {
+                                                                    @RequestHeader("login-id") String loginId) throws JsonProcessingException {
         return ApiResponseDto.toResponseEntity(HttpStatus.CREATED, productTypeCreateService.createProductType(request, loginId));
     }
     @PutMapping("/{productTypeId}")
     public ResponseEntity<ApiResponseDto<Object>> editProductType(@RequestBody ProductTypeEditInput request,
                                                                   @RequestHeader("login-id") String loginId,
-                                                                  @PathVariable UUID productTypeId) {
+                                                                  @PathVariable UUID productTypeId) throws JsonProcessingException {
         return ApiResponseDto.toResponseEntity(HttpStatus.ACCEPTED, productTypeEditService.editProductType(request, loginId, productTypeId));
     }
 }

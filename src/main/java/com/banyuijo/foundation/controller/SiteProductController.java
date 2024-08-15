@@ -10,6 +10,7 @@ import com.banyuijo.foundation.service.product.site.edit.SiteProductEditService;
 import com.banyuijo.foundation.service.product.site.list.SiteProductListService;
 import com.banyuijo.foundation.service.product.site.structure.detail.SiteProductDetailStructureService;
 import com.banyuijo.foundation.service.product.site.structure.edit.SiteProductEditStructureService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,13 +34,13 @@ public class SiteProductController {
     }
     @PostMapping("/create")
     public ResponseEntity<ApiResponseDto<Object>> createSiteProduct(@RequestBody SiteProductCreateInput request,
-                                                            @RequestHeader("login-id") String loginId) {
+                                                            @RequestHeader("login-id") String loginId) throws JsonProcessingException {
         return ApiResponseDto.toResponseEntity(HttpStatus.CREATED, siteProductCreateService.createSiteProduct(request, loginId));
     }
     @PutMapping("/{siteProductId}")
     public ResponseEntity<ApiResponseDto<Object>> editSiteProduct(@RequestBody SiteProductEditInput request,
                                                                 @RequestHeader("login-id") String loginId,
-                                                                @PathVariable UUID siteProductId) {
+                                                                @PathVariable UUID siteProductId) throws JsonProcessingException {
         return ApiResponseDto.toResponseEntity(HttpStatus.ACCEPTED, siteProductEditService.editSiteProduct(request, loginId, siteProductId));
     }
     @GetMapping("/list")
