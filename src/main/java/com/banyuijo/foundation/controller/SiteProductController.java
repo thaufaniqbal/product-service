@@ -58,7 +58,7 @@ public class SiteProductController {
     @PutMapping("/structure/{siteProductId}")
     public ResponseEntity<ApiResponseDto<Object>> editSiteProductStructure(@RequestBody SiteProductEditStructureInput request,
                                                               @RequestHeader("login-id") String loginId,
-                                                              @PathVariable UUID siteProductId) {
+                                                              @PathVariable UUID siteProductId) throws JsonProcessingException {
         return ApiResponseDto.toResponseEntity(HttpStatus.ACCEPTED, siteProductEditStructureService.editSiteProductStructure(request, loginId, siteProductId));
     }
 }
