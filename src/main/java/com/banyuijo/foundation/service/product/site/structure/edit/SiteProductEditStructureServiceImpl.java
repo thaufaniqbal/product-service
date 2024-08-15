@@ -15,6 +15,7 @@ import com.banyuijo.foundation.service.product.site.structure.builder.SiteProduc
 import com.banyuijo.foundation.service.product.site.validator.SiteProductValidator;
 import com.banyuijo.foundation.util.CustomLogger;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -43,10 +44,15 @@ public class SiteProductEditStructureServiceImpl implements SiteProductEditStruc
 
         customLogger.setLogObject(wrapper, "editSiteProductStructure", loginId);
 
+        save(wrapper);
+
+        return request;
+    }
+    @Transactional
+    private void save (SiteProductStructureEditWrapper wrapper){
         structureRepository.saveAll(wrapper.getStructures());
         settingRepository.saveAll(wrapper.getSettings());
         settingDataRepository.saveAll(wrapper.getSettingData());
-        return request;
     }
     private void  buildStructure(SiteBaseProductParent productParent, SiteProductEditStructureInput request, SiteProductStructureEditWrapper wrapper){
         for (SiteProductEditStructureInput.SiteBaseProductStructure structureRequest: request.getStructures()){
