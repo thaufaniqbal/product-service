@@ -11,12 +11,11 @@ import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
-public class ProductTypeValidator {
-    private final GlobalValidator validator;
+public class ProductTypeValidator extends GlobalValidator  {
     private final ProductTypeRepository productTypeRepository;
-    public void validateProductTypeId(UUID siteProductId){
-        if (!productTypeRepository.existsById(siteProductId)){
-            throw new HttpStatusException(HttpStatusCode.DATA_NOT_FOUND_FOR, "site product");
+    public void validateProductTypeId(UUID productTypeId){
+        if (!productTypeRepository.existsById(productTypeId)){
+            throw new HttpStatusException(HttpStatusCode.DATA_NOT_FOUND_FOR, "Product Type");
         }
     }
 }

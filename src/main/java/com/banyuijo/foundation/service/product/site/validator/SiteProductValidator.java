@@ -15,19 +15,18 @@ import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
-public class SiteProductValidator {
-    private final GlobalValidator validator;
+public class SiteProductValidator extends GlobalValidator {
     private final SiteProductRepository siteProductRepository;
     private final ProductTypeRepository productTypeRepository;
 
     public void validateRequest (SiteProductCreateInput createRequest, SiteProductEditInput editRequest){
         String siteProductName = Objects.isNull(editRequest) ? createRequest.getSiteProductName() : editRequest.getSiteProductName();
         String productTypeCode = Objects.isNull(editRequest) ? createRequest.getProductTypeCode() : editRequest.getProductTypeCode();
-        validator.validateRequestMandatory(siteProductName);
-        validator.validateRequestMandatory(productTypeCode);
+        validateRequestMandatory(siteProductName);
+        validateRequestMandatory(productTypeCode);
         if (Objects.isNull(editRequest)){
-            validator.validateRequestMandatory(createRequest.getSiteProductCode());
-            validator.validateRequestLength(createRequest.getSiteProductCode(), 3, 3);
+            validateRequestMandatory(createRequest.getSiteProductCode());
+            validateRequestLength(createRequest.getSiteProductCode(), 3, 3);
             if(siteProductRepository.existsBySiteProductCodeIgnoreCase(createRequest.getSiteProductCode())){
                 throw new HttpStatusException(HttpStatusCode.DATA_ALREADY_EXIST, "Product Code: " + createRequest.getSiteProductCode());
             }
@@ -35,7 +34,7 @@ public class SiteProductValidator {
         if (!productTypeRepository.existsByProductTypeCode(productTypeCode)){
             throw new HttpStatusException(HttpStatusCode.INVALID_DATA_INPUT, "product Type: " + productTypeCode);
         }
-        validator.validateRequestLength(siteProductName, 5, 15);
+        validateRequestLength(siteProductName, 5, 15);
     }
 
     public void validateSiteProductId(UUID siteProductId){
