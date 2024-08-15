@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 @Slf4j
@@ -20,8 +21,14 @@ import java.util.HashMap;
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     private final ObjectMapper objectMapper;
     @ExceptionHandler(HttpStatusException.class)
-    public final ResponseEntity<Object>  error(HttpStatusException ex) throws JsonProcessingException {
-        ApiResponseDto response = new ApiResponseDto(ex.getError().getStatus(), "new HashMap<>()", ex.getError().getFormat());
+    public final ResponseEntity<Object>  errorData(HttpStatusException ex) throws JsonProcessingException {
+        ApiResponseDto response = new ApiResponseDto(ex.getError().getStatus(), new HashMap<>(), ex.getError().getFormat());
+        log.error(objectMapper.writeValueAsString(response));
+        return new ResponseEntity<>(response, ex.getError().getStatus());
+    }
+    @ExceptionHandler(HttpStatusException.class)
+    public final ResponseEntity<Object>  errorList(HttpStatusException ex) throws JsonProcessingException {
+        ApiResponseDto response = new ApiResponseDto(ex.getError().getStatus(), new ArrayList<>(), ex.getError().getFormat());
         log.error(objectMapper.writeValueAsString(response));
         return new ResponseEntity<>(response, ex.getError().getStatus());
     }
