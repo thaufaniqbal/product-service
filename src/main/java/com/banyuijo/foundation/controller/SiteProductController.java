@@ -45,7 +45,8 @@ public class SiteProductController {
     @GetMapping("/list")
     public ResponseEntity<ApiResponseDto<Object>> getSiteProductList() {
         return ApiResponseDto.toResponseEntity(HttpStatus.OK, siteProductListService.getSiteProductList());
-    }@GetMapping("/list/{productTypeId}")
+    }
+    @GetMapping("/list/{productTypeId}")
     public ResponseEntity<ApiResponseDto<Object>> getSiteProductListByProductType(@PathVariable UUID productTypeId) {
         return ApiResponseDto.toResponseEntity(HttpStatus.OK, siteProductListService.getSiteProductListByProductType(productTypeId));
     }
