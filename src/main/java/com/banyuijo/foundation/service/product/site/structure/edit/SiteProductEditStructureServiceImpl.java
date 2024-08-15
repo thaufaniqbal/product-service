@@ -12,7 +12,7 @@ import java.util.UUID;
 public class SiteProductEditStructureServiceImpl implements SiteProductEditStructureService {
     private final SiteProductValidator siteProductValidator;
     @Override
-    public Object editProduct(SiteProductEditStructureInput request, String loginId, UUID siteProductId) {
+    public Object editSiteProductStructure(SiteProductEditStructureInput request, String loginId, UUID siteProductId) {
         siteProductValidator.validateSiteProductId(siteProductId);
         return null;
     }

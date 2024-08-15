@@ -19,7 +19,7 @@ public class SiteProductEditServiceImpl implements SiteProductEditService {
     private final ProductTypeRepository productTypeRepository;
     private final SiteProductValidator validator;
     @Override
-    public Object editProduct(SiteProductEditInput request, String loginId, UUID siteProductId) {
+    public Object editSiteProduct(SiteProductEditInput request, String loginId, UUID siteProductId) {
         validator.validateRequest(null, request);
         validator.validateSiteProductId(siteProductId);
         SiteProduct siteProduct = build(request, loginId, siteProductId);

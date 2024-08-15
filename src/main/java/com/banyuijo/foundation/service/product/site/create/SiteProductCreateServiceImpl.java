@@ -23,7 +23,7 @@ public class SiteProductCreateServiceImpl implements SiteProductCreateService {
     private final SiteProductValidator validator;
 
     @Override
-    public Object createProduct(SiteProductCreateInput request, String loginId) {
+    public Object createSiteProduct(SiteProductCreateInput request, String loginId) {
         validator.validateRequest(request, null);
         SiteProduct siteProduct = build(request, loginId);
         saveProduct(siteProduct);

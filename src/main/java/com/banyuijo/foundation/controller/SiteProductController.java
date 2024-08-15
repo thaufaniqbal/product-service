@@ -26,28 +26,28 @@ public class SiteProductController {
     private final SiteProductDetailStructureService siteProductDetailStructureService;
     private final SiteProductEditStructureService siteProductEditStructureService;
     @GetMapping("/{siteProductId}")
-    public ResponseEntity<ApiResponseDto<Object>> getDetail(@PathVariable UUID siteProductId) {
+    public ResponseEntity<ApiResponseDto<Object>> getSiteProductDetail(@PathVariable UUID siteProductId) {
         return ApiResponseDto.toResponseEntity(HttpStatus.OK, siteProductDetailService.getSiteProductDetail(siteProductId));
     }
     @PostMapping("/create")
-    public ResponseEntity<ApiResponseDto<Object>> createProduct(@RequestBody SiteProductCreateInput request,
+    public ResponseEntity<ApiResponseDto<Object>> createSiteProduct(@RequestBody SiteProductCreateInput request,
                                                             @RequestHeader("login-id") String loginId) {
-        return ApiResponseDto.toResponseEntity(HttpStatus.CREATED, siteProductCreateService.createProduct(request, loginId));
+        return ApiResponseDto.toResponseEntity(HttpStatus.CREATED, siteProductCreateService.createSiteProduct(request, loginId));
     }
     @PutMapping("/{siteProductId}")
-    public ResponseEntity<ApiResponseDto<Object>> editProduct(@RequestBody SiteProductEditInput request,
+    public ResponseEntity<ApiResponseDto<Object>> editSiteProduct(@RequestBody SiteProductEditInput request,
                                                                 @RequestHeader("login-id") String loginId,
                                                                 @PathVariable UUID siteProductId) {
-        return ApiResponseDto.toResponseEntity(HttpStatus.ACCEPTED, siteProductEditService.editProduct(request, loginId, siteProductId));
+        return ApiResponseDto.toResponseEntity(HttpStatus.ACCEPTED, siteProductEditService.editSiteProduct(request, loginId, siteProductId));
     }
     @GetMapping("/structure/{siteProductId}")
-    public ResponseEntity<ApiResponseDto<Object>> getStructureDetail(@PathVariable UUID siteProductId) {
+    public ResponseEntity<ApiResponseDto<Object>> getSiteProductStructureDetail(@PathVariable UUID siteProductId) {
         return ApiResponseDto.toResponseEntity(HttpStatus.OK, siteProductDetailStructureService.getSiteProductStructureDetail(siteProductId));
     }
     @PutMapping("/structure/{siteProductId}")
-    public ResponseEntity<ApiResponseDto<Object>> editStructureProduct(@RequestBody SiteProductEditStructureInput request,
+    public ResponseEntity<ApiResponseDto<Object>> editSiteProductStructure(@RequestBody SiteProductEditStructureInput request,
                                                               @RequestHeader("login-id") String loginId,
                                                               @PathVariable UUID siteProductId) {
-        return ApiResponseDto.toResponseEntity(HttpStatus.ACCEPTED, siteProductEditStructureService.editProduct(request, loginId, siteProductId));
+        return ApiResponseDto.toResponseEntity(HttpStatus.ACCEPTED, siteProductEditStructureService.editSiteProductStructure(request, loginId, siteProductId));
     }
 }

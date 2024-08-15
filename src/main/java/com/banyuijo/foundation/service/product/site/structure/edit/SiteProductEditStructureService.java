@@ -5,5 +5,5 @@ import com.banyuijo.foundation.dto.product.site.structure.edit.SiteProductEditSt
 import java.util.UUID;
 
 public interface SiteProductEditStructureService {
-    Object editProduct(SiteProductEditStructureInput request, String loginId, UUID siteProductId);
+    Object editSiteProductStructure(SiteProductEditStructureInput request, String loginId, UUID siteProductId);
 }
