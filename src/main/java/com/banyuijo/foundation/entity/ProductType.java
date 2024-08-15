@@ -38,4 +38,7 @@ public class ProductType {
     @Column(name = "last_updated_date")
     private LocalDateTime lastUpdatedDate;
 
+    @Column(name = "delete_status")
+    private Integer deleteStatus;
+
 }
