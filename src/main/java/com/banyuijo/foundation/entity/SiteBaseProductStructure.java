@@ -13,21 +13,24 @@ import java.util.UUID;
 @Setter
 @Getter
 @Entity
-@Table(name = "mst_site_product")
-public class SiteProduct {
+@Table(name = "mst_site_base_product_structure")
+public class SiteBaseProductStructure {
 
     @Id
-    @Column(name = "site_product_id")
-    private UUID siteProductId;
+    @Column(name = "site_base_product_structure_id")
+    private UUID siteBaseProductStructureId;
 
-    @Column(name = "site_product_name")
-    private String siteProductName;
+    @Column(name = "site_base_product_structure_name")
+    private String siteBaseProductStructureName;
 
-    @Column(name = "site_product_code")
-    private String siteProductCode;
+    @Column(name = "site_base_product_parent_id")
+    private UUID siteBaseProductParentId;
 
-    @Column(name = "product_type_Id")
-    private UUID productTypeId;
+    @Column(name = "site_base_product_structure_type_id")
+    private UUID siteBaseProductStructureTypeId;
+
+    @Column(name = "seq")
+    private Integer seq;
 
     @Column(name = "created_by")
     private String createdBy;
@@ -40,8 +43,5 @@ public class SiteProduct {
 
     @Column(name = "last_updated_date")
     private LocalDateTime lastUpdatedDate;
-
-    @Column(name = "delete_status")
-    private Integer deleteStatus;
 
 }

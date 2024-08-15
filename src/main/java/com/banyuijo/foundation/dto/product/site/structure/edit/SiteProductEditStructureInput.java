@@ -17,7 +17,7 @@ public class SiteProductEditStructureInput {
     @NoArgsConstructor
     @Setter
     @Getter
-    public class StructureProduct {
+    public static class StructureProduct {
         private String structureName;
         private String dataType;
         private Integer dataStructureType;

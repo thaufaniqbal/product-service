@@ -13,6 +13,15 @@ import java.util.UUID;
 @Getter
 public class SiteProductDetailStructureOutput {
     private UUID siteProductId;
-    private HashMap<Integer, String> structure;
+    private HashMap<Integer, StructureProduct> structure;
     private String jsonStructure;
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Setter
+    @Getter
+    public static class StructureProduct {
+        private String structureName;
+        private String dataType;
+        private Integer dataStructureType;
+    }
 }
