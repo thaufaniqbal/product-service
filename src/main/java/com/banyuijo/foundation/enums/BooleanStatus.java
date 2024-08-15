@@ -19,7 +19,7 @@ public enum BooleanStatus {
         return Arrays.stream(values())
                 .filter(value -> value.getCode() == code)
                 .findFirst()
-                .orElseThrow(() -> new HttpStatusException(HttpStatusCode.DATA_NOT_FOUND));
+                .orElseThrow(() -> new HttpStatusException(HttpStatusCode.INVALID_DATA_TYPE, "Boolean Status"));
     }
 
 }
