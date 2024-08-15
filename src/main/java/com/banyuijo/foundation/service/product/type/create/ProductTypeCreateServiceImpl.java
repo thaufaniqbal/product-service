@@ -24,7 +24,7 @@ public class ProductTypeCreateServiceImpl implements ProductTypeCreateService {
     public Object createProductType(ProductTypeCreateInput request, String loginId) throws JsonProcessingException {
         validator.validateRequest(request, null);
         ProductType productType = build(request, loginId);
-        customLogger.setLogObject(productType);
+        customLogger.setLogObject(productType, "createProductType", loginId);
         saveProduct(productType);
         return request;
     }

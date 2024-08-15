@@ -23,7 +23,7 @@ public class ProductTypeEditServiceImpl implements ProductTypeEditService {
         validator.validateRequest(null, request);
         validator.validateProductTypeId(productTypeId);
         ProductType productType = build(request, loginId, productTypeId);
-        customLogger.setLogObject(productType);
+        customLogger.setLogObject(productType, "editProductType", loginId);
         saveProduct(productType);
         return request;
     }

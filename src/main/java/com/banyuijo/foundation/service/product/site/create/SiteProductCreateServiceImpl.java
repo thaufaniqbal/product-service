@@ -29,7 +29,7 @@ public class SiteProductCreateServiceImpl implements SiteProductCreateService {
     public Object createSiteProduct(SiteProductCreateInput request, String loginId) throws JsonProcessingException {
         validator.validateRequest(request, null);
         SiteProduct siteProduct = build(request, loginId);
-        customLogger.setLogObject(siteProduct);
+        customLogger.setLogObject(siteProduct, "createSiteProduct", loginId);
         saveProduct(siteProduct);
         return request;
     }

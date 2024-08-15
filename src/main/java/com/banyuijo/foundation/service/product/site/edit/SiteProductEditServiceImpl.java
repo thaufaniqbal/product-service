@@ -26,7 +26,7 @@ public class SiteProductEditServiceImpl implements SiteProductEditService {
         validator.validateRequest(null, request);
         validator.validateSiteProductId(siteProductId);
         SiteProduct siteProduct = build(request, loginId, siteProductId);
-        customLogger.setLogObject(siteProduct);
+        customLogger.setLogObject(siteProduct, "editSiteProduct", loginId);
         saveProduct(siteProduct);
         return request;
     }
