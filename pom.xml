@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.banyuijo</groupId>
-	<artifactId>foundation</artifactId>
+	<artifactId>product-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>foundation</name>
-	<description>first project</description>
+	<name>product-service</name>
+	<description>product service</description>
 	<url/>
 	<licenses>
 		<license/>
