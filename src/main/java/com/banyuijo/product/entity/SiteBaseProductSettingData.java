@@ -15,7 +15,7 @@ import java.util.UUID;
 @Table(name = "mst_site_base_product_setting_data")
 public class SiteBaseProductSettingData {
     @Id
-    @Column(name = "site_base_product_setting_data_id")
+    @Column(name = "site_base_product_setting_data_id",columnDefinition = "char(36)")
     private UUID siteBaseProductSettingDataId;
 
     @Column(name = "site_base_product_setting_id")
