@@ -21,6 +21,7 @@ public class SiteProductDetailStructureServiceImpl implements SiteProductDetailS
         SiteProductDetailStructureOutput output = new SiteProductDetailStructureOutput();
         output.setSiteProductId(siteProductId);
         output.setStructure(structure);
+        output.setJsonStructure("{soon}");
         return output;
     }
     private SiteProductStructure build(UUID siteProductId) {
