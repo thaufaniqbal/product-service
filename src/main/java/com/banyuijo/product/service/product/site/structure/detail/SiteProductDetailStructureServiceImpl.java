@@ -52,14 +52,14 @@ public class SiteProductDetailStructureServiceImpl implements SiteProductDetailS
 
         SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData setting3 = new SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData();
         setting3.setSeq(1);
-        setting3.setValue("Value 3");
+        setting3.setValue("Value 2");
         setting3.setUpperBond("Upper Bond 1");
         setting3.setLowerBond("Lower Bond 2");
 
         SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData setting4 = new SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData();
-        setting3.setSeq(2);
-        setting3.setUpperBond("Upper Bond 3");
-        setting3.setLowerBond("Lower Bond 4");
+        setting4.setSeq(2);
+        setting4.setUpperBond("Upper Bond 3");
+        setting4.setLowerBond("Lower Bond 4");
 
         structure2.setSettings(List.of(setting3, setting4));
 
