@@ -58,7 +58,7 @@ public class SiteProductDetailStructureServiceImpl implements SiteProductDetailS
 
         SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData setting4 = new SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData();
         setting4.setSeq(2);
-        setting3.setValue("ke-2");
+        setting4.setValue("ke-2");
         setting4.setUpperBond("15:00");
         setting4.setLowerBond("21:00");
         structure2.setSettings(List.of(setting3, setting4));
