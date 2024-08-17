@@ -32,7 +32,7 @@ public class SiteProductController {
     public ResponseEntity<ApiResponseDto<Object>> getSiteProductDetail(@PathVariable UUID siteProductId) {
         return ApiResponseDto.toResponseEntity(HttpStatus.OK, siteProductDetailService.getSiteProductDetail(siteProductId));
     }
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<ApiResponseDto<Object>> createSiteProduct(@RequestBody SiteProductCreateInput request,
                                                             @RequestHeader("login-id") String loginId) throws JsonProcessingException {
         return ApiResponseDto.toResponseEntity(HttpStatus.CREATED, siteProductCreateService.createSiteProduct(request, loginId));
