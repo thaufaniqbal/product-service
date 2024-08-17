@@ -26,7 +26,7 @@ public class SiteProductValidator extends GlobalValidator {
         validateRequestMandatory(productTypeCode);
         if (Objects.isNull(editRequest)){
             validateRequestMandatory(createRequest.getSiteProductCode());
-            validateRequestLength(createRequest.getSiteProductCode(), 3, 3);
+            validateRequestLength(createRequest.getSiteProductCode(), 1, 3);
             if(siteProductRepository.existsBySiteProductCodeIgnoreCase(createRequest.getSiteProductCode())){
                 throw new HttpStatusException(HttpStatusCode.DATA_ALREADY_EXIST, "Product Code: " + createRequest.getSiteProductCode());
             }
