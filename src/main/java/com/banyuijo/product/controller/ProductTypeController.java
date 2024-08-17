@@ -31,7 +31,7 @@ public class ProductTypeController {
     public ResponseEntity<ApiResponseDto<Object>> getProductTypeDetail(@PathVariable UUID productTypeId) {
         return ApiResponseDto.toResponseEntity(HttpStatus.OK, productTypeDetailService.getProductTypeDetail(productTypeId));
     }
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<ApiResponseDto<Object>> createProductType(@RequestBody ProductTypeCreateInput request,
                                                                     @RequestHeader("login-id") String loginId) throws JsonProcessingException {
         return ApiResponseDto.toResponseEntity(HttpStatus.CREATED, productTypeCreateService.createProductType(request, loginId));
