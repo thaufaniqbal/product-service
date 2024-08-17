@@ -8,6 +8,7 @@ import java.util.UUID;
 
 public interface ProductTypeRepository extends JpaRepository <ProductType, UUID> {
     Boolean existsByProductTypeCode(String productTypeCode);
+    Boolean existsByProductTypeId(UUID productTypeId);
     ProductType findByProductTypeCode(String productTypeCode);
     ProductType findByProductTypeId(UUID productTypeId);
     List<ProductType> findAllByDeleteStatus(Integer deleteStatus);
