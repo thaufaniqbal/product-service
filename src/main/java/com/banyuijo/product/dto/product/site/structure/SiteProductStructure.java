@@ -19,6 +19,7 @@ public class SiteProductStructure {
     @NoArgsConstructor
     @Setter
     @Getter
+    @ToString
     public static class SiteBaseProductStructure {
 
         private Integer seq;
@@ -30,6 +31,7 @@ public class SiteProductStructure {
         @NoArgsConstructor
         @Setter
         @Getter
+        @ToString
         public static class SiteBaseProductSettingData {
 
             private Integer seq;
