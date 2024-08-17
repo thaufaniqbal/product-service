@@ -29,7 +29,7 @@ public class SiteProductDetailStructureServiceImpl implements SiteProductDetailS
 
         List<SiteProductStructure.SiteBaseProductStructure> siteBaseProductStructures = buildStructure(siteProductId);
 
-        output.setSiteBaseProductParentName("Example Parent Name");
+        output.setSiteBaseProductParentName("hidroponik");
         output.setStructures(siteBaseProductStructures);
 
         return output;
@@ -44,29 +44,25 @@ public class SiteProductDetailStructureServiceImpl implements SiteProductDetailS
         SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData setting1 = new SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData();
         setting1.setSeq(1);
         setting1.setValue("Value 1");
-        setting1.setUpperBond("Upper Bond 1");
-        setting1.setLowerBond("Lower Bond 1");
 
-        SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData setting2 = new SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData();
-        setting2.setSeq(2);
-        setting2.setValue("Value 2");
-        setting2.setUpperBond("Upper Bond 2");
-        setting2.setLowerBond("Lower Bond 2");
+        structure1.setSettings(List.of(setting1));
 
-        structure1.setSettings(List.of(setting1, setting2));
-
-        // Create a second structure for demonstration
         SiteProductStructure.SiteBaseProductStructure structure2 = new SiteProductStructure.SiteBaseProductStructure();
         structure2.setSeq(2);
         structure2.setSiteBaseProductStructureName("Structure 2");
 
         SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData setting3 = new SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData();
-        setting3.setSeq(1);
+        setting3.setSeq(2);
         setting3.setValue("Value 3");
-        setting3.setUpperBond("Upper Bond 3");
-        setting3.setLowerBond("Lower Bond 3");
+        setting3.setUpperBond("Upper Bond 1");
+        setting3.setLowerBond("Lower Bond 2");
 
-        structure2.setSettings(List.of(setting3));
+        SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData setting4 = new SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData();
+        setting3.setSeq(2);
+        setting3.setUpperBond("Upper Bond 3");
+        setting3.setLowerBond("Lower Bond 4");
+
+        structure2.setSettings(List.of(setting3, setting4));
 
         return List.of(structure1, structure2);
     }
