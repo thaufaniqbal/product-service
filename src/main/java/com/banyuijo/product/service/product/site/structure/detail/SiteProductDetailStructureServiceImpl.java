@@ -17,7 +17,7 @@ public class SiteProductDetailStructureServiceImpl implements SiteProductDetailS
     public SiteProductDetailStructureOutput getSiteProductStructureDetail(UUID siteProductId) throws JsonProcessingException {
         siteProductValidator.validateSiteProductId(siteProductId);
 
-        SiteProductStructure structure = new SiteProductStructure();
+        SiteProductStructure structure = build(siteProductId);
         SiteProductDetailStructureOutput output = new SiteProductDetailStructureOutput();
         output.setSiteProductId(siteProductId);
         output.setStructure(structure);
