@@ -1,6 +1,5 @@
 package com.banyuijo.product.dto.product.site;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +20,8 @@ public class SiteProductDetailOutput {
     private String siteProductCode;
 
     private UUID productTypeId;
+
+    private String productTypeCode;
 
     private String createdBy;
 
