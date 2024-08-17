@@ -32,9 +32,9 @@ public class ProductTypeValidator extends GlobalValidator  {
         validateRequestLength(productTypeName, 5, 15);
     }
     public void validateProductTypeId(UUID productTypeId){
-        if (!productTypeRepository.existsById(productTypeId)){
-            throw new HttpStatusException(HttpStatusCode.DATA_NOT_FOUND_FOR, "Product Type");
-        }
+//        if (!productTypeRepository.existsById(productTypeId)){
+//            throw new HttpStatusException(HttpStatusCode.DATA_NOT_FOUND_FOR, "Product Type");
+//        }
     }
 
 }
