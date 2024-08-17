@@ -27,10 +27,8 @@ public class SiteProductDetailStructureServiceImpl implements SiteProductDetailS
     private SiteProductStructure build(UUID siteProductId) {
         SiteProductStructure output = new SiteProductStructure();
 
-        // Example of building siteBaseProductStructures, assuming you would retrieve actual data here
         List<SiteProductStructure.SiteBaseProductStructure> siteBaseProductStructures = buildStructure(siteProductId);
 
-        // Setting the parent name as an example; this could be retrieved from a database or another service
         output.setSiteBaseProductParentName("Example Parent Name");
         output.setStructures(siteBaseProductStructures);
 
@@ -38,8 +36,6 @@ public class SiteProductDetailStructureServiceImpl implements SiteProductDetailS
     }
 
     private List<SiteProductStructure.SiteBaseProductStructure> buildStructure(UUID siteProductId) {
-        // Here, you'd retrieve or create the list of SiteBaseProductStructure objects based on the siteProductId
-        // For demonstration purposes, creating a dummy list
 
         SiteProductStructure.SiteBaseProductStructure structure1 = new SiteProductStructure.SiteBaseProductStructure();
         structure1.setSeq(1);
