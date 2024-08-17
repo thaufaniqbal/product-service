@@ -9,7 +9,7 @@ import java.util.List;
 @Setter
 @Getter
 @ToString
-public class SiteProductStructureJson {
+public class SiteProductStructure {
 
     private String siteBaseProductParentName;
 

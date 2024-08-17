@@ -1,6 +1,6 @@
 package com.banyuijo.product.dto.product.site.structure.detail;
 
-import com.banyuijo.product.dto.product.site.structure.SiteProductStructureJson;
+import com.banyuijo.product.dto.product.site.structure.SiteProductStructure;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +13,6 @@ import java.util.UUID;
 @Getter
 public class SiteProductDetailStructureOutput {
     private UUID siteProductId;
-    private SiteProductStructureJson structure;
+    private SiteProductStructure structure;
     private String jsonStructure;
 }
