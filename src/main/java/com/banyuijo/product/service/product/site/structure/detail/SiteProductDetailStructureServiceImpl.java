@@ -21,7 +21,6 @@ public class SiteProductDetailStructureServiceImpl implements SiteProductDetailS
         SiteProductDetailStructureOutput output = new SiteProductDetailStructureOutput();
         output.setSiteProductId(siteProductId);
         output.setStructure(structure);
-        output.setJsonStructure(structure.toString());
         return output;
     }
     private SiteProductStructure build(UUID siteProductId) {
@@ -52,7 +51,7 @@ public class SiteProductDetailStructureServiceImpl implements SiteProductDetailS
         structure2.setSiteBaseProductStructureName("Structure 2");
 
         SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData setting3 = new SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData();
-        setting3.setSeq(2);
+        setting3.setSeq(1);
         setting3.setValue("Value 3");
         setting3.setUpperBond("Upper Bond 1");
         setting3.setLowerBond("Lower Bond 2");
