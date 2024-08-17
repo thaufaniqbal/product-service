@@ -24,12 +24,10 @@ public class SiteProductDetailOutput {
 
     private String createdBy;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
     private LocalDateTime createdDate;
 
     private String lastUpdatedBy;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
     private LocalDateTime lastUpdatedDate;
 
     private Integer deleteStatus;

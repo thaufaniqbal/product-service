@@ -1,6 +1,5 @@
 package com.banyuijo.product.dto.product.type;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,12 +21,10 @@ public class ProductTypeDetailOutput {
 
     private String createdBy;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
     private LocalDateTime createdDate;
 
     private String lastUpdatedBy;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
     private LocalDateTime lastUpdatedDate;
 
     private Integer deleteStatus;
