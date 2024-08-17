@@ -23,7 +23,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     private final CustomLogger customLogger;
     @ExceptionHandler(HttpStatusException.class)
     public final ResponseEntity<Object>  errorData(HttpStatusException ex) throws JsonProcessingException {
-        ApiResponseDto response = new ApiResponseDto(ex.getError().getStatus(), new HashMap<>(), ex.getError().getFormat());
+        ApiResponseDto response = new ApiResponseDto(ex.getError().getStatus(), new HashMap<>(), ex.getMessage());
         customLogger.setLogObject(response);
         return new ResponseEntity<>(response, ex.getError().getStatus());
     }
