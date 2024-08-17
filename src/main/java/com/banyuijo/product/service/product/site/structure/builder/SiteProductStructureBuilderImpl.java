@@ -23,8 +23,8 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class SiteProductStructureBuilderImpl implements SiteProductStructureBuilder {
-    private static final String UUID_DEFAULT= "e46ff88258654afba5e188d792aa7a34";
-    private static final String UUID_NOT_DEFAULT= "e46ff88258654afba5e188d792aa7a35";
+    private static final String UUID_DEFAULT= "e46ff882-5865-4afb-a5e1-88d792aa7a34";
+    private static final String UUID_NOT_DEFAULT= "e46ff882-5865-4afb-a5e1-88d792aa7a35";
     private static final String SYSTEM= "system";
 
     private final SiteBaseProductParentRepository parentRepository;
