@@ -21,7 +21,7 @@ public class ProductTypeDetailServiceImpl implements ProductTypeDetailService {
     public ProductTypeDetailOutput getProductTypeDetail(UUID productTypeId) {
         validator.validateProductTypeId(productTypeId);
         ProductType productType = productTypeRepository.findById(productTypeId)
-                .orElseThrow(()->new HttpStatusException(HttpStatusCode.DATA_NOT_FOUND));
+                .orElseThrow(()->new HttpStatusException(HttpStatusCode.DATA_NOT_FOUND, productTypeId.toString()));
         return objectMapper.convertValue(productType, ProductTypeDetailOutput.class);
     }
 }
