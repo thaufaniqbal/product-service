@@ -1,6 +1,6 @@
 package com.banyuijo.product.config;
 
-import com.banyuijo.product.dto.base.ApiResponseDto;
+import com.banyuijo.product.dto.base.ApiResponseDTO;
 import com.banyuijo.product.exception.HttpStatusException;
 import com.banyuijo.product.util.CustomLogger;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -23,13 +23,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     private final CustomLogger customLogger;
     @ExceptionHandler(HttpStatusException.class)
     public final ResponseEntity<Object>  errorData(HttpStatusException ex) throws JsonProcessingException {
-        ApiResponseDto response = new ApiResponseDto(ex.getError().getStatus(), new HashMap<>(), ex.getMessage());
+        ApiResponseDTO response = new ApiResponseDTO(ex.getError().getStatus(), new HashMap<>(), ex.getMessage());
         customLogger.setLogObject(response);
         return new ResponseEntity<>(response, ex.getError().getStatus());
     }
     @ExceptionHandler(Exception.class)
-    public final ResponseEntity<ApiResponseDto> handleException(Exception ex) throws JsonProcessingException {
-        ApiResponseDto response = new ApiResponseDto(
+    public final ResponseEntity<ApiResponseDTO> handleException(Exception ex) throws JsonProcessingException {
+        ApiResponseDTO response = new ApiResponseDTO(
                 HttpStatus.INTERNAL_SERVER_ERROR,
                 new HashMap<>(),
                 "Internal Server Error: " + ex.getMessage()

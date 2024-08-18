@@ -11,21 +11,21 @@ import org.springframework.http.ResponseEntity;
 @NoArgsConstructor
 @Setter
 @Getter
-public class ApiResponseDto <T> {
+public class ApiResponseDTO<T> {
 
     private HttpStatus status;
     private T result;
     private String message;
 
-    public ApiResponseDto(HttpStatus status, T result) {
+    public ApiResponseDTO(HttpStatus status, T result) {
         this.status = status;
         this.result = result;
         this.message = "";
     }
-    public ResponseEntity<ApiResponseDto<T>> toResponseEntity() {
+    public ResponseEntity<ApiResponseDTO<T>> toResponseEntity() {
         return ResponseEntity.status(this.status).body(this);
     }
-    public static <T> ResponseEntity<ApiResponseDto<T>> toResponseEntity(HttpStatus status, T result) {
-        return new ApiResponseDto<>(status, result).toResponseEntity();
+    public static <T> ResponseEntity<ApiResponseDTO<T>> toResponseEntity(HttpStatus status, T result) {
+        return new ApiResponseDTO<>(status, result).toResponseEntity();
     }
 }

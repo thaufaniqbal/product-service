@@ -5,6 +5,9 @@ import com.banyuijo.product.exception.HttpStatusException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+import java.util.UUID;
+
 @Component
 @RequiredArgsConstructor
 public class GlobalValidator {
@@ -20,6 +23,11 @@ public class GlobalValidator {
     }
     public void validateRequestMandatory(String property){
         if (property.isEmpty()){
+            throw new HttpStatusException(HttpStatusCode.MISSING_MANDATORY_PROPERTY, property);
+        }
+    }
+    public void validateRequestMandatory(UUID uuid, String property){
+        if (Objects.isNull(uuid)){
             throw new HttpStatusException(HttpStatusCode.MISSING_MANDATORY_PROPERTY);
         }
     }
