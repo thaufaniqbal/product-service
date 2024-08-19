@@ -1,4 +1,4 @@
-package com.banyuijo.product.entity;
+package com.banyuijo.product.entity.customer;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,15 +10,14 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name = "mst_state")
-public class State {
+@Table(name = "mst_country")
+public class Country {
+
     @Id
-    @Column(name = "state_code")
-    private String stateCode;
-
-    @Column(name = "state_name")
-    private String stateName;
-
     @Column(name = "country_code")
     private String countryCode;
+
+    @Column(name = "country_name")
+    private String countryName;
+
 }

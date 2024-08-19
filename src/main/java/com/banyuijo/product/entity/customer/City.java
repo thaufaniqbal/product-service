@@ -1,4 +1,4 @@
-package com.banyuijo.product.entity;
+package com.banyuijo.product.entity.customer;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

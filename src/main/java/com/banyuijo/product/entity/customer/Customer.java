@@ -1,4 +1,4 @@
-package com.banyuijo.product.entity;
+package com.banyuijo.product.entity.customer;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,27 +13,21 @@ import java.util.UUID;
 @Setter
 @Getter
 @Entity
-@Table(name = "mst_address")
-public class Address {
+@Table(name = "mst_user")
+public class Customer {
 
     @Id
-    @Column(name = "address_Id")
+    @Column(name = "customer_Id")
+    private UUID customerId;
+
+    @Column(name = "customer_name")
+    private String customerName;
+
+    @Column(name = "address_id")
     private UUID addressId;
 
-    @Column(name = "address")
-    private String address;
-
-    @Column(name = "fax")
-    private String fax;
-
-    @Column(name = "city_code")
-    private String cityCode;
-
-    @Column(name = "state_code")
-    private String stateCode;
-
-    @Column(name = "country_code")
-    private String countryCode;
+    @Column(name = "contact_id")
+    private UUID contactId;
 
     @Column(name = "created_by")
     private String createdBy;
@@ -46,5 +40,8 @@ public class Address {
 
     @Column(name = "last_updated_date")
     private LocalDateTime lastUpdatedDate;
+
+    @Column(name = "delete_status")
+    private Integer deleteStatus;
 
 }

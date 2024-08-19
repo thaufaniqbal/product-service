@@ -1,6 +1,6 @@
-package com.banyuijo.product.repository;
+package com.banyuijo.product.repository.customer;
 
-import com.banyuijo.product.entity.State;
+import com.banyuijo.product.entity.customer.State;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface StateRepository extends JpaRepository<State, String> {
