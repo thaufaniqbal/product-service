@@ -28,7 +28,7 @@ public class GlobalValidator {
     }
     public void validateRequestMandatory(UUID uuid, String property){
         if (Objects.isNull(uuid)){
-            throw new HttpStatusException(HttpStatusCode.MISSING_MANDATORY_PROPERTY);
+            throw new HttpStatusException(HttpStatusCode.MISSING_MANDATORY_PROPERTY, property);
         }
     }
 }
