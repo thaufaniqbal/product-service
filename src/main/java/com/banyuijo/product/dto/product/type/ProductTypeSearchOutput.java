@@ -18,6 +18,8 @@ public class ProductTypeSearchOutput {
 
     private String productTypeCode;
 
+    private String productTypeName;
+
     private LocalDateTime lastUpdatedDate;
 
 }
