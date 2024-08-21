@@ -53,8 +53,8 @@ public class ProductTypeGatewayImpl implements ProductTypeGateway {
                 select(entity).
                 from(productType).
                 where(
-                        productType.productTypeName.likeIgnoreCase("%"+productName+"%"),
-                        productType.productTypeCode.likeIgnoreCase("%"+productCode+"%"),
+                        productType.productTypeName.likeIgnoreCase("%"+productName.toLowerCase()+"%"),
+                        productType.productTypeCode.likeIgnoreCase("%"+productCode.toLowerCase()+"%"),
                         productType.deleteStatus.eq(BooleanStatus.NO.getCode())
                 ).
                 limit(pageable.getPageSize()).

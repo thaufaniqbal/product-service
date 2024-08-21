@@ -66,8 +66,8 @@ public class SiteProductGatewayImpl implements SiteProductGateway {
                 join(productType).
                 on(siteProduct.productTypeId.eq(productType.productTypeId)).
                 where(
-                        siteProduct.siteProductName.likeIgnoreCase("%"+productName+"%"),
-                        siteProduct.siteProductCode.likeIgnoreCase("%"+productCode+"%")
+                        siteProduct.siteProductName.likeIgnoreCase("%"+productName.toLowerCase()+"%"),
+                        siteProduct.siteProductCode.likeIgnoreCase("%"+productCode.toLowerCase()+"%")
                         ).
                 limit(pageable.getPageSize()).
                 offset(pageable.getOffset()).
