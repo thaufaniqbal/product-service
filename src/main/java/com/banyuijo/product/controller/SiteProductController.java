@@ -35,7 +35,20 @@ public class SiteProductController {
     private final SiteProductEditStructureService siteProductEditStructureService;
 
     @GetMapping("/")
-    public ResponseEntity<ApiResponseDTO<Object>> searchSiteProduct(@ModelAttribute SiteProductSearchInput input) {
+    public ResponseEntity<ApiResponseDTO<Object>> searchSiteProduct(
+            @RequestParam(required = false) String productName,
+            @RequestParam(required = false) String productCode,
+            @RequestParam(required = false) UUID productTypeId,
+            @RequestParam(required = false, defaultValue = "10") int size,
+            @RequestParam(required = false, defaultValue = "0") int offset) {
+
+        SiteProductSearchInput input = new SiteProductSearchInput();
+        input.setProductName(productName);
+        input.setProductCode(productCode);
+        input.setProductTypeId(productTypeId);
+        input.setSize(size);
+        input.setOffset(offset);
+
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, siteProductSearchService.searchSiteProduct(input));
     }
     @GetMapping("/{siteProductId}")

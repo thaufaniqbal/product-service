@@ -28,7 +28,18 @@ public class ProductTypeController {
     private final ProductTypeCreateService productTypeCreateService;
     private final ProductTypeEditService productTypeEditService;
     @GetMapping("/")
-    public ResponseEntity<ApiResponseDTO<Object>> searchProductType(@ModelAttribute ProductTypeSearchInput input) {
+    public ResponseEntity<ApiResponseDTO<Object>> searchProductType(
+            @RequestParam(required = false) String productTypeCode,
+            @RequestParam(required = false) String productTypeName,
+            @RequestParam(required = false, defaultValue = "10") int size,
+            @RequestParam(required = false, defaultValue = "0") int offset) {
+
+        ProductTypeSearchInput input = new ProductTypeSearchInput();
+        input.setProductTypeCode(productTypeCode);
+        input.setProductTypeName(productTypeName);
+        input.setSize(size);
+        input.setOffset(offset);
+
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, productTypeSearchService.searchProductType(input));
     }
     @GetMapping("/list")
