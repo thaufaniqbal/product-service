@@ -18,11 +18,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Method;
 import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/v1/site-product")
+@CrossOrigin(methods = {RequestMethod.POST, RequestMethod.PUT, RequestMethod.GET})
 public class SiteProductController {
     private final SiteProductSearchService siteProductSearchService;
     private final SiteProductDetailService siteProductDetailService;
