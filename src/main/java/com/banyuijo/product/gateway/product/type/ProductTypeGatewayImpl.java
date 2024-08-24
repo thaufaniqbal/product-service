@@ -63,7 +63,7 @@ public class ProductTypeGatewayImpl implements ProductTypeGateway {
         List<ProductTypeSearchOutput> result = query.fetch();
 
         if (productCode != null) {
-            query.where(productType.productTypeName.likeIgnoreCase("%"+productName.toLowerCase()+"%"));
+            query.where(productType.productTypeName.likeIgnoreCase("%"+productCode.toLowerCase()+"%"));
         }
         if (productName != null) {
             query.where(productType.productTypeName.likeIgnoreCase("%"+productName.toLowerCase()+"%"));

@@ -75,7 +75,7 @@ public class SiteProductGatewayImpl implements SiteProductGateway {
             query.where(productType.productTypeId.eq(productTypeId));
         }
         if (productCode != null) {
-            query.where(productType.productTypeName.likeIgnoreCase("%"+productName.toLowerCase()+"%"));
+            query.where(productType.productTypeName.likeIgnoreCase("%"+productCode.toLowerCase()+"%"));
         }
         if (productName != null) {
             query.where(productType.productTypeName.likeIgnoreCase("%"+productName.toLowerCase()+"%"));
