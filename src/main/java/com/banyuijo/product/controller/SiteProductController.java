@@ -35,7 +35,7 @@ public class SiteProductController {
     private final SiteProductEditStructureService siteProductEditStructureService;
 
     @PostMapping("/")
-    public ResponseEntity<ApiResponseDTO<Object>> searchSiteProduct(@RequestBody SiteProductSearchInput input) {
+    public ResponseEntity<ApiResponseDTO<Object>> searchSiteProduct(@ModelAttribute SiteProductSearchInput input) {
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, siteProductSearchService.searchSiteProduct(input));
     }
     @GetMapping("/{siteProductId}")

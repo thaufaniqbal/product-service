@@ -28,7 +28,7 @@ public class ProductTypeController {
     private final ProductTypeCreateService productTypeCreateService;
     private final ProductTypeEditService productTypeEditService;
     @PostMapping("/")
-    public ResponseEntity<ApiResponseDTO<Object>> searchProductType(@RequestBody ProductTypeSearchInput input) {
+    public ResponseEntity<ApiResponseDTO<Object>> searchProductType(@ModelAttribute ProductTypeSearchInput input) {
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, productTypeSearchService.searchProductType(input));
     }
     @GetMapping("/list")
