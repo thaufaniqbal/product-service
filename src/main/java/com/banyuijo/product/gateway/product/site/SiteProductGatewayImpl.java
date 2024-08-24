@@ -75,10 +75,10 @@ public class SiteProductGatewayImpl implements SiteProductGateway {
             query.where(productType.productTypeId.eq(productTypeId));
         }
         if (productCode != null) {
-            query.where(productType.productTypeName.likeIgnoreCase("%"+productCode.toLowerCase()+"%"));
+            query.where(siteProduct.siteProductCode.likeIgnoreCase("%"+productCode.toLowerCase()+"%"));
         }
         if (productName != null) {
-            query.where(productType.productTypeName.likeIgnoreCase("%"+productName.toLowerCase()+"%"));
+            query.where(siteProduct.siteProductName.likeIgnoreCase("%"+productName.toLowerCase()+"%"));
         }
         List<SiteProductSearchOutput> result = query.fetch();
         long totalCount = query.fetchCount();
