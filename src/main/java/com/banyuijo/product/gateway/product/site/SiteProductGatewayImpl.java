@@ -59,7 +59,7 @@ public class SiteProductGatewayImpl implements SiteProductGateway {
                 siteProduct.siteProductName,
                 siteProduct.siteProductCode,
                 productType.productTypeId,
-                productType.productTypeCode,
+                productType.productTypeName,
                 siteProduct.lastUpdatedDate
         );
         JPAQuery<SiteProductSearchOutput> query = queryFactory.

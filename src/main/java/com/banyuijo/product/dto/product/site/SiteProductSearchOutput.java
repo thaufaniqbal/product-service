@@ -21,7 +21,7 @@ public class SiteProductSearchOutput {
 
     private UUID productTypeId;
 
-    private String productTypeCode;
+    private String productTypeName;
 
     private LocalDateTime lastUpdatedDate;
 
