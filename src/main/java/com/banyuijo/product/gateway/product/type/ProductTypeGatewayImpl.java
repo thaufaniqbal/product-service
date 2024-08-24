@@ -60,7 +60,6 @@ public class ProductTypeGatewayImpl implements ProductTypeGateway {
                 limit(pageable.getPageSize()).
                 offset(pageable.getOffset()).
                 orderBy(productType.productTypeCode.asc());
-        List<ProductTypeSearchOutput> result = query.fetch();
 
         if (productCode != null) {
             query.where(productType.productTypeCode.likeIgnoreCase("%"+productCode.toLowerCase()+"%"));
@@ -68,7 +67,7 @@ public class ProductTypeGatewayImpl implements ProductTypeGateway {
         if (productName != null) {
             query.where(productType.productTypeName.likeIgnoreCase("%"+productName.toLowerCase()+"%"));
         }
-
+        List<ProductTypeSearchOutput> result = query.fetch();
         long totalCount = query.fetchCount();
         return new PageImpl<>(result, pageable, totalCount);
     }

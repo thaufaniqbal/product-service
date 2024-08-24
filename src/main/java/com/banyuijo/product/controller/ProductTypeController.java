@@ -31,8 +31,8 @@ public class ProductTypeController {
     public ResponseEntity<ApiResponseDTO<Object>> searchProductType(
             @RequestParam(required = false) String productTypeCode,
             @RequestParam(required = false) String productTypeName,
-            @RequestParam(required = false, defaultValue = "10") int size,
-            @RequestParam(required = false, defaultValue = "0") int offset) {
+            @RequestParam(required = false) int size,
+            @RequestParam(required = false) int offset) {
 
         ProductTypeSearchInput input = new ProductTypeSearchInput();
         input.setProductTypeCode(productTypeCode);

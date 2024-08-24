@@ -39,8 +39,8 @@ public class SiteProductController {
             @RequestParam(required = false) String productName,
             @RequestParam(required = false) String productCode,
             @RequestParam(required = false) UUID productTypeId,
-            @RequestParam(required = false, defaultValue = "10") int size,
-            @RequestParam(required = false, defaultValue = "0") int offset) {
+            @RequestParam(required = false) int size,
+            @RequestParam(required = false) int offset) {
 
         SiteProductSearchInput input = new SiteProductSearchInput();
         input.setProductName(productName);
