@@ -34,7 +34,7 @@ public class SiteProductController {
     private final SiteProductDetailStructureService siteProductDetailStructureService;
     private final SiteProductEditStructureService siteProductEditStructureService;
 
-    @PostMapping("/")
+    @GetMapping("/")
     public ResponseEntity<ApiResponseDTO<Object>> searchSiteProduct(@ModelAttribute SiteProductSearchInput input) {
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, siteProductSearchService.searchSiteProduct(input));
     }
@@ -42,7 +42,7 @@ public class SiteProductController {
     public ResponseEntity<ApiResponseDTO<Object>> getSiteProductDetail(@PathVariable UUID siteProductId) {
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, siteProductDetailService.getSiteProductDetail(siteProductId));
     }
-    @PostMapping("/create")
+    @PostMapping("/")
     public ResponseEntity<ApiResponseDTO<Object>> createSiteProduct(@RequestBody SiteProductCreateInput request,
                                                                     @RequestHeader("login-id") String loginId) throws JsonProcessingException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.CREATED, siteProductCreateService.createSiteProduct(request, loginId));

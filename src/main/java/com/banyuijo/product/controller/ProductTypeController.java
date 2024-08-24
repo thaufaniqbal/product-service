@@ -27,7 +27,7 @@ public class ProductTypeController {
     private final ProductTypeDetailService productTypeDetailService;
     private final ProductTypeCreateService productTypeCreateService;
     private final ProductTypeEditService productTypeEditService;
-    @PostMapping("/")
+    @GetMapping("/")
     public ResponseEntity<ApiResponseDTO<Object>> searchProductType(@ModelAttribute ProductTypeSearchInput input) {
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, productTypeSearchService.searchProductType(input));
     }
@@ -39,7 +39,7 @@ public class ProductTypeController {
     public ResponseEntity<ApiResponseDTO<Object>> getProductTypeDetail(@PathVariable UUID productTypeId) {
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, productTypeDetailService.getProductTypeDetail(productTypeId));
     }
-    @PostMapping("/create")
+    @PostMapping("/")
     public ResponseEntity<ApiResponseDTO<Object>> createProductType(@RequestBody ProductTypeCreateInput request,
                                                                     @RequestHeader("login-id") String loginId) throws JsonProcessingException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.CREATED, productTypeCreateService.createProductType(request, loginId));
