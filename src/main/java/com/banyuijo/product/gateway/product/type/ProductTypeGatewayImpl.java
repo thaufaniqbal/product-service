@@ -55,14 +55,20 @@ public class ProductTypeGatewayImpl implements ProductTypeGateway {
                 select(entity).
                 from(productType).
                 where(
-                        productType.productTypeName.likeIgnoreCase("%"+productName.toLowerCase()+"%"),
-                        productType.productTypeCode.likeIgnoreCase("%"+productCode.toLowerCase()+"%"),
                         productType.deleteStatus.eq(BooleanStatus.NO.getCode())
                 ).
                 limit(pageable.getPageSize()).
                 offset(pageable.getOffset()).
                 orderBy(productType.productTypeCode.asc());
         List<ProductTypeSearchOutput> result = query.fetch();
+
+        if (productCode != null) {
+            query.where(productType.productTypeName.likeIgnoreCase("%"+productName.toLowerCase()+"%"));
+        }
+        if (productName != null) {
+            query.where(productType.productTypeName.likeIgnoreCase("%"+productName.toLowerCase()+"%"));
+        }
+
         long totalCount = query.fetchCount();
         return new PageImpl<>(result, pageable, totalCount);
     }

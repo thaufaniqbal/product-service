@@ -4,6 +4,8 @@ import com.banyuijo.product.dto.product.site.SiteProductListOutput;
 import com.banyuijo.product.dto.product.site.SiteProductSearchOutput;
 import com.banyuijo.product.entity.QProductType;
 import com.banyuijo.product.entity.QSiteProduct;
+import com.banyuijo.product.entity.SiteProduct;
+import com.banyuijo.product.enums.BooleanStatus;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.QBean;
 import com.querydsl.jpa.JPQLTemplates;
@@ -65,15 +67,18 @@ public class SiteProductGatewayImpl implements SiteProductGateway {
                 from(siteProduct).
                 join(productType).
                 on(siteProduct.productTypeId.eq(productType.productTypeId)).
-                where(
-                        siteProduct.siteProductName.likeIgnoreCase("%"+productName.toLowerCase()+"%"),
-                        siteProduct.siteProductCode.likeIgnoreCase("%"+productCode.toLowerCase()+"%")
-                        ).
+                where(siteProduct.deleteStatus.eq(BooleanStatus.NO.getCode())).
                 limit(pageable.getPageSize()).
                 offset(pageable.getOffset()).
                 orderBy(siteProduct.siteProductCode.asc());
         if (Objects.nonNull(productTypeId)){
             query.where(productType.productTypeId.eq(productTypeId));
+        }
+        if (productCode != null) {
+            query.where(productType.productTypeName.likeIgnoreCase("%"+productName.toLowerCase()+"%"));
+        }
+        if (productName != null) {
+            query.where(productType.productTypeName.likeIgnoreCase("%"+productName.toLowerCase()+"%"));
         }
         List<SiteProductSearchOutput> result = query.fetch();
         long totalCount = query.fetchCount();
