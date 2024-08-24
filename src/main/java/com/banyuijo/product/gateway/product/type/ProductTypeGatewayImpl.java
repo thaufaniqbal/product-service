@@ -29,6 +29,7 @@ public class ProductTypeGatewayImpl implements ProductTypeGateway {
 
         QBean<ProductTypeListOutput> entity = Projections.fields(ProductTypeListOutput.class,
                 productType.productTypeId,
+                productType.productTypeName,
                 productType.productTypeCode
         );
         JPAQuery<ProductTypeListOutput> query = queryFactory.

@@ -13,5 +13,6 @@ import java.util.UUID;
 @Getter
 public class ProductTypeListOutput {
     private UUID productTypeId;
+    private String productTypeName;
     private String productTypeCode;
 }
