@@ -14,10 +14,9 @@ import com.banyuijo.product.service.product.site.validator.SiteProductValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class SiteProductDetailStructureServiceImpl implements SiteProductDetailStructureService {
@@ -74,7 +73,9 @@ public class SiteProductDetailStructureServiceImpl implements SiteProductDetailS
             result.setSettings(settingsDTO);
             results.add(result);
         }
-        return results;
+        return results.stream()
+                .sorted(Comparator.comparing(SiteProductStructure.SiteBaseProductStructure::getSeq))
+                .collect(Collectors.toList());
     }
     private List<SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData> buildSettingsData (List<SiteBaseProductSetting> settings){
         List<SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData> results = new ArrayList<>();
@@ -95,6 +96,8 @@ public class SiteProductDetailStructureServiceImpl implements SiteProductDetailS
             }
         }
 
-        return results;
+        return results.stream()
+                .sorted(Comparator.comparing(SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData::getSeq))
+                .collect(Collectors.toList());
     }
 }
