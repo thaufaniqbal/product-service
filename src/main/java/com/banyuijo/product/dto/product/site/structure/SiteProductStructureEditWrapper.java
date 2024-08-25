@@ -18,5 +18,4 @@ public class SiteProductStructureEditWrapper {
     List<SiteBaseProductStructure> structures;
     List<SiteBaseProductSetting> settings;
     List<SiteBaseProductSettingData> settingData;
-
 }

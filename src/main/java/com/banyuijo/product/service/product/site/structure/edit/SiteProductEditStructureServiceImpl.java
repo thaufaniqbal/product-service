@@ -19,6 +19,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,6 +35,7 @@ public class SiteProductEditStructureServiceImpl implements SiteProductEditStruc
     private final SiteProductValidator siteProductValidator;
     private final CustomLogger customLogger;
     @Override
+    @Transactional
     public Object editSiteProductStructure(SiteProductEditStructureInput request, String loginId, UUID siteProductId) throws JsonProcessingException {
         siteProductValidator.validateSiteProductId(siteProductId);
         SiteBaseProductParent productParent = parentRepository.findBySiteProductId(siteProductId);
@@ -70,6 +72,9 @@ public class SiteProductEditStructureServiceImpl implements SiteProductEditStruc
         settingDataRepository.saveAll(wrapper.getSettingData());
     }
     private void  buildStructure(SiteBaseProductParent productParent, SiteProductEditStructureInput request, SiteProductStructureEditWrapper wrapper){
+        wrapper.setStructures(new ArrayList<>());
+        wrapper.setSettings(new ArrayList<>());
+        wrapper.setSettingData(new ArrayList<>());
         for (SiteProductEditStructureInput.SiteBaseProductStructure structureRequest: request.getStructures()){
             SiteBaseProductStructure structure =
                     builder.buildStructure(
