@@ -35,6 +35,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 "Internal Server Error: " + ex.getMessage()
         );
         log.error("Error 500 buset, gila lu ya: \n ", objectMapper.writeValueAsString(response),"\n"+ ex);
+        log.error(ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

@@ -1,5 +1,6 @@
 package com.banyuijo.product.dto.product.site;
 
+import com.banyuijo.product.dto.product.site.structure.detail.SiteProductDetailStructureOutput;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,4 +33,6 @@ public class SiteProductDetailOutput {
     private LocalDateTime lastUpdatedDate;
 
     private Integer deleteStatus;
+
+    private SiteProductDetailStructureOutput structureOutput;
 }

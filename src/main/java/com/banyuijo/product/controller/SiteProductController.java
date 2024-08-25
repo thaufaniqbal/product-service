@@ -52,7 +52,7 @@ public class SiteProductController {
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, siteProductSearchService.searchSiteProduct(input));
     }
     @GetMapping("/{siteProductId}")
-    public ResponseEntity<ApiResponseDTO<Object>> getSiteProductDetail(@PathVariable UUID siteProductId) {
+    public ResponseEntity<ApiResponseDTO<Object>> getSiteProductDetail(@PathVariable UUID siteProductId) throws JsonProcessingException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, siteProductDetailService.getSiteProductDetail(siteProductId));
     }
     @PostMapping("/")
