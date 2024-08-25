@@ -2,19 +2,32 @@ package com.banyuijo.product.service.product.site.structure.detail;
 
 import com.banyuijo.product.dto.product.site.structure.SiteProductStructure;
 import com.banyuijo.product.dto.product.site.structure.detail.SiteProductDetailStructureOutput;
+import com.banyuijo.product.entity.SiteBaseProductParent;
+import com.banyuijo.product.entity.SiteBaseProductSetting;
+import com.banyuijo.product.entity.SiteBaseProductSettingData;
+import com.banyuijo.product.entity.SiteBaseProductStructure;
+import com.banyuijo.product.repository.SiteBaseProductParentRepository;
+import com.banyuijo.product.repository.SiteBaseProductSettingDataRepository;
+import com.banyuijo.product.repository.SiteBaseProductSettingRepository;
+import com.banyuijo.product.repository.SiteBaseProductStructureRepository;
 import com.banyuijo.product.service.product.site.validator.SiteProductValidator;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class SiteProductDetailStructureServiceImpl implements SiteProductDetailStructureService {
+    private final SiteBaseProductParentRepository parentRepository;
+    private final SiteBaseProductStructureRepository structureRepository;
+    private final SiteBaseProductSettingRepository settingRepository;
+    private final SiteBaseProductSettingDataRepository settingDataRepository;
     private final SiteProductValidator siteProductValidator;
     @Override
-    public SiteProductDetailStructureOutput getSiteProductStructureDetail(UUID siteProductId) throws JsonProcessingException {
+    public SiteProductDetailStructureOutput getSiteProductStructureDetail(UUID siteProductId){
         siteProductValidator.validateSiteProductId(siteProductId);
 
         SiteProductStructure structure = build(siteProductId);
@@ -27,43 +40,61 @@ public class SiteProductDetailStructureServiceImpl implements SiteProductDetailS
     private SiteProductStructure build(UUID siteProductId) {
         SiteProductStructure output = new SiteProductStructure();
 
-        List<SiteProductStructure.SiteBaseProductStructure> siteBaseProductStructures = buildStructure(siteProductId);
-
-        output.setSiteBaseProductParentName("hidroponik dummy");
+        SiteBaseProductParent productParent = parentRepository.findBySiteProductId(siteProductId);
+        List<SiteProductStructure.SiteBaseProductStructure> siteBaseProductStructures = new ArrayList<>();
+        if (Objects.nonNull(productParent)){
+            siteBaseProductStructures = buildStructures(productParent);
+            output.setSiteBaseProductParentName(productParent.getSiteBaseProductParentName());
+        }
         output.setStructures(siteBaseProductStructures);
-
         return output;
     }
 
-    private List<SiteProductStructure.SiteBaseProductStructure> buildStructure(UUID siteProductId) {
+    private List<SiteProductStructure.SiteBaseProductStructure> buildStructures(SiteBaseProductParent productParent) {
+        List<SiteBaseProductStructure> productStructures = structureRepository.findAllBySiteBaseProductParentId(productParent.getSiteBaseProductParentId());
+        List <SiteProductStructure.SiteBaseProductStructure> productStructuresDTO = new ArrayList<>();
 
-        SiteProductStructure.SiteBaseProductStructure structure1 = new SiteProductStructure.SiteBaseProductStructure();
-        structure1.setSeq(1);
-        structure1.setSiteBaseProductStructureName("pH");
+        if (!productStructures.isEmpty()){
+            productStructuresDTO = buildStructures(productStructures);
+        }
 
-        SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData setting1 = new SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData();
-        setting1.setSeq(1);
-        setting1.setValue("Value 1");
+        return productStructuresDTO;
+    }
+    private List <SiteProductStructure.SiteBaseProductStructure> buildStructures (List<SiteBaseProductStructure> productStructures){
+        List<SiteProductStructure.SiteBaseProductStructure> results = new ArrayList<>();
+        for (SiteBaseProductStructure structure : productStructures){
+            SiteProductStructure.SiteBaseProductStructure result = new SiteProductStructure.SiteBaseProductStructure();
+            List<SiteBaseProductSetting> settings = settingRepository.findAllBySiteBaseProductStructureId(structure.getSiteBaseProductStructureId());
+            List<SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData> settingsDTO = new ArrayList<>();
+            if (!settings.isEmpty()){
+                settingsDTO = buildSettingsData(settings);
+            }
+            result.setSeq(structure.getSeq());
+            result.setSiteBaseProductStructureName(structure.getSiteBaseProductStructureName());
+            result.setSettings(settingsDTO);
+            results.add(result);
+        }
+        return results;
+    }
+    private List<SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData> buildSettingsData (List<SiteBaseProductSetting> settings){
+        List<SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData> results = new ArrayList<>();
 
-        structure1.setSettings(List.of(setting1));
+        for (SiteBaseProductSetting setting : settings) {
+            List<SiteBaseProductSettingData> settingsData = settingDataRepository.findAllBySiteBaseProductSettingId(setting.getSiteBaseProductSettingId());
 
-        SiteProductStructure.SiteBaseProductStructure structure2 = new SiteProductStructure.SiteBaseProductStructure();
-        structure2.setSeq(2);
-        structure2.setSiteBaseProductStructureName("alarm");
+            if (!settingsData.isEmpty()) {
+                for (SiteBaseProductSettingData data : settingsData) {
+                    SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData result =
+                            new SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData();
+                    result.setSeq(data.getSeq());
+                    result.setValue(data.getValue());
+                    result.setUpperBond(data.getUpperBond());
+                    result.setLowerBond(data.getLowerBond());
+                    results.add(result);
+                }
+            }
+        }
 
-        SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData setting3 = new SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData();
-        setting3.setSeq(1);
-        setting3.setValue("ke-1");
-        setting3.setUpperBond("07:00");
-        setting3.setLowerBond("12:00");
-
-        SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData setting4 = new SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData();
-        setting4.setSeq(2);
-        setting4.setValue("ke-2");
-        setting4.setUpperBond("15:00");
-        setting4.setLowerBond("21:00");
-        structure2.setSettings(List.of(setting3, setting4));
-
-        return List.of(structure1, structure2);
+        return results;
     }
 }
