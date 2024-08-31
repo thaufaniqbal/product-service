@@ -41,9 +41,9 @@ public class SiteProductStructureBuilderImpl implements SiteProductStructureBuil
         SiteBaseProductStructure productStructureSecond = buildStructure(productParent.getSiteBaseProductParentId(), 2, "structureName2");
         SiteBaseProductSetting productSetting = buildStructureSetting(productStructure.getSiteBaseProductStructureId(), UUID.fromString(UUID_DEFAULT));
         SiteBaseProductSetting productSettingSecond = buildStructureSetting(productStructureSecond.getSiteBaseProductStructureId(), UUID.fromString(UUID_NOT_DEFAULT));
-        SiteBaseProductSettingData productSettingData = buildStructureSettingData(productSetting.getSiteBaseProductSettingId(), 1, true);
-        SiteBaseProductSettingData productSettingDataSecond = buildStructureSettingData(productSettingSecond.getSiteBaseProductSettingId(), 1, false);
-        SiteBaseProductSettingData productSettingDataSecondT = buildStructureSettingData(productSettingSecond.getSiteBaseProductSettingId(), 2, false);
+        SiteBaseProductSettingData productSettingData = buildStructureSettingData(productSetting.getSiteBaseProductSettingId(), 1, true, -1, "input init");
+        SiteBaseProductSettingData productSettingDataSecond = buildStructureSettingData(productSettingSecond.getSiteBaseProductSettingId(), 1, false, -1, "input init");
+        SiteBaseProductSettingData productSettingDataSecondT = buildStructureSettingData(productSettingSecond.getSiteBaseProductSettingId(), 2, false, 0, "display");
 
         List<SiteBaseProductStructure> structures = Arrays.asList(productStructure, productStructureSecond);
         List<SiteBaseProductSetting> settings = Arrays.asList(productSetting, productSettingSecond);
@@ -100,7 +100,7 @@ public class SiteProductStructureBuilderImpl implements SiteProductStructureBuil
         return result;
     }
     @Override
-    public SiteBaseProductSettingData buildStructureSettingData(UUID settingId, Integer seq, boolean object){
+    public SiteBaseProductSettingData buildStructureSettingData(UUID settingId, Integer seq, boolean object, Integer input, String objectName){
         SiteBaseProductSettingData result = new SiteBaseProductSettingData();
         result.setSiteBaseProductSettingDataId(UUID.randomUUID());
         result.setSiteBaseProductSettingId(settingId);
@@ -111,6 +111,8 @@ public class SiteProductStructureBuilderImpl implements SiteProductStructureBuil
             result.setLowerBond("{init.lower"+seq+"}");
             result.setUpperBond("{init.upper"+seq+"}");
         }
+        result.setInput(input);
+        result.setObjectName(objectName);
         return result;
     }
     @Override

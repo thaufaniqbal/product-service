@@ -32,4 +32,10 @@ public class SiteBaseProductSettingData {
 
     @Column(name = "lower_bond")
     private String lowerBond;
+
+    @Column(name = "input")
+    private Integer input;
+
+    @Column(name = "object_name")
+    private String objectName;
 }

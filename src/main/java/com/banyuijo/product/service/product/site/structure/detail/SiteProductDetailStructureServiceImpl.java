@@ -91,6 +91,8 @@ public class SiteProductDetailStructureServiceImpl implements SiteProductDetailS
                     result.setValue(data.getValue());
                     result.setUpperBond(data.getUpperBond());
                     result.setLowerBond(data.getLowerBond());
+                    result.setInput(data.getInput());
+                    result.setObjectName(data.getObjectName());
                     results.add(result);
                 }
             }

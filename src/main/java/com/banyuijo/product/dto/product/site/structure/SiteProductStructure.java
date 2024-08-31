@@ -42,6 +42,10 @@ public class SiteProductStructure {
 
             private String lowerBond;
 
+            private Integer input;
+
+            private String objectName;
+
         }
     }
 }

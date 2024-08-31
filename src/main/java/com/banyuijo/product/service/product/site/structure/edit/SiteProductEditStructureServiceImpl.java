@@ -103,7 +103,10 @@ public class SiteProductEditStructureServiceImpl implements SiteProductEditStruc
         for (SiteProductEditStructureInput.SiteBaseProductStructure.SiteBaseProductSetting.SiteBaseProductSettingData settingDataRequest : settingDataRequestList){
             SiteBaseProductSettingData settingData;
             settingData = builder.buildStructureSettingData(setting.getSiteBaseProductSettingId(),
-                    settingDataRequest.getSeq(), BooleanStatus.fromCode(settingDataRequest.getObject()).getBooleanStatus());
+                    settingDataRequest.getSeq(),
+                    BooleanStatus.fromCode(settingDataRequest.getObject()).getBooleanStatus(),
+                    settingDataRequest.getInput(),
+                    settingDataRequest.getObjectName());
             wrapper.getSettingData().add(settingData);
         }
     }

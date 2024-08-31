@@ -43,6 +43,10 @@ public class SiteProductEditStructureInput {
                 private Integer seq;
 
                 private Integer object;
+
+                private Integer input;
+
+                private String objectName;
             }
         }
     }
