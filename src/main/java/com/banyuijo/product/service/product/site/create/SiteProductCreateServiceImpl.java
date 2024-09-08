@@ -42,7 +42,7 @@ public class SiteProductCreateServiceImpl implements SiteProductCreateService {
     }
 
     private SiteProduct build (SiteProductCreateInput request, String loginId){
-        ProductType productType = productTypeRepository.findByProductTypeCode(request.getProductTypeCode());
+        ProductType productType = productTypeRepository.findByProductTypeId(request.getProductTypeId());
 
         SiteProduct siteProduct = new SiteProduct();
         siteProduct.setSiteProductId(UUID.randomUUID());

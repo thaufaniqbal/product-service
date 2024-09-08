@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -15,6 +17,6 @@ public class SiteProductCreateInput {
 
     private String siteProductCode;
 
-    private String productTypeCode;
+    private UUID productTypeId;
 
 }
