@@ -2,6 +2,7 @@ package com.banyuijo.product.service.product.site.validator;
 
 import com.banyuijo.product.dto.product.site.SiteProductCreateInput;
 import com.banyuijo.product.dto.product.site.SiteProductEditInput;
+import com.banyuijo.product.enums.BooleanStatus;
 import com.banyuijo.product.enums.HttpStatusCode;
 import com.banyuijo.product.exception.HttpStatusException;
 import com.banyuijo.product.repository.ProductTypeRepository;
@@ -27,7 +28,7 @@ public class SiteProductValidator extends GlobalValidator {
         if (Objects.isNull(editRequest)){
             validateRequestMandatory(createRequest.getSiteProductCode());
             validateRequestLength(createRequest.getSiteProductCode(), 1, 3);
-            if(siteProductRepository.existsBySiteProductCodeIgnoreCase(createRequest.getSiteProductCode())){
+            if(siteProductRepository.existsBySiteProductCodeIgnoreCaseAndDeleteStatus(createRequest.getSiteProductCode(), BooleanStatus.NO.getCode())){
                 throw new HttpStatusException(HttpStatusCode.DATA_ALREADY_EXIST, "Product Code: " + createRequest.getSiteProductCode());
             }
         }

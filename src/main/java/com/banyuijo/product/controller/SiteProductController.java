@@ -6,6 +6,7 @@ import com.banyuijo.product.dto.product.site.SiteProductEditInput;
 import com.banyuijo.product.dto.product.site.SiteProductSearchInput;
 import com.banyuijo.product.dto.product.site.structure.edit.SiteProductEditStructureInput;
 import com.banyuijo.product.service.product.site.create.SiteProductCreateService;
+import com.banyuijo.product.service.product.site.delete.SiteProductDeleteService;
 import com.banyuijo.product.service.product.site.detail.SiteProductDetailService;
 import com.banyuijo.product.service.product.site.edit.SiteProductEditService;
 import com.banyuijo.product.service.product.site.list.SiteProductListService;
@@ -29,6 +30,7 @@ public class SiteProductController {
     private final SiteProductDetailService siteProductDetailService;
     private final SiteProductCreateService siteProductCreateService;
     private final SiteProductEditService siteProductEditService;
+    private final SiteProductDeleteService siteProductDeleteService;
     private final SiteProductListService siteProductListService;
     private final SiteProductDetailStructureService siteProductDetailStructureService;
     private final SiteProductEditStructureService siteProductEditStructureService;
@@ -65,6 +67,12 @@ public class SiteProductController {
                                                                   @PathVariable UUID siteProductId) throws JsonProcessingException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.ACCEPTED, siteProductEditService.editSiteProduct(request, loginId, siteProductId));
     }
+    @DeleteMapping("/{siteProductId}")
+    public ResponseEntity<ApiResponseDTO<Object>> deleteSiteProduct(@RequestHeader("login-id") String loginId,
+                                                                  @PathVariable UUID siteProductId) throws JsonProcessingException {
+        return ApiResponseDTO.toResponseEntity(HttpStatus.ACCEPTED, siteProductDeleteService.deleteSiteProduct(siteProductId,loginId));
+    }
+
     @GetMapping("/list")
     public ResponseEntity<ApiResponseDTO<Object>> getSiteProductList() {
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, siteProductListService.getSiteProductList());

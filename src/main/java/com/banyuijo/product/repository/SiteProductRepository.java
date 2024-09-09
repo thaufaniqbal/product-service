@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface SiteProductRepository extends JpaRepository <SiteProduct, UUID> {
 
-    Boolean existsBySiteProductCodeIgnoreCase(String siteProductCode);
+    Boolean existsBySiteProductCodeIgnoreCaseAndDeleteStatus(String siteProductCode, int deleteStatus);
 
     SiteProduct findBySiteProductId (UUID siteProductId);
 
