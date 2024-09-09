@@ -24,7 +24,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/v1/site-product")
-@CrossOrigin(methods = {RequestMethod.POST, RequestMethod.PUT, RequestMethod.GET})
+@CrossOrigin(methods = {RequestMethod.POST, RequestMethod.PUT, RequestMethod.GET, RequestMethod.DELETE})
 public class SiteProductController {
     private final SiteProductSearchService siteProductSearchService;
     private final SiteProductDetailService siteProductDetailService;

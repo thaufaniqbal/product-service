@@ -20,7 +20,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/v1/product-type")
-@CrossOrigin(methods = {RequestMethod.POST, RequestMethod.PUT, RequestMethod.GET})
+@CrossOrigin(methods = {RequestMethod.POST, RequestMethod.PUT, RequestMethod.GET, RequestMethod.DELETE})
 public class ProductTypeController {
     private final ProductTypeSearchService productTypeSearchService;
     private final ProductTypeListService productTypeListService;
