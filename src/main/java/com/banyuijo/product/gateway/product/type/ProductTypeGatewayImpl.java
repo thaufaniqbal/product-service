@@ -60,7 +60,7 @@ public class ProductTypeGatewayImpl implements ProductTypeGateway {
                 limit(pageable.getPageSize()).
                 offset(pageable.getOffset()).
                 orderBy(productType.productTypeCode.asc());
-
+        query.where(productType.deleteStatus.eq(BooleanStatus.NO.getCode()));
         if (productCode != null) {
             query.where(productType.productTypeCode.likeIgnoreCase("%"+productCode.toLowerCase()+"%"));
         }

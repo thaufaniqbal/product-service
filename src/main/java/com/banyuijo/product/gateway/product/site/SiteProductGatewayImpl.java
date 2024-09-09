@@ -42,6 +42,7 @@ public class SiteProductGatewayImpl implements SiteProductGateway {
                 join(productType).
                 on(siteProduct.productTypeId.eq(productType.productTypeId)).
                 orderBy(siteProduct.siteProductCode.asc());
+        query.where(siteProduct.deleteStatus.eq(BooleanStatus.NO.getCode()));
         if (Objects.nonNull(productTypeId)){
             query.where(productType.productTypeId.eq(productTypeId));
         }
