@@ -19,6 +19,7 @@ public class SiteProductDeleteServiceImpl implements SiteProductDeleteService {
         validator.validateSiteProductId(siteProductId);
         SiteProduct siteProduct = siteProductRepository.findBySiteProductId(siteProductId);
         siteProduct.setDeleteStatus(BooleanStatus.YES.getCode());
+        siteProductRepository.save(siteProduct);
         return siteProduct;
     }
 }
