@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -13,6 +15,6 @@ public class SiteProductEditInput {
 
     private String siteProductName;
 
-    private String productTypeCode;
+    private UUID productTypeId;
 
 }

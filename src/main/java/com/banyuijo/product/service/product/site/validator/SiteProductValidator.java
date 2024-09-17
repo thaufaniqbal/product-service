@@ -22,18 +22,18 @@ public class SiteProductValidator extends GlobalValidator {
 
     public void validateRequest (SiteProductCreateInput createRequest, SiteProductEditInput editRequest){
         String siteProductName = Objects.isNull(editRequest) ? createRequest.getSiteProductName() : editRequest.getSiteProductName();
-        String productTypeId = Objects.isNull(editRequest) ? String.valueOf(createRequest.getProductTypeId()) : editRequest.getProductTypeCode();
+        UUID productTypeId = Objects.isNull(editRequest) ? createRequest.getProductTypeId() : editRequest.getProductTypeId();
         validateRequestMandatory(siteProductName);
-        validateRequestMandatory(productTypeId);
+        validateRequestMandatory(productTypeId, "productTypeId");
         if (Objects.isNull(editRequest)){
             validateRequestMandatory(createRequest.getSiteProductCode());
             validateRequestLength(createRequest.getSiteProductCode(), 1, 3);
             if(siteProductRepository.existsBySiteProductCodeIgnoreCaseAndDeleteStatus(createRequest.getSiteProductCode(), BooleanStatus.NO.getCode())){
                 throw new HttpStatusException(HttpStatusCode.DATA_ALREADY_EXIST, "Product Code: " + createRequest.getSiteProductCode());
             }
-        }
-        if (!productTypeRepository.existsByProductTypeId(createRequest.getProductTypeId())){
-            throw new HttpStatusException(HttpStatusCode.INVALID_DATA_INPUT, "product Type: " + productTypeId);
+            if (!productTypeRepository.existsByProductTypeId(createRequest.getProductTypeId())){
+                throw new HttpStatusException(HttpStatusCode.INVALID_DATA_INPUT, "product Type: " + productTypeId);
+            }
         }
         validateRequestLength(siteProductName, 5, 15);
     }

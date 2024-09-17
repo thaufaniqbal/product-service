@@ -35,7 +35,7 @@ public class SiteProductEditServiceImpl implements SiteProductEditService {
         siteProductRepository.save(siteProduct);
     }
     private SiteProduct build (SiteProductEditInput request, String loginId, UUID siteProductId){
-        ProductType productType = productTypeRepository.findByProductTypeCode(request.getProductTypeCode());
+        ProductType productType = productTypeRepository.findByProductTypeId(request.getProductTypeId());
         SiteProduct siteProduct = siteProductRepository.findBySiteProductId(siteProductId);
         siteProduct.setSiteProductName(request.getSiteProductName());
         siteProduct.setProductTypeId(productType.getProductTypeId());
