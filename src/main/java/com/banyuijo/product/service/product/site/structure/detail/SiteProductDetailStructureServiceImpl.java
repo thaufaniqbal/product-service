@@ -58,7 +58,7 @@ public class SiteProductDetailStructureServiceImpl implements SiteProductDetailS
         for (SiteProductStructure.SiteBaseProductStructure productStructure : siteBaseProductStructures){
             List<SiteProductEditStructure.SiteBaseProductStructure.SiteBaseProductSetting> settings = buildEditSetting(productStructure.getSettings());
             SiteProductEditStructure.SiteBaseProductStructure result = new SiteProductEditStructure.SiteBaseProductStructure();
-            result.setSeq(result.getSeq());
+            result.setSeq(productStructure.getSeq());
             result.setSiteBaseProductStructureName(productStructure.getSiteBaseProductStructureName());
             result.setSettings(settings);
             output.add(result);
@@ -73,6 +73,7 @@ public class SiteProductDetailStructureServiceImpl implements SiteProductDetailS
             result.setSeq(settingData.getSeq());
             result.setInput(settingData.getInput());
             result.setObjectName(settingData.getObjectName());
+            result.setObject(settingData.getObject());
             result.setSiteBaseProductSettingTypeId(UUID.fromString("00000000-0000-0000-0000-000000000000"));
             output.add(result);
         }
