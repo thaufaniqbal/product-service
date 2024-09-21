@@ -6,6 +6,7 @@ import com.banyuijo.product.entity.SiteBaseProductParent;
 import com.banyuijo.product.entity.SiteBaseProductSetting;
 import com.banyuijo.product.entity.SiteBaseProductSettingData;
 import com.banyuijo.product.entity.SiteBaseProductStructure;
+import com.banyuijo.product.enums.BooleanStatus;
 import com.banyuijo.product.repository.SiteBaseProductParentRepository;
 import com.banyuijo.product.repository.SiteBaseProductSettingDataRepository;
 import com.banyuijo.product.repository.SiteBaseProductSettingRepository;
@@ -93,6 +94,11 @@ public class SiteProductDetailStructureServiceImpl implements SiteProductDetailS
                     result.setLowerBond(data.getLowerBond());
                     result.setInput(data.getInput());
                     result.setObjectName(data.getObjectName());
+                    if (Objects.isNull(result.getValue())){
+                        result.setObject(BooleanStatus.NO.getCode());
+                    }else {
+                        result.setObject(BooleanStatus.YES.getCode());
+                    }
                     results.add(result);
                 }
             }

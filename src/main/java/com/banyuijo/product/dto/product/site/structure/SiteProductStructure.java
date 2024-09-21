@@ -46,6 +46,8 @@ public class SiteProductStructure {
 
             private String objectName;
 
+            private Integer object;
+
         }
     }
 }
