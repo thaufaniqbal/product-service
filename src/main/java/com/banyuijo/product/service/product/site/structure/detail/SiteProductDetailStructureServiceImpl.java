@@ -2,6 +2,7 @@ package com.banyuijo.product.service.product.site.structure.detail;
 
 import com.banyuijo.product.dto.product.site.structure.SiteProductStructure;
 import com.banyuijo.product.dto.product.site.structure.detail.SiteProductDetailStructureOutput;
+import com.banyuijo.product.dto.product.site.structure.edit.SiteProductEditStructure;
 import com.banyuijo.product.entity.SiteBaseProductParent;
 import com.banyuijo.product.entity.SiteBaseProductSetting;
 import com.banyuijo.product.entity.SiteBaseProductSettingData;
@@ -37,6 +38,48 @@ public class SiteProductDetailStructureServiceImpl implements SiteProductDetailS
         output.setJsonStructure("{soon}");
         return output;
     }
+
+    @Override
+    public SiteProductEditStructure getEditDetail(UUID siteProductId) {
+        siteProductValidator.validateSiteProductId(siteProductId);
+        return buildEditDetail(siteProductId);
+    }
+    private SiteProductEditStructure buildEditDetail (UUID siteProductId) {
+        SiteProductEditStructure output = new SiteProductEditStructure();
+
+        SiteProductStructure productStructure = build(siteProductId);
+        List<SiteProductEditStructure.SiteBaseProductStructure> detailStructureEdit = buildEditDetailStructure(productStructure.getStructures());
+
+        output.setStructures(detailStructureEdit);
+        return output;
+    }
+    private List<SiteProductEditStructure.SiteBaseProductStructure> buildEditDetailStructure (List<SiteProductStructure.SiteBaseProductStructure> siteBaseProductStructures){
+        List<SiteProductEditStructure.SiteBaseProductStructure> output  = new ArrayList<>();
+        for (SiteProductStructure.SiteBaseProductStructure productStructure : siteBaseProductStructures){
+            List<SiteProductEditStructure.SiteBaseProductStructure.SiteBaseProductSetting> settings = buildEditSetting(productStructure.getSettings());
+            SiteProductEditStructure.SiteBaseProductStructure result = new SiteProductEditStructure.SiteBaseProductStructure();
+            result.setSeq(result.getSeq());
+            result.setSiteBaseProductStructureName(productStructure.getSiteBaseProductStructureName());
+            result.setSettings(settings);
+            output.add(result);
+        }
+        return output;
+    }
+    private List<SiteProductEditStructure.SiteBaseProductStructure.SiteBaseProductSetting> buildEditSetting (List<SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData> settingDataList){
+        List<SiteProductEditStructure.SiteBaseProductStructure.SiteBaseProductSetting> output = new ArrayList<>();
+        for (SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData settingData : settingDataList){
+            SiteProductEditStructure.SiteBaseProductStructure.SiteBaseProductSetting result = new SiteProductEditStructure.SiteBaseProductStructure.SiteBaseProductSetting();
+            result.setInput(settingData.getInput());
+            result.setSeq(settingData.getSeq());
+            result.setInput(settingData.getInput());
+            result.setObjectName(settingData.getObjectName());
+            result.setSiteBaseProductSettingTypeId(UUID.fromString("00000000-0000-0000-0000-000000000000"));
+            output.add(result);
+        }
+        return output;
+    }
+
+
     private SiteProductStructure build(UUID siteProductId) {
         SiteProductStructure output = new SiteProductStructure();
 

@@ -85,6 +85,10 @@ public class SiteProductController {
     public ResponseEntity<ApiResponseDTO<Object>> getSiteProductStructureDetail(@PathVariable UUID siteProductId) throws JsonProcessingException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, siteProductDetailStructureService.getSiteProductStructureDetail(siteProductId));
     }
+    @GetMapping("/structure/edit/{siteProductId}")
+    public ResponseEntity<ApiResponseDTO<Object>> getEditDetail(@PathVariable UUID siteProductId) {
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, siteProductDetailStructureService.getEditDetail(siteProductId));
+    }
     @PutMapping("/structure/{siteProductId}")
     public ResponseEntity<ApiResponseDTO<Object>> editSiteProductStructure(@RequestBody SiteProductEditStructureInput request,
                                                                            @RequestHeader("login-id") String loginId,
