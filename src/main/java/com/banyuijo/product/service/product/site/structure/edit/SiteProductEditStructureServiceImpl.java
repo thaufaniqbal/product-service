@@ -1,6 +1,7 @@
 package com.banyuijo.product.service.product.site.structure.edit;
 
 import com.banyuijo.product.dto.product.site.structure.SiteProductStructureEditWrapper;
+import com.banyuijo.product.dto.product.site.structure.edit.SiteProductEditStructure;
 import com.banyuijo.product.dto.product.site.structure.edit.SiteProductEditStructureInput;
 import com.banyuijo.product.entity.SiteBaseProductParent;
 import com.banyuijo.product.entity.SiteBaseProductSetting;
@@ -52,6 +53,25 @@ public class SiteProductEditStructureServiceImpl implements SiteProductEditStruc
 
         return request;
     }
+
+    @Override
+    public Object editSiteProductStructure(SiteProductEditStructure request, String loginId, UUID siteProductId) throws JsonProcessingException {
+        siteProductValidator.validateSiteProductId(siteProductId);
+        SiteBaseProductParent productParent = parentRepository.findBySiteProductId(siteProductId);
+
+        deleteStructure(productParent);
+
+        SiteProductStructureEditWrapper wrapper = new SiteProductStructureEditWrapper();
+
+        buildStructure(productParent, request, wrapper);
+
+        customLogger.setLogObject(wrapper, "editSiteProductStructure", loginId);
+
+        save(wrapper);
+
+        return request;
+    }
+
     @Transactional
     private void deleteStructure (SiteBaseProductParent productParent){
         List<SiteBaseProductStructure> structures = structureRepository.findAllBySiteBaseProductParentId(productParent.getSiteBaseProductParentId());
@@ -71,6 +91,23 @@ public class SiteProductEditStructureServiceImpl implements SiteProductEditStruc
         settingRepository.saveAll(wrapper.getSettings());
         settingDataRepository.saveAll(wrapper.getSettingData());
     }
+
+    private void  buildStructure(SiteBaseProductParent productParent, SiteProductEditStructure request, SiteProductStructureEditWrapper wrapper){
+        wrapper.setStructures(new ArrayList<>());
+        wrapper.setSettings(new ArrayList<>());
+        wrapper.setSettingData(new ArrayList<>());
+        for (SiteProductEditStructure.SiteBaseProductStructure structureRequest: request.getStructures()){
+            SiteBaseProductStructure structure =
+                    builder.buildStructure(
+                            productParent.getSiteBaseProductParentId(),
+                            structureRequest.getSeq(),
+                            structureRequest.getSiteBaseProductStructureName()
+                    );
+            buildSettingDetail(structure, structureRequest.getSettings(), wrapper);
+            wrapper.getStructures().add(structure);
+        }
+    }
+
     private void  buildStructure(SiteBaseProductParent productParent, SiteProductEditStructureInput request, SiteProductStructureEditWrapper wrapper){
         wrapper.setStructures(new ArrayList<>());
         wrapper.setSettings(new ArrayList<>());
@@ -86,14 +123,23 @@ public class SiteProductEditStructureServiceImpl implements SiteProductEditStruc
             wrapper.getStructures().add(structure);
         }
     }
-
     private void buildSetting(SiteBaseProductStructure structure,
                               List<SiteProductEditStructureInput.SiteBaseProductStructure.SiteBaseProductSetting> settingsRequestList,
-                                                      SiteProductStructureEditWrapper wrapper){
+                              SiteProductStructureEditWrapper wrapper){
         for (SiteProductEditStructureInput.SiteBaseProductStructure.SiteBaseProductSetting settingRequest : settingsRequestList){
             SiteBaseProductSetting setting;
             setting = builder.buildStructureSetting(structure.getSiteBaseProductStructureId(), settingRequest.getSiteBaseProductSettingTypeId());
             buildSettingData(setting, settingRequest.getSettingData(), wrapper);
+            wrapper.getSettings().add(setting);
+        }
+    }
+    private void buildSettingDetail(SiteBaseProductStructure structure,
+                                    List<SiteProductEditStructure.SiteBaseProductStructure.SiteBaseProductSetting> settingsRequestList,
+                                    SiteProductStructureEditWrapper wrapper){
+        for (SiteProductEditStructure.SiteBaseProductStructure.SiteBaseProductSetting settingRequest : settingsRequestList){
+            SiteBaseProductSetting setting;
+            setting = builder.buildStructureSetting(structure.getSiteBaseProductStructureId(), settingRequest.getSiteBaseProductSettingTypeId());
+            buildSettingDataDetail(setting, settingRequest, wrapper);
             wrapper.getSettings().add(setting);
         }
     }
@@ -109,5 +155,17 @@ public class SiteProductEditStructureServiceImpl implements SiteProductEditStruc
                     settingDataRequest.getObjectName());
             wrapper.getSettingData().add(settingData);
         }
+    }
+    private void buildSettingDataDetail (SiteBaseProductSetting setting,
+                                         SiteProductEditStructure.SiteBaseProductStructure.SiteBaseProductSetting settingDataRequest,
+                                         SiteProductStructureEditWrapper wrapper){
+        SiteBaseProductSettingData settingData;
+        settingData = builder.buildStructureSettingData(setting.getSiteBaseProductSettingId(),
+                settingDataRequest.getSeq(),
+                BooleanStatus.fromCode(settingDataRequest.getObject()).getBooleanStatus(),
+                settingDataRequest.getInput(),
+                settingDataRequest.getObjectName());
+        wrapper.getSettingData().add(settingData);
+
     }
 }

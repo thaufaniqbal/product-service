@@ -4,6 +4,7 @@ import com.banyuijo.product.dto.base.ApiResponseDTO;
 import com.banyuijo.product.dto.product.site.SiteProductCreateInput;
 import com.banyuijo.product.dto.product.site.SiteProductEditInput;
 import com.banyuijo.product.dto.product.site.SiteProductSearchInput;
+import com.banyuijo.product.dto.product.site.structure.edit.SiteProductEditStructure;
 import com.banyuijo.product.dto.product.site.structure.edit.SiteProductEditStructureInput;
 import com.banyuijo.product.service.product.site.create.SiteProductCreateService;
 import com.banyuijo.product.service.product.site.delete.SiteProductDeleteService;
@@ -90,7 +91,7 @@ public class SiteProductController {
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, siteProductDetailStructureService.getEditDetail(siteProductId));
     }
     @PutMapping("/structure/{siteProductId}")
-    public ResponseEntity<ApiResponseDTO<Object>> editSiteProductStructure(@RequestBody SiteProductEditStructureInput request,
+    public ResponseEntity<ApiResponseDTO<Object>> editSiteProductStructure(@RequestBody SiteProductEditStructure request,
                                                                            @RequestHeader("login-id") String loginId,
                                                                            @PathVariable UUID siteProductId) throws JsonProcessingException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.ACCEPTED, siteProductEditStructureService.editSiteProductStructure(request, loginId, siteProductId));
