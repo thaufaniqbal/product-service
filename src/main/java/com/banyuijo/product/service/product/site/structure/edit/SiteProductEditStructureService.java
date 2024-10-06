@@ -7,6 +7,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.UUID;
 
 public interface SiteProductEditStructureService {
+    //for editable many setting type to setting data
     Object editSiteProductStructure(SiteProductEditStructureInput request, String loginId, UUID siteProductId) throws JsonProcessingException;
     Object editSiteProductStructure(SiteProductEditStructure request, String loginId, UUID siteProductId) throws JsonProcessingException;
 }

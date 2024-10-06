@@ -37,6 +37,7 @@ public class SiteProductEditStructureServiceImpl implements SiteProductEditStruc
     private final CustomLogger customLogger;
     @Override
     @Transactional
+    //for editable many setting type to setting data
     public Object editSiteProductStructure(SiteProductEditStructureInput request, String loginId, UUID siteProductId) throws JsonProcessingException {
         siteProductValidator.validateSiteProductId(siteProductId);
         SiteBaseProductParent productParent = parentRepository.findBySiteProductId(siteProductId);
