@@ -5,6 +5,7 @@ import com.banyuijo.product.entity.SiteBaseProductParent;
 import com.banyuijo.product.entity.SiteBaseProductSetting;
 import com.banyuijo.product.entity.SiteBaseProductSettingData;
 import com.banyuijo.product.entity.SiteBaseProductStructure;
+import com.banyuijo.product.enums.InputTypeStructure;
 import com.banyuijo.product.enums.ObjectTypeStructure;
 import com.banyuijo.product.repository.SiteBaseProductParentRepository;
 import com.banyuijo.product.repository.SiteBaseProductSettingDataRepository;
@@ -42,9 +43,9 @@ public class SiteProductStructureBuilderImpl implements SiteProductStructureBuil
         SiteBaseProductStructure productStructureSecond = buildStructure(productParent.getSiteBaseProductParentId(), 2, "structureName2");
         SiteBaseProductSetting productSetting = buildStructureSetting(productStructure.getSiteBaseProductStructureId(), UUID.fromString(UUID_DEFAULT));
         SiteBaseProductSetting productSettingSecond = buildStructureSetting(productStructureSecond.getSiteBaseProductStructureId(), UUID.fromString(UUID_NOT_DEFAULT));
-        SiteBaseProductSettingData productSettingData = buildStructureSettingData(productSetting.getSiteBaseProductSettingId(), 1, ObjectTypeStructure.OBJECT_TYPE2.getCode(), -1, "input init", "");
-        SiteBaseProductSettingData productSettingDataSecond = buildStructureSettingData(productSettingSecond.getSiteBaseProductSettingId(), 1, ObjectTypeStructure.OBJECT_TYPE1.getCode(), -1, "input init", "");
-        SiteBaseProductSettingData productSettingDataSecondT = buildStructureSettingData(productSettingSecond.getSiteBaseProductSettingId(), 2, ObjectTypeStructure.OBJECT_TYPE2.getCode(), 0, "display", "");
+        SiteBaseProductSettingData productSettingData = buildStructureSettingData(productSetting.getSiteBaseProductSettingId(), 1, ObjectTypeStructure.OBJECT_TYPE2.getCode(), InputTypeStructure.INPUT_TYPE1.getCode(), "input init", "");
+        SiteBaseProductSettingData productSettingDataSecond = buildStructureSettingData(productSettingSecond.getSiteBaseProductSettingId(), 1, ObjectTypeStructure.OBJECT_TYPE1.getCode(), InputTypeStructure.INPUT_TYPE1.getCode(), "input init", "");
+        SiteBaseProductSettingData productSettingDataSecondT = buildStructureSettingData(productSettingSecond.getSiteBaseProductSettingId(), 2, ObjectTypeStructure.OBJECT_TYPE2.getCode(), InputTypeStructure.INPUT_TYPE2.getCode(), "display", "");
 
         List<SiteBaseProductStructure> structures = Arrays.asList(productStructure, productStructureSecond);
         List<SiteBaseProductSetting> settings = Arrays.asList(productSetting, productSettingSecond);
