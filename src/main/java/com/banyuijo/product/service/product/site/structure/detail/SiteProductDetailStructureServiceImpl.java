@@ -7,7 +7,7 @@ import com.banyuijo.product.entity.SiteBaseProductParent;
 import com.banyuijo.product.entity.SiteBaseProductSetting;
 import com.banyuijo.product.entity.SiteBaseProductSettingData;
 import com.banyuijo.product.entity.SiteBaseProductStructure;
-import com.banyuijo.product.enums.BooleanStatus;
+import com.banyuijo.product.enums.InputTypeStructure;
 import com.banyuijo.product.repository.SiteBaseProductParentRepository;
 import com.banyuijo.product.repository.SiteBaseProductSettingDataRepository;
 import com.banyuijo.product.repository.SiteBaseProductSettingRepository;
@@ -35,7 +35,6 @@ public class SiteProductDetailStructureServiceImpl implements SiteProductDetailS
         SiteProductDetailStructureOutput output = new SiteProductDetailStructureOutput();
         output.setSiteProductId(siteProductId);
         output.setStructure(structure);
-        output.setJsonStructure("{soon}");
         return output;
     }
 
@@ -69,11 +68,14 @@ public class SiteProductDetailStructureServiceImpl implements SiteProductDetailS
         List<SiteProductEditStructure.SiteBaseProductStructure.SiteBaseProductSetting> output = new ArrayList<>();
         for (SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData settingData : settingDataList){
             SiteProductEditStructure.SiteBaseProductStructure.SiteBaseProductSetting result = new SiteProductEditStructure.SiteBaseProductStructure.SiteBaseProductSetting();
-            result.setInput(settingData.getInput());
+            int settingDataInput = (Objects.isNull(settingData.getInput()) || settingData.getInput() == -1) ? 1 : settingData.getInput();
+            InputTypeStructure inputTypeStructure = InputTypeStructure.fromCode(settingDataInput);
             result.setSeq(settingData.getSeq());
-            result.setInput(settingData.getInput());
+            result.setInput(settingDataInput);
+            result.setSettingCode(settingData.getSettingCode());
             result.setObjectName(settingData.getObjectName());
             result.setObject(settingData.getObject());
+            result.setInputTypeDescription(inputTypeStructure.getDescription());
             result.setSiteBaseProductSettingTypeId(UUID.fromString("00000000-0000-0000-0000-000000000000"));
             output.add(result);
         }
@@ -130,6 +132,8 @@ public class SiteProductDetailStructureServiceImpl implements SiteProductDetailS
 
             if (!settingsData.isEmpty()) {
                 for (SiteBaseProductSettingData data : settingsData) {
+                    int settingDataInput = (Objects.isNull(data.getInput()) || data.getInput() == -1) ? 1 : data.getInput();
+                    InputTypeStructure inputTypeStructure = InputTypeStructure.fromCode(settingDataInput);
                     SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData result =
                             new SiteProductStructure.SiteBaseProductStructure.SiteBaseProductSettingData();
                     result.setSeq(data.getSeq());
@@ -137,12 +141,10 @@ public class SiteProductDetailStructureServiceImpl implements SiteProductDetailS
                     result.setUpperBond(data.getUpperBond());
                     result.setLowerBond(data.getLowerBond());
                     result.setInput(data.getInput());
+                    result.setObject(data.getObjectType());
+                    result.setInputTypeDescription(inputTypeStructure.getDescription());
+                    result.setSettingCode((Objects.isNull(data.getSettingCode()) || data.getSettingCode().isEmpty()) ?  "" : data.getSettingCode());
                     result.setObjectName(data.getObjectName());
-                    if (Objects.isNull(result.getValue())){
-                        result.setObject(BooleanStatus.NO.getCode());
-                    }else {
-                        result.setObject(BooleanStatus.YES.getCode());
-                    }
                     results.add(result);
                 }
             }

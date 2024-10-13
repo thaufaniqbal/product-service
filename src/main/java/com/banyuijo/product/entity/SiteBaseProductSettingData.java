@@ -21,6 +21,9 @@ public class SiteBaseProductSettingData {
     @Column(name = "site_base_product_setting_id")
     private UUID siteBaseProductSettingId;
 
+    @Column(name = "setting_code")
+    private String settingCode;
+
     @Column(name = "seq")
     private Integer seq;
 
@@ -35,6 +38,9 @@ public class SiteBaseProductSettingData {
 
     @Column(name = "input")
     private Integer input;
+
+    @Column(name = "objectType")
+    private Integer objectType;
 
     @Column(name = "object_name")
     private String objectName;

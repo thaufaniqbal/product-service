@@ -44,9 +44,13 @@ public class SiteProductStructure {
 
             private Integer input;
 
+            private String settingCode;
+
             private String objectName;
 
             private Integer object;
+
+            private String inputTypeDescription;
 
         }
     }

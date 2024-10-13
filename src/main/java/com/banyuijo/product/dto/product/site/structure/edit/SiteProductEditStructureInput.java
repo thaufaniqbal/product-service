@@ -46,6 +46,8 @@ public class SiteProductEditStructureInput {
 
                 private Integer input;
 
+                private String settingCode;
+
                 private String objectName;
             }
         }

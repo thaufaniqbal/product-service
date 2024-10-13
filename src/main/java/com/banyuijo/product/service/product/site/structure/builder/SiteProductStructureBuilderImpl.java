@@ -5,6 +5,7 @@ import com.banyuijo.product.entity.SiteBaseProductParent;
 import com.banyuijo.product.entity.SiteBaseProductSetting;
 import com.banyuijo.product.entity.SiteBaseProductSettingData;
 import com.banyuijo.product.entity.SiteBaseProductStructure;
+import com.banyuijo.product.enums.ObjectTypeStructure;
 import com.banyuijo.product.repository.SiteBaseProductParentRepository;
 import com.banyuijo.product.repository.SiteBaseProductSettingDataRepository;
 import com.banyuijo.product.repository.SiteBaseProductSettingRepository;
@@ -41,9 +42,9 @@ public class SiteProductStructureBuilderImpl implements SiteProductStructureBuil
         SiteBaseProductStructure productStructureSecond = buildStructure(productParent.getSiteBaseProductParentId(), 2, "structureName2");
         SiteBaseProductSetting productSetting = buildStructureSetting(productStructure.getSiteBaseProductStructureId(), UUID.fromString(UUID_DEFAULT));
         SiteBaseProductSetting productSettingSecond = buildStructureSetting(productStructureSecond.getSiteBaseProductStructureId(), UUID.fromString(UUID_NOT_DEFAULT));
-        SiteBaseProductSettingData productSettingData = buildStructureSettingData(productSetting.getSiteBaseProductSettingId(), 1, true, -1, "input init");
-        SiteBaseProductSettingData productSettingDataSecond = buildStructureSettingData(productSettingSecond.getSiteBaseProductSettingId(), 1, false, -1, "input init");
-        SiteBaseProductSettingData productSettingDataSecondT = buildStructureSettingData(productSettingSecond.getSiteBaseProductSettingId(), 2, false, 0, "display");
+        SiteBaseProductSettingData productSettingData = buildStructureSettingData(productSetting.getSiteBaseProductSettingId(), 1, ObjectTypeStructure.OBJECT_TYPE2.getCode(), -1, "input init", "");
+        SiteBaseProductSettingData productSettingDataSecond = buildStructureSettingData(productSettingSecond.getSiteBaseProductSettingId(), 1, ObjectTypeStructure.OBJECT_TYPE1.getCode(), -1, "input init", "");
+        SiteBaseProductSettingData productSettingDataSecondT = buildStructureSettingData(productSettingSecond.getSiteBaseProductSettingId(), 2, ObjectTypeStructure.OBJECT_TYPE2.getCode(), 0, "display", "");
 
         List<SiteBaseProductStructure> structures = Arrays.asList(productStructure, productStructureSecond);
         List<SiteBaseProductSetting> settings = Arrays.asList(productSetting, productSettingSecond);
@@ -100,18 +101,18 @@ public class SiteProductStructureBuilderImpl implements SiteProductStructureBuil
         return result;
     }
     @Override
-    public SiteBaseProductSettingData buildStructureSettingData(UUID settingId, Integer seq, boolean object, Integer input, String objectName){
+    public SiteBaseProductSettingData buildStructureSettingData(UUID settingId, Integer seq, int object, Integer input, String objectName, String settingCode){
         SiteBaseProductSettingData result = new SiteBaseProductSettingData();
+        ObjectTypeStructure objectTypeStructure = ObjectTypeStructure.fromCode(object);
         result.setSiteBaseProductSettingDataId(UUID.randomUUID());
         result.setSiteBaseProductSettingId(settingId);
         result.setSeq(seq);
-        if (object){
-            result.setValue("{init.format}");
-        }else {
-            result.setLowerBond("{init.lower"+seq+"}");
-            result.setUpperBond("{init.upper"+seq+"}");
-        }
+        result.setObjectType(objectTypeStructure.getCode());
+        result.setValue(objectTypeStructure.getValue());
+        result.setLowerBond(objectTypeStructure.getLowerBond());
+        result.setUpperBond(objectTypeStructure.getUpperBond());
         result.setInput(input);
+        result.setSettingCode(settingCode.isEmpty() ? generateSettingCode() : settingCode);
         result.setObjectName(objectName);
         return result;
     }
@@ -201,5 +202,10 @@ public class SiteProductStructureBuilderImpl implements SiteProductStructureBuil
             }
         }
         return settingDataWrappers;
+    }
+
+    public static String generateSettingCode() {
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        return uuid.substring(0, 5);
     }
 }

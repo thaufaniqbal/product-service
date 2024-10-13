@@ -15,7 +15,7 @@ public interface SiteProductStructureBuilder {
     SiteBaseProductParent buildParent(UUID sideProductId, UUID productTypeId, String productName);
     SiteBaseProductStructure buildStructure(UUID parentId, Integer seq, String structureName);
     SiteBaseProductSetting buildStructureSetting(UUID structureId, UUID settingTypeId);
-    SiteBaseProductSettingData buildStructureSettingData(UUID settingId, Integer seq, boolean object, Integer input, String objectName);
+    SiteBaseProductSettingData buildStructureSettingData(UUID settingId, Integer seq, int object, Integer input, String objectName, String settingCode);
     SiteProductStructureWrapper buildWrapper(SiteBaseProductParent productParent,
                                              List<SiteBaseProductStructure> structures,
                                              List<SiteBaseProductSetting> settings,

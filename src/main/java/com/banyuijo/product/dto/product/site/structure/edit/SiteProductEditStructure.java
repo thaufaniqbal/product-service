@@ -35,6 +35,10 @@ public class SiteProductEditStructure {
 
             private Integer input;
 
+            private String settingCode;
+
+            private String inputTypeDescription;
+
             private String objectName;
 
             private UUID siteBaseProductSettingTypeId;

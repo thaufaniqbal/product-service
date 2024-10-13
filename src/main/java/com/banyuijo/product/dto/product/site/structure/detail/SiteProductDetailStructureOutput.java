@@ -14,5 +14,4 @@ import java.util.UUID;
 public class SiteProductDetailStructureOutput {
     private UUID siteProductId;
     private SiteProductStructure structure;
-    private String jsonStructure;
 }

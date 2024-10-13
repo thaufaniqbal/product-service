@@ -7,7 +7,6 @@ import com.banyuijo.product.entity.SiteBaseProductParent;
 import com.banyuijo.product.entity.SiteBaseProductSetting;
 import com.banyuijo.product.entity.SiteBaseProductSettingData;
 import com.banyuijo.product.entity.SiteBaseProductStructure;
-import com.banyuijo.product.enums.BooleanStatus;
 import com.banyuijo.product.repository.SiteBaseProductParentRepository;
 import com.banyuijo.product.repository.SiteBaseProductSettingDataRepository;
 import com.banyuijo.product.repository.SiteBaseProductSettingRepository;
@@ -151,9 +150,10 @@ public class SiteProductEditStructureServiceImpl implements SiteProductEditStruc
             SiteBaseProductSettingData settingData;
             settingData = builder.buildStructureSettingData(setting.getSiteBaseProductSettingId(),
                     settingDataRequest.getSeq(),
-                    BooleanStatus.fromCode(settingDataRequest.getObject()).getBooleanStatus(),
+                    settingDataRequest.getObject(),
                     settingDataRequest.getInput(),
-                    settingDataRequest.getObjectName());
+                    settingDataRequest.getObjectName(),
+                    settingDataRequest.getSettingCode());
             wrapper.getSettingData().add(settingData);
         }
     }
@@ -163,9 +163,10 @@ public class SiteProductEditStructureServiceImpl implements SiteProductEditStruc
         SiteBaseProductSettingData settingData;
         settingData = builder.buildStructureSettingData(setting.getSiteBaseProductSettingId(),
                 settingDataRequest.getSeq(),
-                BooleanStatus.fromCode(settingDataRequest.getObject()).getBooleanStatus(),
+                settingDataRequest.getObject(),
                 settingDataRequest.getInput(),
-                settingDataRequest.getObjectName());
+                settingDataRequest.getObjectName(),
+                settingDataRequest.getSettingCode());
         wrapper.getSettingData().add(settingData);
 
     }
