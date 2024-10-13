@@ -43,9 +43,9 @@ public class SiteProductStructureBuilderImpl implements SiteProductStructureBuil
         SiteBaseProductStructure productStructureSecond = buildStructure(productParent.getSiteBaseProductParentId(), 2, "structureName2");
         SiteBaseProductSetting productSetting = buildStructureSetting(productStructure.getSiteBaseProductStructureId(), UUID.fromString(UUID_DEFAULT));
         SiteBaseProductSetting productSettingSecond = buildStructureSetting(productStructureSecond.getSiteBaseProductStructureId(), UUID.fromString(UUID_NOT_DEFAULT));
-        SiteBaseProductSettingData productSettingData = buildStructureSettingData(productSetting.getSiteBaseProductSettingId(), 1, ObjectTypeStructure.OBJECT_TYPE2.getCode(), InputTypeStructure.INPUT_TYPE1.getCode(), "input init", "");
-        SiteBaseProductSettingData productSettingDataSecond = buildStructureSettingData(productSettingSecond.getSiteBaseProductSettingId(), 1, ObjectTypeStructure.OBJECT_TYPE1.getCode(), InputTypeStructure.INPUT_TYPE1.getCode(), "input init", "");
-        SiteBaseProductSettingData productSettingDataSecondT = buildStructureSettingData(productSettingSecond.getSiteBaseProductSettingId(), 2, ObjectTypeStructure.OBJECT_TYPE2.getCode(), InputTypeStructure.INPUT_TYPE2.getCode(), "display", "");
+        SiteBaseProductSettingData productSettingData = buildStructureSettingData(productSetting.getSiteBaseProductSettingId(), 1, ObjectTypeStructure.OBJECT_TYPE1.getCode(), InputTypeStructure.INPUT_TYPE5.getCode(), "input init", "");
+        SiteBaseProductSettingData productSettingDataSecond = buildStructureSettingData(productSettingSecond.getSiteBaseProductSettingId(), 1, ObjectTypeStructure.OBJECT_TYPE2.getCode(), InputTypeStructure.INPUT_TYPE7.getCode(), "input init", "");
+        SiteBaseProductSettingData productSettingDataSecondT = buildStructureSettingData(productSettingSecond.getSiteBaseProductSettingId(), 2, ObjectTypeStructure.OBJECT_TYPE3.getCode(), InputTypeStructure.INPUT_TYPE3.getCode(), "display", "");
 
         List<SiteBaseProductStructure> structures = Arrays.asList(productStructure, productStructureSecond);
         List<SiteBaseProductSetting> settings = Arrays.asList(productSetting, productSettingSecond);
