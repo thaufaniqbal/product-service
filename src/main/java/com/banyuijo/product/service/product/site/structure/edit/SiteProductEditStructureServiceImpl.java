@@ -55,6 +55,7 @@ public class SiteProductEditStructureServiceImpl implements SiteProductEditStruc
     }
 
     @Override
+    @Transactional
     public Object editSiteProductStructure(SiteProductEditStructure request, String loginId, UUID siteProductId) throws JsonProcessingException {
         siteProductValidator.validateSiteProductId(siteProductId);
         SiteBaseProductParent productParent = parentRepository.findBySiteProductId(siteProductId);

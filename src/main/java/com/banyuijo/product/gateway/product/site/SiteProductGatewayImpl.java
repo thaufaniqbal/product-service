@@ -1,10 +1,9 @@
 package com.banyuijo.product.gateway.product.site;
 
-import com.banyuijo.product.dto.product.site.SiteProductListOutput;
-import com.banyuijo.product.dto.product.site.SiteProductSearchOutput;
+import com.banyuijo.product.dto.product.site.product.SiteProductListOutput;
+import com.banyuijo.product.dto.product.site.product.SiteProductSearchOutput;
 import com.banyuijo.product.entity.QProductType;
 import com.banyuijo.product.entity.QSiteProduct;
-import com.banyuijo.product.entity.SiteProduct;
 import com.banyuijo.product.enums.BooleanStatus;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.QBean;

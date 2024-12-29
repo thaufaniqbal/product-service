@@ -1,7 +1,7 @@
 package com.banyuijo.product.service.product.site.validator;
 
-import com.banyuijo.product.dto.product.site.SiteProductCreateInput;
-import com.banyuijo.product.dto.product.site.SiteProductEditInput;
+import com.banyuijo.product.dto.product.site.product.SiteProductCreateInput;
+import com.banyuijo.product.dto.product.site.product.SiteProductEditInput;
 import com.banyuijo.product.enums.BooleanStatus;
 import com.banyuijo.product.enums.HttpStatusCode;
 import com.banyuijo.product.exception.HttpStatusException;

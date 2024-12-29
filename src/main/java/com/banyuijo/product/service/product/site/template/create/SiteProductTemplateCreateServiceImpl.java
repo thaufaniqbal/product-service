@@ -1,0 +1,66 @@
+package com.banyuijo.product.service.product.site.template.create;
+
+import com.banyuijo.product.dto.product.site.template.SiteProductTemplateInput;
+import com.banyuijo.product.entity.ProductTemplate;
+import com.banyuijo.product.entity.ProductTemplateMapping;
+import com.banyuijo.product.repository.ProductTemplateMappingRepository;
+import com.banyuijo.product.repository.ProductTemplateRepository;
+import com.banyuijo.product.util.CustomLogger;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.UUID;
+
+@Service
+@RequiredArgsConstructor
+public class SiteProductTemplateCreateServiceImpl implements SiteProductTemplateCreateService {
+    private final CustomLogger customLogger;
+    private final ProductTemplateRepository templateRepository;
+    private final ProductTemplateMappingRepository templateMappingRepository;
+    @Override
+    @Transactional
+    public Object createProductTemplate(SiteProductTemplateInput request, UUID siteProductId) throws JsonProcessingException {
+        ProductTemplate productTemplate = getOrNew(siteProductId);
+        customLogger.setLogObject(productTemplate);
+        List<ProductTemplateMapping> productTemplateMappingsFromRepo = templateMappingRepository.findAllByProductTemplateId(productTemplate.getProductTemplateId());
+        List<ProductTemplateMapping> productTemplateMappingsSaved = new ArrayList<>();
+
+        for (var structure : request.getStructures()){
+            for (var cardTemplate : structure.getCardTemplate()){
+                ProductTemplateMapping productTemplateMapping = getOrNew(productTemplateMappingsFromRepo, cardTemplate.getSettingCode(), productTemplate);
+                productTemplateMapping.setSeq(cardTemplate.getSeq());
+                productTemplateMapping.setComponentValue(cardTemplate.getComponentValue());
+                productTemplateMappingsSaved.add(productTemplateMapping);
+            }
+        }
+        templateMappingRepository.saveAll(productTemplateMappingsSaved);
+        return productTemplateMappingsSaved;
+    }
+
+    private ProductTemplate getOrNew (UUID siteProductId){
+        return templateRepository.findBySiteProductId(siteProductId)
+                .orElse(new ProductTemplate(UUID.randomUUID(), siteProductId));
+    }
+
+    private ProductTemplateMapping getOrNew (List<ProductTemplateMapping>productTemplateMappings, String settingDataCode, ProductTemplate productTemplate){
+        ProductTemplateMapping result = null;
+        for (ProductTemplateMapping productTemplateMapping : productTemplateMappings){
+            if (productTemplateMapping.getSettingDataCode().equals(settingDataCode)
+                    && productTemplateMapping.getProductTemplateId().equals(productTemplate.getProductTemplateId())){
+                result = productTemplateMapping;
+            }
+        }
+        if (Objects.isNull(result)){
+            result = new ProductTemplateMapping();
+            result.setProductTemplateMappingId(UUID.randomUUID());
+            result.setProductTemplateId(productTemplate.getProductTemplateId());
+            result.setSettingDataCode(settingDataCode);
+        }
+        return result;
+    }
+}
