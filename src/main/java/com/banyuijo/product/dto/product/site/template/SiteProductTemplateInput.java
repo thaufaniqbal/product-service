@@ -17,14 +17,14 @@ public class SiteProductTemplateInput {
     @NoArgsConstructor
     @Setter
     @Getter
-    public class StructureDTO {
+    public static class StructureDTO {
         private int seq;
         private List<CardTemplateDTO> cardTemplate;
         @AllArgsConstructor
         @NoArgsConstructor
         @Setter
         @Getter
-        public class CardTemplateDTO {
+        public static class CardTemplateDTO {
             private int seq;
             private String componentValue;
             private String settingCode;
