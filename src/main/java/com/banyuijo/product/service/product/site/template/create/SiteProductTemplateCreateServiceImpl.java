@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +29,7 @@ public class SiteProductTemplateCreateServiceImpl implements SiteProductTemplate
         ProductTemplate productTemplate = getOrNew(siteProductId);
         customLogger.setLogObject(productTemplate);
         List<ProductTemplateMapping> productTemplateMappingsFromRepo = templateMappingRepository.findAllByProductTemplateId(productTemplate.getProductTemplateId());
+
         List<ProductTemplateMapping> productTemplateMappingsSaved = new ArrayList<>();
 
         for (var structure : request.getStructures()){
@@ -38,7 +40,15 @@ public class SiteProductTemplateCreateServiceImpl implements SiteProductTemplate
                 productTemplateMappingsSaved.add(productTemplateMapping);
             }
         }
+        templateRepository.save(productTemplate);
+        List<ProductTemplateMapping> mappingsToDelete = productTemplateMappingsFromRepo.stream()
+                .filter(existing -> productTemplateMappingsSaved.stream()
+                        .noneMatch(newMapping ->
+                                Objects.equals(existing.getSettingDataCode(), newMapping.getSettingDataCode())))
+                .collect(Collectors.toList());
+        templateMappingRepository.deleteAll(mappingsToDelete);
         templateMappingRepository.saveAll(productTemplateMappingsSaved);
+
         return productTemplateMappingsSaved;
     }
 

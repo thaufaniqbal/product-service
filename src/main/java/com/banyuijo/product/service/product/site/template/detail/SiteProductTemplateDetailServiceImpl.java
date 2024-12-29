@@ -41,6 +41,7 @@ public class SiteProductTemplateDetailServiceImpl implements SiteProductTemplate
         result.setSeq(structure.getSeq());
         List<SiteProductTemplateOutput.StructureDTO.CardTemplateDTO> cartTemplates = getCartTemplates (structure);
         result.setCardTemplate(cartTemplates);
+        results.add(result);
         return results;
     }
     private List<SiteProductTemplateOutput.StructureDTO.CardTemplateDTO> getCartTemplates (SiteProductEditStructure.SiteBaseProductStructure structure){
