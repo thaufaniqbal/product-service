@@ -5,6 +5,7 @@ import com.banyuijo.product.dto.product.type.ProductTypeCreateInput;
 import com.banyuijo.product.dto.product.type.ProductTypeEditInput;
 import com.banyuijo.product.dto.product.type.ProductTypeSearchInput;
 import com.banyuijo.product.service.product.type.create.ProductTypeCreateService;
+import com.banyuijo.product.service.product.type.delete.ProductTypeDeleteService;
 import com.banyuijo.product.service.product.type.detail.ProductTypeDetailService;
 import com.banyuijo.product.service.product.type.edit.ProductTypeEditService;
 import com.banyuijo.product.service.product.type.list.ProductTypeListService;
@@ -27,6 +28,7 @@ public class ProductTypeController {
     private final ProductTypeDetailService productTypeDetailService;
     private final ProductTypeCreateService productTypeCreateService;
     private final ProductTypeEditService productTypeEditService;
+    private final ProductTypeDeleteService productTypeDeleteService;
     @GetMapping("/")
     public ResponseEntity<ApiResponseDTO<Object>> searchProductType(
             @RequestParam(required = false) String productTypeCode,
@@ -60,5 +62,10 @@ public class ProductTypeController {
                                                                   @RequestHeader("login-id") String loginId,
                                                                   @PathVariable UUID productTypeId) throws JsonProcessingException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.ACCEPTED, productTypeEditService.editProductType(request, loginId, productTypeId));
+    }
+    @DeleteMapping("/{productTypeId}")
+    public ResponseEntity<ApiResponseDTO<Object>> deleteProductType(@RequestHeader("login-id") String loginId,
+                                                                  @PathVariable UUID productTypeId) throws JsonProcessingException {
+        return ApiResponseDTO.toResponseEntity(HttpStatus.ACCEPTED, productTypeDeleteService.deleteProductType(productTypeId, loginId));
     }
 }
