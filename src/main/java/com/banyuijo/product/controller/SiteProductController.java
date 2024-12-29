@@ -102,7 +102,7 @@ public class SiteProductController {
                                                                            @PathVariable UUID siteProductId) throws JsonProcessingException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.ACCEPTED, siteProductEditStructureService.editSiteProductStructure(request, loginId, siteProductId));
     }
-    @GetMapping("/template")
+    @GetMapping("/template/{siteProductId}")
     public ResponseEntity<ApiResponseDTO<Object>> getProductTemplate(@PathVariable UUID siteProductId) {
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, templateDetailService.getProductTemplate(siteProductId));
     }
