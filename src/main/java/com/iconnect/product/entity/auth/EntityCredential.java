@@ -27,4 +27,7 @@ public class EntityCredential {
 
     @Column(name = "password")
     private String password;
+
+    @Column(name = "user_type")
+    private int userType;
 }
