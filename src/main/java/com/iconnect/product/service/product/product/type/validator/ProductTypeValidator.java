@@ -2,12 +2,12 @@ package com.iconnect.product.service.product.product.type.validator;
 
 import com.iconnect.product.dto.product.type.ProductTypeCreateInput;
 import com.iconnect.product.dto.product.type.ProductTypeEditInput;
-import com.iconnect.product.entity.SiteProduct;
+import com.iconnect.product.entity.product.SiteProduct;
 import com.iconnect.product.enums.BooleanStatus;
 import com.iconnect.product.enums.HttpStatusCode;
 import com.iconnect.product.exception.HttpStatusException;
-import com.iconnect.product.repository.ProductTypeRepository;
-import com.iconnect.product.repository.SiteProductRepository;
+import com.iconnect.product.repository.product.ProductTypeRepository;
+import com.iconnect.product.repository.product.SiteProductRepository;
 import com.iconnect.product.validator.GlobalValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

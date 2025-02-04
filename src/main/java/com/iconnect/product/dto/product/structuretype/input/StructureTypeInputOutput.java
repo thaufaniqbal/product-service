@@ -1,4 +1,4 @@
-package com.iconnect.product.dto.structuretype.input;
+package com.iconnect.product.dto.product.structuretype.input;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package com.iconnect.product.service.product.product.site.product.search;
 
-import com.iconnect.product.dto.base.ResponsePageDTO;
+import com.iconnect.product.dto.ResponsePageDTO;
 import com.iconnect.product.dto.product.site.product.SiteProductSearchInput;
 import com.iconnect.product.dto.product.site.product.SiteProductSearchOutput;
 import com.iconnect.product.gateway.product.site.SiteProductGateway;

@@ -1,4 +1,4 @@
-package com.iconnect.product.entity;
+package com.iconnect.product.entity.product;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,6 +1,6 @@
 package com.iconnect.product.controller.product;
 
-import com.iconnect.product.dto.base.ApiResponseDTO;
+import com.iconnect.product.dto.ApiResponseDTO;
 import com.iconnect.product.dto.product.type.ProductTypeCreateInput;
 import com.iconnect.product.dto.product.type.ProductTypeEditInput;
 import com.iconnect.product.dto.product.type.ProductTypeSearchInput;

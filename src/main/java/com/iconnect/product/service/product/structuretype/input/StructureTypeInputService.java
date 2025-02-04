@@ -1,6 +1,6 @@
 package com.iconnect.product.service.product.structuretype.input;
 
-import com.iconnect.product.dto.structuretype.input.StructureTypeInputOutput;
+import com.iconnect.product.dto.product.structuretype.input.StructureTypeInputOutput;
 
 import java.util.List;
 

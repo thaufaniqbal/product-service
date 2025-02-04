@@ -1,4 +1,4 @@
-package com.iconnect.product.dto.base;
+package com.iconnect.product.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

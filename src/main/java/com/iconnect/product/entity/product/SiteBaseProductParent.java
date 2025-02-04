@@ -1,4 +1,4 @@
-package com.iconnect.product.entity;
+package com.iconnect.product.entity.product;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,18 +13,21 @@ import java.util.UUID;
 @Setter
 @Getter
 @Entity
-@Table(name = "mst_site_base_product_setting")
-public class SiteBaseProductSetting {
+@Table(name = "mst_site_base_product_parent")
+public class SiteBaseProductParent {
 
     @Id
-    @Column(name = "site_base_product_setting_id",columnDefinition = "char(36)")
-    private UUID siteBaseProductSettingId;
+    @Column(name = "site_base_product_parent_id",columnDefinition = "char(36)")
+    private UUID siteBaseProductParentId;
 
-    @Column(name = "site_base_product_setting_type_id")
-    private UUID siteBaseProductSettingTypeId;
+    @Column(name = "site_base_product_parent_name")
+    private String siteBaseProductParentName;
 
-    @Column(name = "site_base_product_structure_id")
-    private UUID siteBaseProductStructureId;
+    @Column(name = "site_product_Id")
+    private UUID siteProductId;
+
+    @Column(name = "product_type_Id")
+    private UUID productTypeId;
 
     @Column(name = "created_by")
     private String createdBy;

@@ -1,6 +1,6 @@
 package com.iconnect.product.service.product.structuretype.object;
 
-import com.iconnect.product.dto.structuretype.object.StructureTypeObjectOutput;
+import com.iconnect.product.dto.product.structuretype.object.StructureTypeObjectOutput;
 import com.iconnect.product.enums.ObjectTypeStructure;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

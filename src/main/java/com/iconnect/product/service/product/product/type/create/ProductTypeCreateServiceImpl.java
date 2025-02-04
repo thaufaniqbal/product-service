@@ -1,9 +1,9 @@
 package com.iconnect.product.service.product.product.type.create;
 
 import com.iconnect.product.dto.product.type.ProductTypeCreateInput;
-import com.iconnect.product.entity.ProductType;
+import com.iconnect.product.entity.product.ProductType;
 import com.iconnect.product.enums.BooleanStatus;
-import com.iconnect.product.repository.ProductTypeRepository;
+import com.iconnect.product.repository.product.ProductTypeRepository;
 import com.iconnect.product.service.product.product.type.validator.ProductTypeValidator;
 import com.iconnect.product.util.CustomLogger;
 import com.fasterxml.jackson.core.JsonProcessingException;

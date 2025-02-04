@@ -1,8 +1,8 @@
 package com.iconnect.product.service.product.product.site.product.delete;
 
-import com.iconnect.product.entity.SiteProduct;
+import com.iconnect.product.entity.product.SiteProduct;
 import com.iconnect.product.enums.BooleanStatus;
-import com.iconnect.product.repository.SiteProductRepository;
+import com.iconnect.product.repository.product.SiteProductRepository;
 import com.iconnect.product.service.product.product.site.validator.SiteProductValidator;
 import com.iconnect.product.util.CustomLogger;
 import com.fasterxml.jackson.core.JsonProcessingException;

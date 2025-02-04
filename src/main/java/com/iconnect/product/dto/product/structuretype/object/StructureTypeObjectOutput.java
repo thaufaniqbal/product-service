@@ -1,4 +1,4 @@
-package com.iconnect.product.dto.structuretype.object;
+package com.iconnect.product.dto.product.structuretype.object;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

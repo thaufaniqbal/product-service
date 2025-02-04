@@ -1,10 +1,10 @@
 package com.iconnect.product.service.product.product.site.template.create;
 
 import com.iconnect.product.dto.product.site.template.SiteProductTemplateInput;
-import com.iconnect.product.entity.ProductTemplate;
-import com.iconnect.product.entity.ProductTemplateMapping;
-import com.iconnect.product.repository.ProductTemplateMappingRepository;
-import com.iconnect.product.repository.ProductTemplateRepository;
+import com.iconnect.product.entity.product.ProductTemplate;
+import com.iconnect.product.entity.product.ProductTemplateMapping;
+import com.iconnect.product.repository.product.ProductTemplateMappingRepository;
+import com.iconnect.product.repository.product.ProductTemplateRepository;
 import com.iconnect.product.util.CustomLogger;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import jakarta.transaction.Transactional;

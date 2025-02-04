@@ -1,6 +1,6 @@
 package com.iconnect.product.controller.product;
 
-import com.iconnect.product.dto.base.ApiResponseDTO;
+import com.iconnect.product.dto.ApiResponseDTO;
 import com.iconnect.product.service.product.structuretype.input.StructureTypeInputService;
 import com.iconnect.product.service.product.structuretype.object.StructureTypeObjectService;
 import lombok.RequiredArgsConstructor;

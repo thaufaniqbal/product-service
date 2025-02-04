@@ -1,8 +1,8 @@
 package com.iconnect.product.dto.product.site.structure;
 
-import com.iconnect.product.entity.SiteBaseProductSetting;
-import com.iconnect.product.entity.SiteBaseProductSettingData;
-import com.iconnect.product.entity.SiteBaseProductStructure;
+import com.iconnect.product.entity.product.SiteBaseProductSetting;
+import com.iconnect.product.entity.product.SiteBaseProductSettingData;
+import com.iconnect.product.entity.product.SiteBaseProductStructure;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

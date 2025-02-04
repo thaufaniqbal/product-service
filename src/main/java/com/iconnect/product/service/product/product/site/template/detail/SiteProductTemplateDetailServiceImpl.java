@@ -2,8 +2,8 @@ package com.iconnect.product.service.product.product.site.template.detail;
 
 import com.iconnect.product.dto.product.site.structure.edit.SiteProductEditStructure;
 import com.iconnect.product.dto.product.site.template.SiteProductTemplateOutput;
-import com.iconnect.product.entity.ProductTemplateMapping;
-import com.iconnect.product.repository.ProductTemplateMappingRepository;
+import com.iconnect.product.entity.product.ProductTemplateMapping;
+import com.iconnect.product.repository.product.ProductTemplateMappingRepository;
 import com.iconnect.product.service.product.product.site.structure.detail.SiteProductDetailStructureService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

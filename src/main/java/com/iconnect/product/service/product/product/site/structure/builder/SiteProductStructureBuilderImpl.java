@@ -1,16 +1,16 @@
 package com.iconnect.product.service.product.product.site.structure.builder;
 
 import com.iconnect.product.dto.product.site.structure.SiteProductStructureWrapper;
-import com.iconnect.product.entity.SiteBaseProductParent;
-import com.iconnect.product.entity.SiteBaseProductSetting;
-import com.iconnect.product.entity.SiteBaseProductSettingData;
-import com.iconnect.product.entity.SiteBaseProductStructure;
+import com.iconnect.product.entity.product.SiteBaseProductParent;
+import com.iconnect.product.entity.product.SiteBaseProductSetting;
+import com.iconnect.product.entity.product.SiteBaseProductSettingData;
+import com.iconnect.product.entity.product.SiteBaseProductStructure;
 import com.iconnect.product.enums.InputTypeStructure;
 import com.iconnect.product.enums.ObjectTypeStructure;
-import com.iconnect.product.repository.SiteBaseProductParentRepository;
-import com.iconnect.product.repository.SiteBaseProductSettingDataRepository;
-import com.iconnect.product.repository.SiteBaseProductSettingRepository;
-import com.iconnect.product.repository.SiteBaseProductStructureRepository;
+import com.iconnect.product.repository.product.SiteBaseProductParentRepository;
+import com.iconnect.product.repository.product.SiteBaseProductSettingDataRepository;
+import com.iconnect.product.repository.product.SiteBaseProductSettingRepository;
+import com.iconnect.product.repository.product.SiteBaseProductStructureRepository;
 import com.iconnect.product.util.CustomLogger;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;

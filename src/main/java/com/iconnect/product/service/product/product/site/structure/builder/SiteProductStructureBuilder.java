@@ -1,10 +1,10 @@
 package com.iconnect.product.service.product.product.site.structure.builder;
 
 import com.iconnect.product.dto.product.site.structure.SiteProductStructureWrapper;
-import com.iconnect.product.entity.SiteBaseProductParent;
-import com.iconnect.product.entity.SiteBaseProductSetting;
-import com.iconnect.product.entity.SiteBaseProductSettingData;
-import com.iconnect.product.entity.SiteBaseProductStructure;
+import com.iconnect.product.entity.product.SiteBaseProductParent;
+import com.iconnect.product.entity.product.SiteBaseProductSetting;
+import com.iconnect.product.entity.product.SiteBaseProductSettingData;
+import com.iconnect.product.entity.product.SiteBaseProductStructure;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.util.List;

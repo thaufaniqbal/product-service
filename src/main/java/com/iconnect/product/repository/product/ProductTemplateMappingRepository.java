@@ -1,6 +1,6 @@
-package com.iconnect.product.repository;
+package com.iconnect.product.repository.product;
 
-import com.iconnect.product.entity.ProductTemplateMapping;
+import com.iconnect.product.entity.product.ProductTemplateMapping;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

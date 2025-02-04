@@ -1,11 +1,11 @@
 package com.iconnect.product.service.product.product.site.product.create;
 
 import com.iconnect.product.dto.product.site.product.SiteProductCreateInput;
-import com.iconnect.product.entity.ProductType;
-import com.iconnect.product.entity.SiteProduct;
+import com.iconnect.product.entity.product.ProductType;
+import com.iconnect.product.entity.product.SiteProduct;
 import com.iconnect.product.enums.BooleanStatus;
-import com.iconnect.product.repository.ProductTypeRepository;
-import com.iconnect.product.repository.SiteProductRepository;
+import com.iconnect.product.repository.product.ProductTypeRepository;
+import com.iconnect.product.repository.product.SiteProductRepository;
 import com.iconnect.product.service.product.product.site.structure.builder.SiteProductStructureBuilder;
 import com.iconnect.product.service.product.product.site.validator.SiteProductValidator;
 import com.iconnect.product.util.CustomLogger;
