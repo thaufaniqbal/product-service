@@ -1,4 +1,4 @@
-package com.iconnect.product.entity.customer;
+package com.iconnect.product.entity.company;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,16 +15,16 @@ import java.util.UUID;
 @Setter
 @Getter
 @Entity
-@Table(name = "mst_customer")
+@Table(name = "mst_company")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Customer {
+public class Company {
     @Id
-    @Column(name = "customer_Id", columnDefinition = "char(36)")
-    private UUID customerId;
+    @Column(name = "company_id", columnDefinition = "char(36)")
+    private UUID companyId;
 
-    @Column(name = "customer_name")
-    private String customerName;
+    @Column(name = "company_name")
+    private String companyName;
 
     @Column(name = "address_id")
     private UUID addressId;
@@ -46,5 +46,4 @@ public class Customer {
 
     @Column(name = "delete_status")
     private Integer deleteStatus;
-
 }

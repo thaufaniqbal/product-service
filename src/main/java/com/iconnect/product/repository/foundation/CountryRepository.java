@@ -1,6 +1,6 @@
-package com.iconnect.product.repository.customer;
+package com.iconnect.product.repository.foundation;
 
-import com.iconnect.product.entity.customer.Country;
+import com.iconnect.product.entity.foundation.Country;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CountryRepository extends JpaRepository<Country, String> {
