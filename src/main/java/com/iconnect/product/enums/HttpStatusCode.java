@@ -59,7 +59,19 @@ public enum HttpStatusCode {
     TRANSACTION_DATA_ALREADY_EXIST (500006, HttpStatus.BAD_REQUEST, true, "Data Already Exist for %s"),
     TRANSACTION_INVALID_DATA_INPUT (500007, HttpStatus.BAD_REQUEST, true, "Invalid data input for %s"),
     TRANSACTION_DATA_NOT_FOUND_FOR (500008, HttpStatus.BAD_REQUEST, true, "Data Not Found for %s"),
-    TRANSACTION_FAILED_DELETE (500009, HttpStatus.NOT_ACCEPTABLE, true, "It has %d that use this %s%s");
+    TRANSACTION_FAILED_DELETE (500009, HttpStatus.NOT_ACCEPTABLE, true, "It has %d that use this %s%s"),
+
+    //auth-service
+    AUTH_DATA_NOT_FOUND (600001, HttpStatus.NO_CONTENT, false, "Data Not Found"),
+    AUTH_MISSING_MANDATORY_PROPERTY (600002, HttpStatus.BAD_REQUEST, true, "Missing mandatory property %s"),
+    AUTH_INVALID_DATA_TYPE(600003, HttpStatus.BAD_REQUEST,true,"Invalid data type for property %s"),
+    AUTH_MAXIMUM_LENGTH_EXCEEDED (600004, HttpStatus.BAD_REQUEST, true, "Maximum length for property %s is %s"),
+    AUTH_MINIMUM_LENGTH_EXCEEDED (600005, HttpStatus.BAD_REQUEST, true, "Minimum length for property %s is %s"),
+    AUTH_DATA_ALREADY_EXIST (600006, HttpStatus.BAD_REQUEST, true, "Data Already Exist for %s"),
+    AUTH_INVALID_DATA_INPUT (600007, HttpStatus.BAD_REQUEST, true, "Invalid data input for %s"),
+    AUTH_DATA_NOT_FOUND_FOR (600008, HttpStatus.BAD_REQUEST, true, "Data Not Found for %s"),
+    AUTH_FAILED_DELETE (600009, HttpStatus.NOT_ACCEPTABLE, true, "It has %d that use this %s%s"),
+    AUTH_FAILED_LOGIN (600010, HttpStatus.NOT_ACCEPTABLE, true, "Invalid Login%s");
 
     private final int code;
     private final HttpStatus status;

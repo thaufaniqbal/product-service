@@ -2,7 +2,7 @@ package com.iconnect.product.gateway.product.type;
 
 import com.iconnect.product.dto.product.type.ProductTypeListOutput;
 import com.iconnect.product.dto.product.type.ProductTypeSearchOutput;
-import com.iconnect.product.entity.QProductType;
+import com.iconnect.product.entity.product.QProductType;
 import com.iconnect.product.enums.BooleanStatus;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.QBean;

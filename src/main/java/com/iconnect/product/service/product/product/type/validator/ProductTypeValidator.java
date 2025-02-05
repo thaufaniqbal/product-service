@@ -25,17 +25,17 @@ public class ProductTypeValidator extends GlobalValidator  {
 
     public void validateRequest(ProductTypeCreateInput createRequest, ProductTypeEditInput editRequest){
         String productTypeName = Objects.isNull(editRequest) ? createRequest.getProductTypeName() : editRequest.getProductTypeName();
-        validateRequestMandatory(productTypeName, HttpStatusCode.MISSING_MANDATORY_PROPERTY);
+        validateRequestMandatory(productTypeName, HttpStatusCode.MISSING_MANDATORY_PROPERTY, "productTypeName");
 
         if (Objects.isNull(editRequest)){
             String productTypeCode = createRequest.getProductTypeCode() ;
-            validateRequestMandatory(productTypeCode, HttpStatusCode.MISSING_MANDATORY_PROPERTY);
-            validateRequestLength(productTypeCode, 3, 3);
+            validateRequestMandatory(productTypeCode, HttpStatusCode.MISSING_MANDATORY_PROPERTY, "productTypeCode");
+            validateRequestLength(productTypeCode, 3, 15, HttpStatusCode.MINIMUM_LENGTH_EXCEEDED , HttpStatusCode.MAXIMUM_LENGTH_EXCEEDED);
             if(Boolean.TRUE.equals(productTypeRepository.existsByProductTypeCode(createRequest.getProductTypeCode()))){
                 throw new HttpStatusException(HttpStatusCode.DATA_ALREADY_EXIST, "Product type Code: " + productTypeCode);
             }
         }
-        validateRequestLength(productTypeName, 5, 15);
+        validateRequestLength(productTypeName, 5, 15, HttpStatusCode.MINIMUM_LENGTH_EXCEEDED , HttpStatusCode.MAXIMUM_LENGTH_EXCEEDED);
     }
     public void validateProductTypeId(UUID productTypeId){
         if (Boolean.FALSE.equals(productTypeRepository.existsByProductTypeId(productTypeId))){

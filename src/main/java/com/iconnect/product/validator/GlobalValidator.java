@@ -11,18 +11,20 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class GlobalValidator {
 
-    public void validateRequestLength(String property ,Integer minLength, Integer maxLength) {
+    public void validateRequestLength(String property ,Integer minLength, Integer maxLength,
+                                      HttpStatusCode minimumStatus, HttpStatusCode maximumStatus,
+                                      Object... params) {
         int length = property.length();
         if (length < minLength || length > maxLength) {
             throw new HttpStatusException(
-                    length < minLength ? HttpStatusCode.MINIMUM_LENGTH_EXCEEDED : HttpStatusCode.MAXIMUM_LENGTH_EXCEEDED,
+                    length < minLength ? minimumStatus : maximumStatus,
                     property,
                     length < minLength ? minLength : maxLength);
         }
     }
-    public void validateRequestMandatory(Object property, HttpStatusCode httpStatusCode){
+    public void validateRequestMandatory(Object property, HttpStatusCode httpStatusCode, Object... params){
         if (Objects.isNull(property)){
-            throw new HttpStatusException(httpStatusCode, property.toString());
+            throw new HttpStatusException(httpStatusCode, params);
         }
     }
 }

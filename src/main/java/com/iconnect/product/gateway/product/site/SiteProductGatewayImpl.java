@@ -2,8 +2,9 @@ package com.iconnect.product.gateway.product.site;
 
 import com.iconnect.product.dto.product.site.product.SiteProductListOutput;
 import com.iconnect.product.dto.product.site.product.SiteProductSearchOutput;
-import com.iconnect.product.entity.QProductType;
-import com.iconnect.product.entity.QSiteProduct;
+
+import com.iconnect.product.entity.product.QProductType;
+import com.iconnect.product.entity.product.QSiteProduct;
 import com.iconnect.product.enums.BooleanStatus;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.QBean;
