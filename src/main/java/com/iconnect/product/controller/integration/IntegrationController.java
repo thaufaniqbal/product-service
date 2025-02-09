@@ -30,24 +30,28 @@ public class IntegrationController {
     private final CompanyProductTypeService companyProductTypeService;
     private final CustomerSiteProductService customerSiteProductService;
 
-    //customer
+    //company customer
     @PostMapping ("/customer")
     public ResponseEntity<ApiResponseDTO<Object>> createCustomer(@RequestHeader("user-id") UUID userId,
                                                                  @RequestBody IntCompanyCustomerInput input) throws JsonProcessingException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.CREATED, companyCustomerService.createCustomerByCompany(userId, input));
     }
+    @GetMapping ("/customer/get-credential/{customerId}")
+    public ResponseEntity<ApiResponseDTO<Object>> getCredential(@RequestHeader("user-id") UUID userId,
+                                                                @PathVariable UUID customerId) throws JsonProcessingException {
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, companyCustomerService.getCustomerCredential(userId, customerId));
+    }
     @PostMapping ("/customer/product-mapping")
     public ResponseEntity<ApiResponseDTO<Object>> companyCustomerProductMapping(@RequestHeader("user-id") UUID userId,
                                                                                 @RequestBody IntCompanyCustomerProductMapping input) throws JsonProcessingException {
-        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, customerSiteProductService.customerSiteProductMapping(userId, input));
+        return ApiResponseDTO.toResponseEntity(HttpStatus.CREATED, customerSiteProductService.customerSiteProductMapping(userId, input));
     }
-    @GetMapping ("/customer/get-credential/{customerId}")
-    public ResponseEntity<ApiResponseDTO<Object>> getCredential(@RequestHeader("user-id") String userId,
+    @GetMapping ("/customer/product-mapping/{customerId}")
+    public ResponseEntity<ApiResponseDTO<Object>> getCustomerProductMapping(@RequestHeader("user-id") UUID userId,
                                                                 @PathVariable UUID customerId) throws JsonProcessingException {
-        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, null);
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, companyCustomerService.getCustomerProductMapping(userId, customerId));
     }
-
-    // site product
+    // company site product
     @PostMapping("/site-product/")
     public ResponseEntity<ApiResponseDTO<Object>> createSiteProduct(@RequestBody SiteProductCreateInput input,
                                                                     @RequestHeader("login-id") String loginId,
@@ -57,7 +61,7 @@ public class IntegrationController {
     @GetMapping("/site-product/list")
     public ResponseEntity<ApiResponseDTO<Object>> getSiteProductList(@RequestHeader("user-id") UUID userId) {
 
-        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, null);
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, companySiteProductService.getSiteProductList(userId));
     }
     @GetMapping("/site-product/")
     public ResponseEntity<ApiResponseDTO<Object>> searchSiteProduct(
@@ -75,18 +79,18 @@ public class IntegrationController {
         input.setSize(size);
         input.setOffset(offset);
 
-        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, null);
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, companySiteProductService.searchSiteProduct(userId, input));
     }
-    //product type
+    //company product type
     @PostMapping("/product-type")
     public ResponseEntity<ApiResponseDTO<Object>> createProductType(@RequestBody ProductTypeCreateInput input,
                                                                     @RequestHeader("login-id") String loginId,
                                                                     @RequestHeader("user-id") UUID userId) throws JsonProcessingException {
-        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, companyProductTypeService);
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, companyProductTypeService.createProductTypeByCompany(userId, loginId, input));
     }
     @GetMapping("/product-type/list")
     public ResponseEntity<ApiResponseDTO<Object>> getAllProductCode(@RequestHeader("user-id") UUID userId) {
-        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, null);
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, companyProductTypeService.getProductTypeList(userId));
     }
 
     @GetMapping("/product-type/")
@@ -103,11 +107,6 @@ public class IntegrationController {
         input.setSize(size);
         input.setOffset(offset);
 
-        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, null);
-    }
-
-    @GetMapping("/product-type/list")
-    public ResponseEntity<ApiResponseDTO<Object>> getCard(@RequestHeader("user-id") UUID userId) {
-        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, null);
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, companyProductTypeService.searchProductType(userId, input));
     }
 }
