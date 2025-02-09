@@ -22,7 +22,7 @@ public class CustomerTransactionController {
     public ResponseEntity<ApiResponseDTO<Object>> getProductList(@PathVariable UUID userId) throws JsonProcessingException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, customerTransactionService.getProductList(userId));
     }
-    @PostMapping("/{siteProductId}")
+    @PostMapping("/get-data/{siteProductId}")
     public ResponseEntity<ApiResponseDTO<Object>> getData(@PathVariable UUID siteProductId,
                                                           @RequestHeader("user-id") UUID userId) throws JsonProcessingException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, customerTransactionService.getData(userId, siteProductId));
