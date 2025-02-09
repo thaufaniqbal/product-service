@@ -4,7 +4,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -14,10 +16,11 @@ import java.util.UUID;
 @Getter
 @Entity
 @Table(name = "mst_customer")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Customer {
-
     @Id
-    @Column(name = "customer_Id")
+    @Column(name = "customer_Id", columnDefinition = "char(36)")
     private UUID customerId;
 
     @Column(name = "customer_name")

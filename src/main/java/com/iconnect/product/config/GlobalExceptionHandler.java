@@ -1,6 +1,6 @@
 package com.iconnect.product.config;
 
-import com.iconnect.product.dto.base.ApiResponseDTO;
+import com.iconnect.product.dto.ApiResponseDTO;
 import com.iconnect.product.exception.HttpStatusException;
 import com.iconnect.product.util.CustomLogger;
 import com.fasterxml.jackson.core.JsonProcessingException;
