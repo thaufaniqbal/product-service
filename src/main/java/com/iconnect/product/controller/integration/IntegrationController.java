@@ -9,6 +9,7 @@ import com.iconnect.product.dto.product.site.product.SiteProductSearchInput;
 import com.iconnect.product.dto.product.type.ProductTypeCreateInput;
 import com.iconnect.product.dto.product.type.ProductTypeSearchInput;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,17 +25,17 @@ public class IntegrationController {
     @PostMapping ("/customer")
     public ResponseEntity<ApiResponseDTO<Object>> createCustomer(@RequestHeader("user-id") UUID userId,
                                                                  @RequestBody CustomerCreateInput input) throws JsonProcessingException {
-        return null;
+        return ApiResponseDTO.toResponseEntity(HttpStatus.CREATED,input);
     }
     @PostMapping ("/customer/product-mapping")
     public ResponseEntity<ApiResponseDTO<Object>> companyCustomerProductMapping(@RequestHeader("user-id") UUID userId,
                                                                                 @RequestBody IntCompanyCustomerProductMapping input) throws JsonProcessingException {
-        return null;
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, null);
     }
     @GetMapping ("/customer/get-credential/{customerId}")
     public ResponseEntity<ApiResponseDTO<Object>> getCredential(@RequestHeader("user-id") String userId,
                                                                 @PathVariable UUID customerId) throws JsonProcessingException {
-        return null;
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, null);
     }
 
     // site product
@@ -42,12 +43,12 @@ public class IntegrationController {
     public ResponseEntity<ApiResponseDTO<Object>> createSiteProduct(@RequestBody SiteProductCreateInput input,
                                                                     @RequestHeader("login-id") String loginId,
                                                                     @RequestHeader("user-id") UUID userId) throws JsonProcessingException {
-        return null;
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, null);
     }
     @GetMapping("/site-product/list")
     public ResponseEntity<ApiResponseDTO<Object>> getSiteProductList(@RequestHeader("user-id") UUID userId) {
 
-        return null;
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, null);
     }
     @GetMapping("/site-product/")
     public ResponseEntity<ApiResponseDTO<Object>> searchSiteProduct(
@@ -65,18 +66,18 @@ public class IntegrationController {
         input.setSize(size);
         input.setOffset(offset);
 
-        return null;
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, null);
     }
     //product type
     @PostMapping("/product-type")
     public ResponseEntity<ApiResponseDTO<Object>> createProductType(@RequestBody ProductTypeCreateInput input,
                                                                     @RequestHeader("login-id") String loginId,
                                                                     @RequestHeader("user-id") UUID userId) throws JsonProcessingException {
-        return null;
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, null);
     }
     @GetMapping("/product-type/list")
     public ResponseEntity<ApiResponseDTO<Object>> getAllProductCode(@RequestHeader("user-id") UUID userId) {
-        return null;
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, null);
     }
 
     @GetMapping("/product-type/")
@@ -93,11 +94,11 @@ public class IntegrationController {
         input.setSize(size);
         input.setOffset(offset);
 
-        return null;
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, null);
     }
 
     @GetMapping("/product-type/list")
     public ResponseEntity<ApiResponseDTO<Object>> getCard(@RequestHeader("user-id") UUID userId) {
-        return null;
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, null);
     }
 }
