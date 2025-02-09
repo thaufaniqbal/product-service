@@ -76,7 +76,7 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
         List<IntCompanyCustomerSearchOutput> results = new ArrayList<>();
         for (CompanyCustomer companyCustomer : companyCustomers){
             Customer customer = customers.stream()
-                    .filter(customerFilter -> customerFilter.getCustomerId().equals(companyCustomer.getCompanyId()))
+                    .filter(customerFilter -> customerFilter.getCustomerId().equals(companyCustomer.getCustomerId()))
                     .findFirst().orElse(null);
             if (Objects.nonNull(customer)){
                 IntCompanyCustomerSearchOutput result = new IntCompanyCustomerSearchOutput();
