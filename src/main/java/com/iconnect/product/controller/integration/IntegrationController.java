@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.iconnect.product.dto.ApiResponseDTO;
 import com.iconnect.product.dto.integration.IntCompanyCustomerInput;
 import com.iconnect.product.dto.integration.IntCompanyCustomerProductMapping;
+import com.iconnect.product.dto.integration.IntCompanyCustomerSearchInput;
 import com.iconnect.product.dto.product.site.product.SiteProductCreateInput;
 import com.iconnect.product.dto.product.site.product.SiteProductSearchInput;
 import com.iconnect.product.dto.product.type.ProductTypeCreateInput;
@@ -31,17 +32,22 @@ public class IntegrationController {
     private final CustomerSiteProductService customerSiteProductService;
 
     //company customer
-    @PostMapping ("/customer")
+    @PostMapping ("/customer/")
     public ResponseEntity<ApiResponseDTO<Object>> createCustomer(@RequestHeader("user-id") UUID userId,
                                                                  @RequestBody IntCompanyCustomerInput input) throws JsonProcessingException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.CREATED, companyCustomerService.createCustomerByCompany(userId, input));
+    }
+    @PostMapping ("/customer/")
+    public ResponseEntity<ApiResponseDTO<Object>> searchCustomer(@RequestHeader("user-id") UUID userId,
+                                                                 @RequestBody IntCompanyCustomerSearchInput input) throws JsonProcessingException {
+        return ApiResponseDTO.toResponseEntity(HttpStatus.CREATED, companyCustomerService.searchCustomer(userId, input));
     }
     @GetMapping ("/customer/get-credential/{customerId}")
     public ResponseEntity<ApiResponseDTO<Object>> getCredential(@RequestHeader("user-id") UUID userId,
                                                                 @PathVariable UUID customerId) throws JsonProcessingException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, companyCustomerService.getCustomerCredential(userId, customerId));
     }
-    @PostMapping ("/customer/product-mapping")
+    @PostMapping ("/customer/product-mapping/")
     public ResponseEntity<ApiResponseDTO<Object>> companyCustomerProductMapping(@RequestHeader("user-id") UUID userId,
                                                                                 @RequestBody IntCompanyCustomerProductMapping input) throws JsonProcessingException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.CREATED, customerSiteProductService.customerSiteProductMapping(userId, input));
@@ -109,4 +115,5 @@ public class IntegrationController {
 
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, companyProductTypeService.searchProductType(userId, input));
     }
+
 }
