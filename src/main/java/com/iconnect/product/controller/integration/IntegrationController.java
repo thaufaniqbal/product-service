@@ -122,6 +122,6 @@ public class IntegrationController {
     //company login
     @PostMapping ("/login")
     public ResponseEntity<ApiResponseDTO<Object>> login(@RequestBody IntAuthLoginInput input) throws JsonProcessingException {
-        return ApiResponseDTO.toResponseEntity(HttpStatus.CREATED, integrationAuthService.login(input));
+        return ApiResponseDTO.toResponseEntity(HttpStatus.ACCEPTED, integrationAuthService.login(input));
     }
 }
