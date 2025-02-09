@@ -46,11 +46,14 @@ public class IntegrationGatewayImpl implements IntegrationGateway {
                 join(productType).
                 on(siteProduct.productTypeId.eq(productType.productTypeId)).
                 join(companySiteProduct).
-                on(companySiteProduct.companyId.eq(companyId)).
+                on(companySiteProduct.siteProductId.eq(siteProduct.siteProductId)).
                 orderBy(siteProduct.siteProductCode.asc());
         query.where(siteProduct.deleteStatus.eq(deleteStatus));
         if (Objects.nonNull(productTypeId)){
             query.where(productType.productTypeId.eq(productTypeId));
+        }
+        if (Objects.nonNull(companyId)){
+            query.where(companySiteProduct.companyId.eq(companyId));
         }
         return query.fetch();
     }
@@ -76,7 +79,7 @@ public class IntegrationGatewayImpl implements IntegrationGateway {
                 join(productType).
                 on(siteProduct.productTypeId.eq(productType.productTypeId)).
                 join(companySiteProduct).
-                on(companySiteProduct.companyId.eq(companyId)).
+                on(companySiteProduct.siteProductId.eq(siteProduct.siteProductId)).
                 where(siteProduct.deleteStatus.eq(BooleanStatus.NO.getCode())).
                 limit(pageable.getPageSize()).
                 offset(pageable.getOffset()).
@@ -89,6 +92,9 @@ public class IntegrationGatewayImpl implements IntegrationGateway {
         }
         if (productName != null) {
             query.where(siteProduct.siteProductName.likeIgnoreCase("%"+productName.toLowerCase()+"%"));
+        }
+        if (Objects.nonNull(companyId)){
+            query.where(companySiteProduct.companyId.eq(companyId));
         }
         List<SiteProductSearchOutput> result = query.fetch();
         long totalCount = query.fetchCount();
@@ -110,9 +116,12 @@ public class IntegrationGatewayImpl implements IntegrationGateway {
                 select(entity).
                 from(productType).
                 join(companyProductType).
-                on(companyProductType.companyId.eq(companyId)).
+                on(companyProductType.productTypeId.eq(productType.productTypeId)).
                 where(productType.deleteStatus.eq(deleteStatus)).
                 orderBy(productType.productTypeCode.asc());
+        if (Objects.nonNull(companyId)){
+            query.where(companyProductType.companyId.eq(companyId));
+        }
         return query.fetch();
     }
 
@@ -132,7 +141,7 @@ public class IntegrationGatewayImpl implements IntegrationGateway {
                 select(entity).
                 from(productType).
                 join(companyProductType).
-                on(companyProductType.companyId.eq(companyId)).
+                on(companyProductType.productTypeId.eq(productType.productTypeId)).
                 where(
                         productType.deleteStatus.eq(BooleanStatus.NO.getCode())
                 ).
@@ -145,6 +154,9 @@ public class IntegrationGatewayImpl implements IntegrationGateway {
         }
         if (productName != null) {
             query.where(productType.productTypeName.likeIgnoreCase("%"+productName.toLowerCase()+"%"));
+        }
+        if (Objects.nonNull(companyId)){
+            query.where(companyProductType.companyId.eq(companyId));
         }
         List<ProductTypeSearchOutput> result = query.fetch();
         long totalCount = query.fetchCount();
