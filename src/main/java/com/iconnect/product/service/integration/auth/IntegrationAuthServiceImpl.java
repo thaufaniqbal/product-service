@@ -44,6 +44,7 @@ public class IntegrationAuthServiceImpl implements IntegrationAuthService {
                 result.setLoginId(entityCredential.getUserName());
                 result.setUserId(entityCredential.getUserId());
                 result.setCompanyLabel(company.getCompanyName());
+                result.setRole("super-user");
             }
         }
 
@@ -64,6 +65,7 @@ public class IntegrationAuthServiceImpl implements IntegrationAuthService {
                 result.setLoginId(entityCredential.getUserName());
                 result.setUserId(entityCredential.getUserId());
                 result.setCompanyLabel(company.getCompanyName());
+                result.setRole("user");
             }
         }
 
