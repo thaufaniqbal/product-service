@@ -10,6 +10,6 @@ import lombok.Setter;
 @Setter
 @Getter
 public class IntAuthLoginInput {
-    private String userName;
+    private String username;
     private String password;
 }

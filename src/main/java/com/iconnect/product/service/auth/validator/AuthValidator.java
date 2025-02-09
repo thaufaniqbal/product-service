@@ -17,9 +17,9 @@ public class AuthValidator extends GlobalValidator {
     private final EntityCredentialRepository credentialRepository;
 
     public void validateLogin (AuthLoginInput input){
-        validateRequestMandatory(input.getUserName(), HttpStatusCode.AUTH_MISSING_MANDATORY_PROPERTY);
-        validateRequestMandatory(input.getUserName(), HttpStatusCode.AUTH_MISSING_MANDATORY_PROPERTY);
-        EntityCredential credential = credentialRepository.findByUserNameIgnoreCase(input.getUserName());
+        validateRequestMandatory(input.getUsername(), HttpStatusCode.AUTH_MISSING_MANDATORY_PROPERTY);
+        validateRequestMandatory(input.getUsername(), HttpStatusCode.AUTH_MISSING_MANDATORY_PROPERTY);
+        EntityCredential credential = credentialRepository.findByUserNameIgnoreCase(input.getUsername());
         validateRequestMandatory(credential, HttpStatusCode.AUTH_FAILED_LOGIN, "");
         if (!credential.getPassword().equalsIgnoreCase(input.getPassword())){
             throw new HttpStatusException(HttpStatusCode.AUTH_FAILED_LOGIN, ", invalid password");

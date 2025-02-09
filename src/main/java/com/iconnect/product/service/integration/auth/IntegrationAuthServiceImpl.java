@@ -31,10 +31,10 @@ public class IntegrationAuthServiceImpl implements IntegrationAuthService {
     public Object login(IntAuthLoginInput input) {
         IntAuthLoginOutput result = new IntAuthLoginOutput();
         AuthLoginInput authLogin = new AuthLoginInput();
-        authLogin.setUserName(input.getUserName());
+        authLogin.setUsername(input.getUsername());
         authLogin.setPassword(input.getPassword());
         if (authLoginService.login(authLogin)){
-            EntityCredential entityCredential = credentialRepository.findByUserNameIgnoreCase(authLogin.getUserName());
+            EntityCredential entityCredential = credentialRepository.findByUserNameIgnoreCase(authLogin.getUsername());
             EntityUserCompany entityUserCompany = getEntityUser(entityCredential.getUserId());
             Company company = companyRepository.findById(entityUserCompany.getCompanyId()).orElse(null);
             if (Objects.nonNull(company)){
