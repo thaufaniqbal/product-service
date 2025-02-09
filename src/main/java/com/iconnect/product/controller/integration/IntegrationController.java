@@ -91,7 +91,7 @@ public class IntegrationController {
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, companySiteProductService.searchSiteProduct(userId, input));
     }
     //company product type
-    @PostMapping("/product-type")
+    @PostMapping("/product-type/")
     public ResponseEntity<ApiResponseDTO<Object>> createProductType(@RequestBody ProductTypeCreateInput input,
                                                                     @RequestHeader("login-id") String loginId,
                                                                     @RequestHeader("user-id") UUID userId) throws JsonProcessingException {
