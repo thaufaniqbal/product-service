@@ -40,7 +40,7 @@ public class IntegrationController {
                                                                  @RequestBody IntCompanyCustomerInput input) throws JsonProcessingException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.CREATED, companyCustomerService.createCustomerByCompany(userId, input));
     }
-    @PostMapping ("/customer/")
+    @PostMapping ("/customer/search")
     public ResponseEntity<ApiResponseDTO<Object>> searchCustomer(@RequestHeader("user-id") UUID userId,
                                                                  @RequestBody IntCompanyCustomerSearchInput input) throws JsonProcessingException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.CREATED, companyCustomerService.searchCustomer(userId, input));
