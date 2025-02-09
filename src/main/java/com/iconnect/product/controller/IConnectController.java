@@ -24,14 +24,14 @@ public class IConnectController {
     private final CompanyListService companyListService;
 
     @PostMapping("/register/user-company")
-    public ResponseEntity<ApiResponseDTO<Object>> searchCustomer(@RequestHeader("user-id") UUID userId,
-                                                                 @RequestBody AuthCompanyUserRegisterInput input) throws JsonProcessingException {
+    public ResponseEntity<ApiResponseDTO<Object>> registerUserCompany(@RequestHeader("user-id") UUID userId,
+                                                                      @RequestBody AuthCompanyUserRegisterInput input) throws JsonProcessingException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.CREATED, authRegisterService.registerUserCompany(input, null));
     }
 
     @PostMapping("/company/")
     public ResponseEntity<ApiResponseDTO<Object>> createCompany(@RequestHeader("user-id") UUID userId,
-                                                                 @RequestBody CompanyCreateInput input) throws JsonProcessingException {
+                                                                @RequestBody CompanyCreateInput input) throws JsonProcessingException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.CREATED, companyCreateService.create(input, null));
     }
     @GetMapping("/company/list")

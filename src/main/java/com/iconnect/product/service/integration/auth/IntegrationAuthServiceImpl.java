@@ -37,9 +37,11 @@ public class IntegrationAuthServiceImpl implements IntegrationAuthService {
             EntityCredential entityCredential = credentialRepository.findByUserNameIgnoreCase(authLogin.getUserName());
             EntityUserCompany entityUserCompany = getEntityUser(entityCredential.getUserId());
             Company company = companyRepository.findById(entityUserCompany.getCompanyId()).orElse(null);
-            result.setLoginId(entityCredential.getUserName());
-            result.setUserId(entityCredential.getUserId());
-            result.setCompanyLabel(company.getCompanyName());
+            if (Objects.nonNull(company)){
+                result.setLoginId(entityCredential.getUserName());
+                result.setUserId(entityCredential.getUserId());
+                result.setCompanyLabel(company.getCompanyName());
+            }
         }
 
         return result;

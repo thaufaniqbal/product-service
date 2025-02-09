@@ -34,7 +34,7 @@ public class SiteProductCreateServiceImpl implements SiteProductCreateService {
         customLogger.setLogObject(siteProduct, "createSiteProduct", loginId);
         saveProduct(siteProduct);
         structureBuilder.init(siteProduct.getSiteProductId(), siteProduct.getProductTypeId(), siteProduct.getSiteProductName());
-        return request;
+        return siteProduct;
     }
     @Transactional
     private void saveProduct(SiteProduct siteProduct){
