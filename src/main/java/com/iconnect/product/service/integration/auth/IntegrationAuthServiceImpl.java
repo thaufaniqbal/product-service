@@ -6,11 +6,13 @@ import com.iconnect.product.dto.integration.IntAuthLoginOutput;
 import com.iconnect.product.entity.auth.EntityCredential;
 import com.iconnect.product.entity.auth.EntityUserCompany;
 import com.iconnect.product.entity.company.Company;
+import com.iconnect.product.entity.integration.CompanyCustomer;
 import com.iconnect.product.enums.HttpStatusCode;
 import com.iconnect.product.exception.HttpStatusException;
 import com.iconnect.product.repository.auth.EntityCredentialRepository;
 import com.iconnect.product.repository.auth.EntityUserCompanyRepository;
 import com.iconnect.product.repository.company.CompanyRepository;
+import com.iconnect.product.repository.integration.CompanyCustomerRepository;
 import com.iconnect.product.service.auth.login.AuthLoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,7 @@ public class IntegrationAuthServiceImpl implements IntegrationAuthService {
     private final EntityCredentialRepository credentialRepository;
     private final EntityUserCompanyRepository entityUserCompanyRepository;
     private final CompanyRepository companyRepository;
+    private final CompanyCustomerRepository companyCustomerRepository;
 
     private final AuthLoginService authLoginService;
 
@@ -46,8 +49,36 @@ public class IntegrationAuthServiceImpl implements IntegrationAuthService {
 
         return result;
     }
+
+    @Override
+    public Object loginCustomer(IntAuthLoginInput input) {
+        IntAuthLoginOutput result = new IntAuthLoginOutput();
+        AuthLoginInput authLogin = new AuthLoginInput();
+        authLogin.setUsername(input.getUsername());
+        authLogin.setPassword(input.getPassword());
+        if (authLoginService.login(authLogin)){
+            EntityCredential entityCredential = credentialRepository.findByUserNameIgnoreCase(authLogin.getUsername());
+            CompanyCustomer entityUserCompany = getCompanyCustomer(entityCredential.getUserId());
+            Company company = companyRepository.findById(entityUserCompany.getCompanyId()).orElse(null);
+            if (Objects.nonNull(company)){
+                result.setLoginId(entityCredential.getUserName());
+                result.setUserId(entityCredential.getUserId());
+                result.setCompanyLabel(company.getCompanyName());
+            }
+        }
+
+        return result;
+    }
+
     private EntityUserCompany getEntityUser (UUID userId) {
         EntityUserCompany result = entityUserCompanyRepository.findById(userId).orElse(null);
+        if (Objects.isNull(result)){
+            throw new HttpStatusException(HttpStatusCode.AUTH_DATA_NOT_FOUND);
+        }
+        return result;
+    }
+    private CompanyCustomer getCompanyCustomer (UUID userId) {
+        CompanyCustomer result = companyCustomerRepository.findByCustomerId(userId).orElse(null);
         if (Objects.isNull(result)){
             throw new HttpStatusException(HttpStatusCode.AUTH_DATA_NOT_FOUND);
         }

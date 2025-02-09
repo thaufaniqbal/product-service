@@ -4,4 +4,5 @@ import com.iconnect.product.dto.integration.IntAuthLoginInput;
 
 public interface IntegrationAuthService {
     Object login (IntAuthLoginInput input);
+    Object loginCustomer (IntAuthLoginInput input);
 }
