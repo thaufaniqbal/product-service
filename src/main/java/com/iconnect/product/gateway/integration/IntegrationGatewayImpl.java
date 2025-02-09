@@ -4,6 +4,7 @@ import com.iconnect.product.dto.product.site.product.SiteProductListOutput;
 import com.iconnect.product.dto.product.site.product.SiteProductSearchOutput;
 import com.iconnect.product.dto.product.type.ProductTypeListOutput;
 import com.iconnect.product.dto.product.type.ProductTypeSearchOutput;
+import com.iconnect.product.entity.integration.QCompanyProductType;
 import com.iconnect.product.entity.integration.QCompanySiteProduct;
 import com.iconnect.product.entity.product.QProductType;
 import com.iconnect.product.entity.product.QSiteProduct;
@@ -98,7 +99,7 @@ public class IntegrationGatewayImpl implements IntegrationGateway {
     public List<ProductTypeListOutput> getListProductType(UUID companyId, Integer deleteStatus) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(JPQLTemplates.DEFAULT, entityManager);
         QProductType productType = QProductType.productType;
-        QCompanySiteProduct companySiteProduct = QCompanySiteProduct.companySiteProduct;
+        QCompanyProductType companyProductType = QCompanyProductType.companyProductType;
 
         QBean<ProductTypeListOutput> entity = Projections.fields(ProductTypeListOutput.class,
                 productType.productTypeId,
@@ -108,18 +109,19 @@ public class IntegrationGatewayImpl implements IntegrationGateway {
         JPAQuery<ProductTypeListOutput> query = queryFactory.
                 select(entity).
                 from(productType).
-                join(companySiteProduct).
-                on(companySiteProduct.companyId.eq(companyId)).
+                join(companyProductType).
+                on(companyProductType.companyId.eq(companyId)).
                 where(productType.deleteStatus.eq(deleteStatus)).
                 orderBy(productType.productTypeCode.asc());
-        return query.fetch();
+        List<ProductTypeListOutput> outputs = query.fetch();
+        return outputs;
     }
 
     @Override
     public Page<ProductTypeSearchOutput> getSearchProductType(UUID companyId, String productTypeCode, String productName, Pageable pageable) {
         JPAQueryFactory queryFactory = new JPAQueryFactory(JPQLTemplates.DEFAULT, entityManager);
         QProductType productType = QProductType.productType;
-        QCompanySiteProduct companySiteProduct = QCompanySiteProduct.companySiteProduct;
+        QCompanyProductType companyProductType = QCompanyProductType.companyProductType;
 
         QBean<ProductTypeSearchOutput> entity = Projections.fields(ProductTypeSearchOutput.class,
                 productType.productTypeId,
@@ -130,8 +132,8 @@ public class IntegrationGatewayImpl implements IntegrationGateway {
         JPAQuery<ProductTypeSearchOutput> query = queryFactory.
                 select(entity).
                 from(productType).
-                join(companySiteProduct).
-                on(companySiteProduct.companyId.eq(companyId)).
+                join(companyProductType).
+                on(companyProductType.companyId.eq(companyId)).
                 where(
                         productType.deleteStatus.eq(BooleanStatus.NO.getCode())
                 ).
