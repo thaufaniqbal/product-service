@@ -17,7 +17,7 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
     private final CompanyCustomerRepository companyCustomerRepository;
 
     @Override
-    public Object getData(UUID userId, UUID siteProductId, CustomerTransactionDataInput input) {
+    public Object getData(UUID userId, UUID siteProductId) {
         CompanyCustomer entityUserCompany = getCompanyCustomer(userId);
 
         return null;
