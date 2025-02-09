@@ -26,7 +26,7 @@ public class ProductTypeCreateServiceImpl implements ProductTypeCreateService {
         ProductType productType = build(request, loginId);
         customLogger.setLogObject(productType, "createProductType", loginId);
         saveProduct(productType);
-        return request;
+        return productType;
     }
     @Transactional
     private void saveProduct(ProductType productType){
