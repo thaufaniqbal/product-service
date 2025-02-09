@@ -5,6 +5,6 @@ import com.iconnect.product.dto.product.site.product.SiteProductCreateInput;
 import java.util.UUID;
 
 public interface CompanySiteProductService {
-    Object createProductByCompany (UUID userId, SiteProductCreateInput input);
+    Object createProductByCompany (UUID userId, String loginId,SiteProductCreateInput input);
 
 }

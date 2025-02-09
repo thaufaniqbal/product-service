@@ -9,7 +9,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CompanyProductTypeServiceImpl implements CompanyProductTypeService {
     @Override
-    public Object createProductTypeByCompany(UUID userId, ProductTypeCreateInput input) {
+    public Object createProductTypeByCompany(UUID userId, String loginId, ProductTypeCreateInput input) {
         return null;
     }
 }
