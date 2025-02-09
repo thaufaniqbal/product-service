@@ -43,7 +43,7 @@ public class IntegrationController {
     @PostMapping ("/customer/search")
     public ResponseEntity<ApiResponseDTO<Object>> searchCustomer(@RequestHeader("user-id") UUID userId,
                                                                  @RequestBody IntCompanyCustomerSearchInput input) throws JsonProcessingException {
-        return ApiResponseDTO.toResponseEntity(HttpStatus.CREATED, companyCustomerService.searchCustomer(userId, input));
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, companyCustomerService.searchCustomer(userId, input));
     }
     @GetMapping ("/customer/get-credential/{customerId}")
     public ResponseEntity<ApiResponseDTO<Object>> getCredential(@RequestHeader("user-id") UUID userId,

@@ -80,6 +80,7 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
                     .findFirst().orElse(null);
             if (Objects.nonNull(customer)){
                 IntCompanyCustomerSearchOutput result = new IntCompanyCustomerSearchOutput();
+                result.setCustomerId(customer.getCustomerId());
                 result.setCustomerName(customer.getCustomerName());
                 result.setStatus(BooleanStatus.YES.getCode());
                 results.add(result);
