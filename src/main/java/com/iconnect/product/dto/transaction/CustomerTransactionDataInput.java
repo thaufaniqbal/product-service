@@ -12,7 +12,5 @@ import java.util.UUID;
 @Setter
 @Getter
 public class CustomerTransactionDataInput {
-    private UUID customerId;
-    private UUID siteProductId;
     private byte[] data;
 }

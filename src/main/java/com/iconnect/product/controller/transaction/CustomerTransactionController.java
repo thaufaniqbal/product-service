@@ -18,19 +18,21 @@ import java.util.UUID;
 public class CustomerTransactionController {
     private final CustomerTransactionService customerTransactionService;
 
-    @PostMapping("/list/{companyId}")
-    public ResponseEntity<ApiResponseDTO<Object>> getProductList(@PathVariable UUID companyId,
-                                                                 @RequestBody CustomerTransactionDataInput input) throws JsonProcessingException {
-        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, customerTransactionService.getProductList(companyId, input));
+    @PostMapping("/list/{userId}")
+    public ResponseEntity<ApiResponseDTO<Object>> getProductList(@PathVariable UUID userId) throws JsonProcessingException {
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, customerTransactionService.getProductList(userId));
     }
-    @PostMapping("/{companyId}")
-    public ResponseEntity<ApiResponseDTO<Object>> getData(@PathVariable UUID companyId,
-                                                                @RequestBody CustomerTransactionDataInput input) throws JsonProcessingException {
-        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, customerTransactionService.getData(companyId, input));
+    @PostMapping("/{siteProductId}")
+    public ResponseEntity<ApiResponseDTO<Object>> getData(@PathVariable UUID siteProductId,
+                                                          @RequestHeader("user-id") UUID userId,
+                                                          @RequestBody CustomerTransactionDataInput input) throws JsonProcessingException {
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, customerTransactionService.getData(userId, siteProductId, input));
     }
-    @PostMapping("/save")
-    public ResponseEntity<ApiResponseDTO<Object>> saveData(@RequestBody CustomerTransactionDataInput input) throws JsonProcessingException {
-        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, customerTransactionService.saveData(input));
+    @PostMapping("/save/{siteProductId}")
+    public ResponseEntity<ApiResponseDTO<Object>> saveData(@PathVariable UUID siteProductId,
+                                                           @RequestHeader("user-id") UUID userId,
+                                                           @RequestBody CustomerTransactionDataInput input) throws JsonProcessingException {
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, customerTransactionService.saveData(siteProductId, userId, input));
     }
 
 }

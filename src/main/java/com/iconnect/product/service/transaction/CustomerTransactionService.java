@@ -5,7 +5,7 @@ import com.iconnect.product.dto.transaction.CustomerTransactionDataInput;
 import java.util.UUID;
 
 public interface CustomerTransactionService {
-    Object getData (UUID companyId, CustomerTransactionDataInput input);
-    Object getProductList (UUID companyId, CustomerTransactionDataInput input);
-    Object saveData (CustomerTransactionDataInput input);
+    Object getData (UUID userId, UUID siteProductId, CustomerTransactionDataInput input);
+    Object getProductList (UUID userId);
+    Object saveData (UUID userId, UUID siteProductId, CustomerTransactionDataInput input);
 }
