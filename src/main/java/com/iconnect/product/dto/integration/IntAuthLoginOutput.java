@@ -15,4 +15,6 @@ public class IntAuthLoginOutput {
     private String loginId;
     private UUID userId;
     private String companyLabel;
+    private String token;
+    private String role;
 }
