@@ -113,8 +113,7 @@ public class IntegrationGatewayImpl implements IntegrationGateway {
                 on(companyProductType.companyId.eq(companyId)).
                 where(productType.deleteStatus.eq(deleteStatus)).
                 orderBy(productType.productTypeCode.asc());
-        List<ProductTypeListOutput> outputs = query.fetch();
-        return outputs;
+        return query.fetch();
     }
 
     @Override
