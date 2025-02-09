@@ -27,4 +27,7 @@ public class CustomerSiteProduct {
 
     @Column(name = "site_product_id", columnDefinition = "char(36)")
     private UUID siteProductId;
+
+    @Column(name = "company_id", columnDefinition = "char(36)")
+    private UUID companyId;
 }

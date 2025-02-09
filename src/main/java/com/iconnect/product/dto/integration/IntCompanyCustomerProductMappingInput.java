@@ -11,7 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Setter
 @Getter
-public class IntCompanyCustomerProductMapping {
+public class IntCompanyCustomerProductMappingInput {
     private UUID customerId;
     private UUID siteProductId;
 }

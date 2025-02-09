@@ -3,7 +3,7 @@ package com.iconnect.product.controller.integration;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.iconnect.product.dto.ApiResponseDTO;
 import com.iconnect.product.dto.integration.IntCompanyCustomerInput;
-import com.iconnect.product.dto.integration.IntCompanyCustomerProductMapping;
+import com.iconnect.product.dto.integration.IntCompanyCustomerProductMappingInput;
 import com.iconnect.product.dto.integration.IntCompanyCustomerSearchInput;
 import com.iconnect.product.dto.product.site.product.SiteProductCreateInput;
 import com.iconnect.product.dto.product.site.product.SiteProductSearchInput;
@@ -49,7 +49,7 @@ public class IntegrationController {
     }
     @PostMapping ("/customer/product-mapping/")
     public ResponseEntity<ApiResponseDTO<Object>> companyCustomerProductMapping(@RequestHeader("user-id") UUID userId,
-                                                                                @RequestBody IntCompanyCustomerProductMapping input) throws JsonProcessingException {
+                                                                                @RequestBody IntCompanyCustomerProductMappingInput input) throws JsonProcessingException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.CREATED, customerSiteProductService.customerSiteProductMapping(userId, input));
     }
     @GetMapping ("/customer/product-mapping/{customerId}")
