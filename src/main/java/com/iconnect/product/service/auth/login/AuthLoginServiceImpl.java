@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class AuthLoginServiceImpl implements AuthLoginService {
     private final AuthValidator validator ;
     @Override
-    public Boolean login(AuthLoginInput input) {
+    public boolean login(AuthLoginInput input) {
         validator.validateLogin(input);
         return true;
     }

@@ -2,6 +2,7 @@ package com.iconnect.product.controller.integration;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.iconnect.product.dto.ApiResponseDTO;
+import com.iconnect.product.dto.integration.IntAuthLoginInput;
 import com.iconnect.product.dto.integration.IntCompanyCustomerInput;
 import com.iconnect.product.dto.integration.IntCompanyCustomerProductMappingInput;
 import com.iconnect.product.dto.integration.IntCompanyCustomerSearchInput;
@@ -9,6 +10,7 @@ import com.iconnect.product.dto.product.site.product.SiteProductCreateInput;
 import com.iconnect.product.dto.product.site.product.SiteProductSearchInput;
 import com.iconnect.product.dto.product.type.ProductTypeCreateInput;
 import com.iconnect.product.dto.product.type.ProductTypeSearchInput;
+import com.iconnect.product.service.integration.auth.IntegrationAuthService;
 import com.iconnect.product.service.integration.company.customer.CompanyCustomerService;
 import com.iconnect.product.service.integration.company.product.site.CompanySiteProductService;
 import com.iconnect.product.service.integration.company.product.type.CompanyProductTypeService;
@@ -30,6 +32,7 @@ public class IntegrationController {
     private final CompanySiteProductService companySiteProductService;
     private final CompanyProductTypeService companyProductTypeService;
     private final CustomerSiteProductService customerSiteProductService;
+    private final IntegrationAuthService integrationAuthService;
 
     //company customer
     @PostMapping ("/customer/")
@@ -116,4 +119,9 @@ public class IntegrationController {
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, companyProductTypeService.searchProductType(userId, input));
     }
 
+    //company login
+    @PostMapping ("/login")
+    public ResponseEntity<ApiResponseDTO<Object>> login(@RequestBody IntAuthLoginInput input) throws JsonProcessingException {
+        return ApiResponseDTO.toResponseEntity(HttpStatus.CREATED, integrationAuthService.login(input));
+    }
 }
