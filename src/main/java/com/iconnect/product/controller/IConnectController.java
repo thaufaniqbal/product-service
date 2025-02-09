@@ -29,13 +29,13 @@ public class IConnectController {
         return ApiResponseDTO.toResponseEntity(HttpStatus.CREATED, authRegisterService.registerUserCompany(input, null));
     }
 
-    @PostMapping("/company/")
+    @PostMapping("/company/create")
     public ResponseEntity<ApiResponseDTO<Object>> createCompany(@RequestHeader("user-id") UUID userId,
                                                                 @RequestBody CompanyCreateInput input) throws JsonProcessingException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.CREATED, companyCreateService.create(input, null));
     }
     @GetMapping("/company/list")
     public ResponseEntity<ApiResponseDTO<Object>> getCompanyList() throws JsonProcessingException {
-        return ApiResponseDTO.toResponseEntity(HttpStatus.CREATED, companyListService.getCompanyList());
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, companyListService.getCompanyList());
     }
 }
