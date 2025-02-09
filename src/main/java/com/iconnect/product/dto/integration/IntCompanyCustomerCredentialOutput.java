@@ -10,4 +10,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class IntCompanyCustomerCredentialOutput {
+    private String userName;
+    private String password;
+    private Integer isDefault;
 }

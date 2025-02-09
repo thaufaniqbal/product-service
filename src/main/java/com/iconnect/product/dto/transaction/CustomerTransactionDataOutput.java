@@ -10,4 +10,5 @@ import lombok.Setter;
 @Setter
 @Getter
 public class CustomerTransactionDataOutput {
+    private Object data;
 }

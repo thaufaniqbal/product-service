@@ -10,4 +10,6 @@ import lombok.Setter;
 @Setter
 @Getter
 public class IntCompanyCustomerSearchOutput {
+    private String customerName;
+    private Integer status;
 }
