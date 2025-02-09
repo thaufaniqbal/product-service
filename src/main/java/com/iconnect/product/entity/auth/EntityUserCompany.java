@@ -19,9 +19,9 @@ import java.util.UUID;
 @NoArgsConstructor
 public class EntityUserCompany {
     @Id
-    @Column(name = "user_id", columnDefinition = "char(36)")
+    @Column(name = "user_id")
     private UUID userId;
 
-    @Column(name = "company_id", columnDefinition = "char(36)")
+    @Column(name = "company_id")
     private UUID companyId;
 }

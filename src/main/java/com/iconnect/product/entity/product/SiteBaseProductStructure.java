@@ -17,7 +17,7 @@ import java.util.UUID;
 public class SiteBaseProductStructure {
 
     @Id
-    @Column(name = "site_base_product_structure_id", columnDefinition = "char(36)")
+    @Column(name = "site_base_product_structure_id")
     private UUID siteBaseProductStructureId;
 
     @Column(name = "site_base_product_structure_name")

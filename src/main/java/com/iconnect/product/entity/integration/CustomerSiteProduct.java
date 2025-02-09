@@ -19,15 +19,15 @@ import java.util.UUID;
 @NoArgsConstructor
 public class CustomerSiteProduct {
     @Id
-    @Column(name = "customer_site_product_id", columnDefinition = "char(36)")
+    @Column(name = "customer_site_product_id")
     private UUID customerSiteProductId;
 
-    @Column(name = "customer_id", columnDefinition = "char(36)")
+    @Column(name = "customer_id")
     private UUID customerId;
 
-    @Column(name = "site_product_id", columnDefinition = "char(36)")
+    @Column(name = "site_product_id")
     private UUID siteProductId;
 
-    @Column(name = "company_id", columnDefinition = "char(36)")
+    @Column(name = "company_id")
     private UUID companyId;
 }

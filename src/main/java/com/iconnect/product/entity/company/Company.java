@@ -20,7 +20,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Company {
     @Id
-    @Column(name = "company_id", columnDefinition = "char(36)")
+    @Column(name = "company_id")
     private UUID companyId;
 
     @Column(name = "company_name")

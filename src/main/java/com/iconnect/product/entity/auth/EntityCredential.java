@@ -19,7 +19,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class EntityCredential {
     @Id
-    @Column(name = "user_id", columnDefinition = "char(36)")
+    @Column(name = "user_id")
     private UUID userId;
 
     @Column(name = "user_name")

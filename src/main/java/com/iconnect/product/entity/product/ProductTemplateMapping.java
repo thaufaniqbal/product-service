@@ -15,10 +15,10 @@ import java.util.UUID;
 @Table(name = "mst_product_template_mapping")
 public class ProductTemplateMapping {
     @Id
-    @Column(name = "product_template_mapping_id", columnDefinition = "char(36)")
+    @Column(name = "product_template_mapping_id")
     private UUID productTemplateMappingId;
 
-    @Column(name = "product_template_id", columnDefinition = "char(36)")
+    @Column(name = "product_template_id")
     private UUID productTemplateId;
 
     @Column(name = "seq")

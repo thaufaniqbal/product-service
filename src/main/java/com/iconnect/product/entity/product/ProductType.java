@@ -17,7 +17,7 @@ import java.util.UUID;
 public class ProductType {
 
     @Id
-    @Column(name = "product_type_Id" ,columnDefinition = "char(36)")
+    @Column(name = "product_type_Id" )
     private UUID productTypeId;
 
     @Column(name = "product_type_name")

@@ -19,9 +19,9 @@ import java.util.UUID;
 @NoArgsConstructor
 public class ProductTemplate {
     @Id
-    @Column(name = "product_template_id", columnDefinition = "char(36)")
+    @Column(name = "product_template_id")
     private UUID productTemplateId;
 
-    @Column(name = "site_product_Id", columnDefinition = "char(36)")
+    @Column(name = "site_product_Id")
     private UUID siteProductId;
 }

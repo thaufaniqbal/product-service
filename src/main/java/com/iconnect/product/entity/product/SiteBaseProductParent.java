@@ -17,7 +17,7 @@ import java.util.UUID;
 public class SiteBaseProductParent {
 
     @Id
-    @Column(name = "site_base_product_parent_id",columnDefinition = "char(36)")
+    @Column(name = "site_base_product_parent_id")
     private UUID siteBaseProductParentId;
 
     @Column(name = "site_base_product_parent_name")
