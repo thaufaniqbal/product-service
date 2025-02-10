@@ -1,9 +1,7 @@
 package com.iconnect.product.entity.integration;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.iconnect.product.entity.integration.id.CompanySiteProductIds;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,11 +15,13 @@ import java.util.UUID;
 @Table(name = "mst_company_site_product")
 @AllArgsConstructor
 @NoArgsConstructor
+@IdClass(CompanySiteProductIds.class)
 public class CompanySiteProduct {
     @Id
     @Column(name = "company_id")
     private UUID companyId;
 
+    @Id
     @Column(name = "site_product_id")
     private UUID siteProductId;
 }
