@@ -28,7 +28,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/v1/site-product")
-@CrossOrigin(origins = "*", allowCredentials = "true")
+@CrossOrigin(origins = "*")
 public class SiteProductController {
     private final SiteProductSearchService siteProductSearchService;
     private final SiteProductDetailService siteProductDetailService;

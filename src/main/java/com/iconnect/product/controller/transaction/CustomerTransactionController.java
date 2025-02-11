@@ -14,7 +14,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/customer/v1/transaction")
-@CrossOrigin(origins = "*", allowCredentials = "true")
+@CrossOrigin(origins = "*")
 public class CustomerTransactionController {
     private final CustomerTransactionService customerTransactionService;
 
