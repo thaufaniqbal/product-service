@@ -13,7 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOriginPatterns("https://banyu-ijo-4l8e.vercel.app", "http://192.168.100.51:5173")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
-                .exposedHeaders("Authorization", "Content-Type", "X-Requested-With", "Accept", "Origin", "Cache-Control")
+                .exposedHeaders("Authorization", "Content-Type")
                 .allowCredentials(true)
                 .maxAge(3600);
     }
