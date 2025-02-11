@@ -1,4 +1,4 @@
-package com.iconnect.product.controller;
+package com.iconnect.product.controller.product;
 
 import com.iconnect.product.dto.ApiResponseDTO;
 import com.iconnect.product.service.product.structuretype.input.StructureTypeInputService;

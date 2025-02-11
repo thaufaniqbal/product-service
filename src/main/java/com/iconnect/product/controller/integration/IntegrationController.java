@@ -1,4 +1,4 @@
-package com.iconnect.product.controller;
+package com.iconnect.product.controller.integration;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.iconnect.product.dto.ApiResponseDTO;
