@@ -4,7 +4,6 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -25,9 +24,9 @@ public class SimpleCORSFilter implements Filter {
 
         if (ALLOWED_ORIGINS.contains(origin)) {
             response.setHeader("Access-Control-Allow-Origin", origin);
-            response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+            response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
             response.setHeader("Access-Control-Max-Age", "3600");
-            response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type");
+            response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
             response.setHeader("Access-Control-Expose-Headers", "Authorization");
             response.setHeader("Access-Control-Allow-Credentials", "true");
         }
