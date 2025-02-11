@@ -1,4 +1,4 @@
-package com.iconnect.product.controller.product;
+package com.iconnect.product.controller;
 
 import com.iconnect.product.dto.ApiResponseDTO;
 import com.iconnect.product.dto.product.type.ProductTypeCreateInput;
