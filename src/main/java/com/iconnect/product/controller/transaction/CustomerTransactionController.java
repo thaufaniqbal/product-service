@@ -17,7 +17,7 @@ import java.util.UUID;
 public class CustomerTransactionController {
     private final CustomerTransactionService customerTransactionService;
 
-    @PostMapping("/list/{userId}")
+    @GetMapping("/list/{userId}")
     public ResponseEntity<ApiResponseDTO<Object>> getProductList(@PathVariable UUID userId) throws JsonProcessingException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, customerTransactionService.getProductList(userId));
     }
