@@ -10,10 +10,10 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOriginPatterns("https://banyu-ijo-4l8e.vercel.app", "https://another-allowed-origin.com") // Tambahkan origin yang diperbolehkan
+                .allowedOriginPatterns("https://banyu-ijo-4l8e.vercel.app", "http://192.168.100.51:5173/") // Tambahkan origin yang diperbolehkan
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
-                .exposedHeaders("Authorization", "Content-Type", "X-Requested-With", "Accept", "Origin", "Cache-Control")
+                .exposedHeaders("'Access-Control-Allow-Origin'")
                 .allowCredentials(true)
                 .maxAge(3600);
     }
