@@ -26,7 +26,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/integration/v1")
-@CrossOrigin(methods = {RequestMethod.POST, RequestMethod.PUT, RequestMethod.GET, RequestMethod.DELETE})
+@CrossOrigin(origins = "*", allowCredentials = "true")
 public class IntegrationController {
     private final CompanyCustomerService companyCustomerService;
     private final CompanySiteProductService companySiteProductService;
