@@ -14,7 +14,6 @@ import com.iconnect.product.exception.HttpStatusException;
 import com.iconnect.product.gateway.integration.IntegrationGateway;
 import com.iconnect.product.repository.auth.EntityCredentialRepository;
 import com.iconnect.product.repository.auth.EntityUserCompanyRepository;
-import com.iconnect.product.repository.customer.CustomerRepository;
 import com.iconnect.product.repository.integration.CompanyCustomerRepository;
 import com.iconnect.product.repository.integration.CustomerSiteProductRepository;
 import com.iconnect.product.service.auth.register.AuthRegisterService;
@@ -36,7 +35,6 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
     private final CompanyCustomerRepository companyCustomerRepository;
     private final EntityUserCompanyRepository entityUserCompanyRepository;
     private final EntityCredentialRepository entityCredentialRepository;
-    private final CustomerRepository customerRepository;
     private final CustomerSiteProductRepository customerSiteProductRepository;
     private final IntegrationGateway integrationGateway;
     private final CustomerCreateService customerCreateService;
