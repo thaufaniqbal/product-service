@@ -1,5 +1,7 @@
 package com.iconnect.product.gateway.integration;
 
+import com.iconnect.product.dto.integration.IntCompanyCustomerSearchInput;
+import com.iconnect.product.dto.integration.IntCompanyCustomerSearchOutput;
 import com.iconnect.product.dto.product.site.product.SiteProductListOutput;
 import com.iconnect.product.dto.product.site.product.SiteProductSearchOutput;
 import com.iconnect.product.dto.product.type.ProductTypeListOutput;
@@ -15,5 +17,6 @@ public interface IntegrationGateway {
     Page<SiteProductSearchOutput> getSearchSiteProduct (UUID companyId, String productCode, String productName, UUID productTypeId, Pageable pageable);
     List<ProductTypeListOutput> getListProductType (UUID companyId, Integer deleteStatus);
     Page<ProductTypeSearchOutput> getSearchProductType (UUID companyId, String productTypeCode, String productName, Pageable pageable);
+    Page<IntCompanyCustomerSearchOutput> getSearchCustomer (UUID companyId, IntCompanyCustomerSearchInput input, Pageable pageable);
 
 }

@@ -1,9 +1,13 @@
 package com.iconnect.product.gateway.integration;
 
+import com.iconnect.product.dto.integration.IntCompanyCustomerSearchInput;
+import com.iconnect.product.dto.integration.IntCompanyCustomerSearchOutput;
 import com.iconnect.product.dto.product.site.product.SiteProductListOutput;
 import com.iconnect.product.dto.product.site.product.SiteProductSearchOutput;
 import com.iconnect.product.dto.product.type.ProductTypeListOutput;
 import com.iconnect.product.dto.product.type.ProductTypeSearchOutput;
+import com.iconnect.product.entity.customer.QCustomer;
+import com.iconnect.product.entity.integration.QCompanyCustomer;
 import com.iconnect.product.entity.integration.QCompanyProductType;
 import com.iconnect.product.entity.integration.QCompanySiteProduct;
 import com.iconnect.product.entity.product.QProductType;
@@ -159,6 +163,37 @@ public class IntegrationGatewayImpl implements IntegrationGateway {
             query.where(companyProductType.companyId.eq(companyId));
         }
         List<ProductTypeSearchOutput> result = query.fetch();
+        long totalCount = query.fetchCount();
+        return new PageImpl<>(result, pageable, totalCount);
+    }
+
+    @Override
+    public Page<IntCompanyCustomerSearchOutput> getSearchCustomer(UUID companyId, IntCompanyCustomerSearchInput input, Pageable pageable) {
+        JPAQueryFactory queryFactory = new JPAQueryFactory(JPQLTemplates.DEFAULT, entityManager);
+        QCompanyCustomer companyCustomer = QCompanyCustomer.companyCustomer;
+        QCustomer customer = QCustomer.customer;
+
+        QBean<IntCompanyCustomerSearchOutput> entity = Projections.fields(IntCompanyCustomerSearchOutput.class,
+                customer.customerId,
+                customer.customerName
+        );
+        JPAQuery<IntCompanyCustomerSearchOutput> query = queryFactory.
+                select(entity).
+                from(companyCustomer).
+                join(customer).
+                on(customer.customerId.eq(companyCustomer.customerId)).
+                where(
+                        companyCustomer.companyId.eq(companyId)
+                ).
+                limit(pageable.getPageSize()).
+                offset(pageable.getOffset()).
+                orderBy(customer.customerName.asc());
+
+        if (Objects.nonNull(input.getCustomerName()) && !input.getCustomerName().isEmpty()){
+            query.where(customer.customerName.likeIgnoreCase("%" + input.getCustomerName().toLowerCase() + "%"));
+        }
+
+        List<IntCompanyCustomerSearchOutput> result = query.fetch();
         long totalCount = query.fetchCount();
         return new PageImpl<>(result, pageable, totalCount);
     }

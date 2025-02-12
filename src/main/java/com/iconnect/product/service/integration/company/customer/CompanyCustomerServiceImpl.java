@@ -1,16 +1,17 @@
 package com.iconnect.product.service.integration.company.customer;
 
+import com.iconnect.product.dto.ResponsePageDTO;
 import com.iconnect.product.dto.auth.register.AuthRegisterInput;
 import com.iconnect.product.dto.customer.create.CustomerCreateInput;
 import com.iconnect.product.dto.integration.*;
 import com.iconnect.product.entity.auth.EntityCredential;
 import com.iconnect.product.entity.auth.EntityUserCompany;
-import com.iconnect.product.entity.customer.Customer;
 import com.iconnect.product.entity.integration.CompanyCustomer;
 import com.iconnect.product.entity.integration.CustomerSiteProduct;
 import com.iconnect.product.enums.BooleanStatus;
 import com.iconnect.product.enums.HttpStatusCode;
 import com.iconnect.product.exception.HttpStatusException;
+import com.iconnect.product.gateway.integration.IntegrationGateway;
 import com.iconnect.product.repository.auth.EntityCredentialRepository;
 import com.iconnect.product.repository.auth.EntityUserCompanyRepository;
 import com.iconnect.product.repository.customer.CustomerRepository;
@@ -20,14 +21,14 @@ import com.iconnect.product.service.auth.register.AuthRegisterService;
 import com.iconnect.product.service.customer.create.CustomerCreateService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-
-import static java.util.stream.Collectors.toList;
 
 @Service
 @RequiredArgsConstructor
@@ -37,6 +38,7 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
     private final EntityCredentialRepository entityCredentialRepository;
     private final CustomerRepository customerRepository;
     private final CustomerSiteProductRepository customerSiteProductRepository;
+    private final IntegrationGateway integrationGateway;
     private final CustomerCreateService customerCreateService;
     private final AuthRegisterService authRegisterService;
     @Override
@@ -68,25 +70,14 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
     @Override
     public Object searchCustomer(UUID userId, IntCompanyCustomerSearchInput input) {
         EntityUserCompany entityUserCompany = getEntityUser(userId);
-        List<CompanyCustomer> companyCustomers =  companyCustomerRepository.findAllByCompanyId(entityUserCompany.getCompanyId());
-        List<UUID> customerUUIDS =  companyCustomers.stream()
-                .map(CompanyCustomer::getCustomerId).collect(toList());
-        List<Customer> customers = customerRepository.findAllById(customerUUIDS);
-
-        List<IntCompanyCustomerSearchOutput> results = new ArrayList<>();
-        for (CompanyCustomer companyCustomer : companyCustomers){
-            Customer customer = customers.stream()
-                    .filter(customerFilter -> customerFilter.getCustomerId().equals(companyCustomer.getCustomerId()))
-                    .findFirst().orElse(null);
-            if (Objects.nonNull(customer)){
-                IntCompanyCustomerSearchOutput result = new IntCompanyCustomerSearchOutput();
-                result.setCustomerId(customer.getCustomerId());
-                result.setCustomerName(customer.getCustomerName());
-                result.setStatus(BooleanStatus.YES.getCode());
-                results.add(result);
-            }
-        }
-        return results;
+        Page<IntCompanyCustomerSearchOutput> resultsPage = integrationGateway.
+                getSearchCustomer(entityUserCompany.getCompanyId(), input, PageRequest.of(0, 999));
+        ResponsePageDTO output = new ResponsePageDTO<>();
+        output.setList(resultsPage.getContent());
+        output.setPage(resultsPage.getNumber());
+        output.setResultPerPage(resultsPage.getSize());
+        output.setTotalResult(resultsPage.getTotalElements());
+        return resultsPage.getContent();
     }
 
     @Override
