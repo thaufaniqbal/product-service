@@ -1,4 +1,4 @@
-package com.iconnect.product.service.integration.auth;
+package com.iconnect.product.service.integration.service.auth;
 
 import com.iconnect.product.dto.integration.IntAuthLoginInput;
 

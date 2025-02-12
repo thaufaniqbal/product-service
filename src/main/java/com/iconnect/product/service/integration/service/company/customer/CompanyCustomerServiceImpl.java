@@ -1,4 +1,4 @@
-package com.iconnect.product.service.integration.company.customer;
+package com.iconnect.product.service.integration.service.company.customer;
 
 import com.iconnect.product.dto.ResponsePageDTO;
 import com.iconnect.product.dto.auth.register.AuthRegisterInput;
@@ -9,15 +9,13 @@ import com.iconnect.product.entity.auth.EntityUserCompany;
 import com.iconnect.product.entity.integration.CompanyCustomer;
 import com.iconnect.product.entity.integration.CustomerSiteProduct;
 import com.iconnect.product.enums.BooleanStatus;
-import com.iconnect.product.enums.HttpStatusCode;
-import com.iconnect.product.exception.HttpStatusException;
 import com.iconnect.product.gateway.integration.IntegrationGateway;
 import com.iconnect.product.repository.auth.EntityCredentialRepository;
-import com.iconnect.product.repository.auth.EntityUserCompanyRepository;
 import com.iconnect.product.repository.integration.CompanyCustomerRepository;
 import com.iconnect.product.repository.integration.CustomerSiteProductRepository;
 import com.iconnect.product.service.auth.register.AuthRegisterService;
 import com.iconnect.product.service.customer.create.CustomerCreateService;
+import com.iconnect.product.service.integration.validator.IntegrationUtil;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -33,16 +31,16 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CompanyCustomerServiceImpl implements CompanyCustomerService {
     private final CompanyCustomerRepository companyCustomerRepository;
-    private final EntityUserCompanyRepository entityUserCompanyRepository;
     private final EntityCredentialRepository entityCredentialRepository;
     private final CustomerSiteProductRepository customerSiteProductRepository;
     private final IntegrationGateway integrationGateway;
     private final CustomerCreateService customerCreateService;
     private final AuthRegisterService authRegisterService;
+    private final IntegrationUtil integrationUtil;
     @Override
     @Transactional
     public Object createCustomerByCompany(UUID userId, IntCompanyCustomerInput input) {
-        EntityUserCompany entityUserCompany = getEntityUser(userId);
+        EntityUserCompany entityUserCompany = integrationUtil.getOrCheckCompanyUser(userId);
 
         UUID customerId = UUID.randomUUID();
         CustomerCreateInput customerCreateInput = new CustomerCreateInput();
@@ -67,7 +65,7 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
 
     @Override
     public Object searchCustomer(UUID userId, IntCompanyCustomerSearchInput input) {
-        EntityUserCompany entityUserCompany = getEntityUser(userId);
+        EntityUserCompany entityUserCompany = integrationUtil.getOrCheckCompanyUser(userId);
         Page<IntCompanyCustomerSearchOutput> resultsPage = integrationGateway.
                 getSearchCustomer(entityUserCompany.getCompanyId(), input, PageRequest.of(0, 999));
         ResponsePageDTO output = new ResponsePageDTO<>();
@@ -81,7 +79,7 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
     @Override
     public IntCompanyCustomerCredentialOutput getCustomerCredential(UUID userId, UUID customerId) {
         IntCompanyCustomerCredentialOutput result = new IntCompanyCustomerCredentialOutput();
-        EntityUserCompany entityUserCompany = getEntityUser(userId);
+        EntityUserCompany entityUserCompany = integrationUtil.getOrCheckCompanyUser(userId);
         List<CompanyCustomer> companyCustomers =  companyCustomerRepository.findAllByCompanyId(entityUserCompany.getCompanyId());
         CompanyCustomer customer = companyCustomers.stream()
                 .filter(customerFilter -> customerFilter.getCustomerId().equals(customerId))
@@ -99,8 +97,8 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
 
     @Override
     public Object getCustomerProductMapping(UUID userId, UUID customerId) {
+        EntityUserCompany entityUserCompany = integrationUtil.getOrCheckCompanyUser(userId);
         List<IntCompanyCustomerProductMappingOutput> results = new ArrayList<>();
-        EntityUserCompany entityUserCompany = getEntityUser(userId);
         List<CustomerSiteProduct> customerSiteProducts = customerSiteProductRepository.findAllByCompanyId(entityUserCompany.getCompanyId());
 
         if (!customerSiteProducts.isEmpty()){
@@ -120,13 +118,5 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
     public static String generateSettingCode() {
         String uuid = UUID.randomUUID().toString().replace("-", "");
         return uuid.substring(0, 5);
-    }
-
-    private EntityUserCompany getEntityUser (UUID userId) {
-        EntityUserCompany result = entityUserCompanyRepository.findById(userId).orElse(null);
-        if (Objects.isNull(result)){
-            throw new HttpStatusException(HttpStatusCode.AUTH_DATA_NOT_FOUND);
-        }
-        return result;
     }
 }

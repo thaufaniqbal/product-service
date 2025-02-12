@@ -1,4 +1,4 @@
-package com.iconnect.product.service.integration.company.customer;
+package com.iconnect.product.service.integration.service.company.customer;
 
 import com.iconnect.product.dto.integration.IntCompanyCustomerCredentialOutput;
 import com.iconnect.product.dto.integration.IntCompanyCustomerInput;

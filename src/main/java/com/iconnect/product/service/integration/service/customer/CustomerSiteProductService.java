@@ -1,4 +1,4 @@
-package com.iconnect.product.service.integration.customer;
+package com.iconnect.product.service.integration.service.customer;
 
 import com.iconnect.product.dto.integration.IntCompanyCustomerProductMappingInput;
 

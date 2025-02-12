@@ -1,4 +1,4 @@
-package com.iconnect.product.service.integration.company.product.site;
+package com.iconnect.product.service.integration.service.company.product.site;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.iconnect.product.dto.product.site.product.SiteProductCreateInput;
