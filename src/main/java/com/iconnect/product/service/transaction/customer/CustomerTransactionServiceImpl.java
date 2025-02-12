@@ -1,4 +1,4 @@
-package com.iconnect.product.service.transaction;
+package com.iconnect.product.service.transaction.customer;
 
 import com.iconnect.product.dto.integration.IntCompanyCustomerProductMappingOutput;
 import com.iconnect.product.dto.transaction.CustomerTransactionDataInput;
