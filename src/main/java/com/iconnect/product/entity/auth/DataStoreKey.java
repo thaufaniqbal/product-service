@@ -1,4 +1,4 @@
-package com.iconnect.product.entity.transaction.customer;
+package com.iconnect.product.entity.auth;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,24 +10,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Setter
 @Getter
 @Entity
-@Table(name = "trx_customer_site_product")
+@Table(name = "mst_data_store_key")
 @AllArgsConstructor
 @NoArgsConstructor
-public class TrxCustomerSiteProduct {
+public class DataStoreKey {
     @Id
-    @Column(name = "trx_id")
-    private UUID trxId;
+    @Column(name = "store_key")
+    private String storeKey;
 
-    @Column(name = "customer_mapping_id")
-    private UUID customerMappingId;
+    @Column(name = "created_by")
+    private String createdBy;
 
-    @Column(name = "data")
-    private byte[] data;
+    @Column(name = "active_status")
+    private Integer activeStatus;
 
     @Column(name = "created_date")
     private LocalDateTime createdDate;
