@@ -4,8 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.iconnect.product.dto.ApiResponseDTO;
 import com.iconnect.product.dto.auth.register.AuthCompanyUserRegisterInput;
 import com.iconnect.product.dto.company.create.CompanyCreateInput;
+import com.iconnect.product.dto.foundation.credential.key.CreateCompanyCredentialKeyInput;
 import com.iconnect.product.service.auth.register.AuthRegisterService;
 import com.iconnect.product.service.company.create.CompanyCreateService;
+import com.iconnect.product.service.company.key.CreateCompanyCredentialKeyService;
 import com.iconnect.product.service.company.list.CompanyListService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,7 @@ public class IConnectController {
     private final AuthRegisterService authRegisterService;
     private final CompanyCreateService companyCreateService;
     private final CompanyListService companyListService;
+    private final CreateCompanyCredentialKeyService createCompanyCredentialKeyService;
 
     @PostMapping("/register/user-company")
     public ResponseEntity<ApiResponseDTO<Object>> registerUserCompany(@RequestHeader("user-id") UUID userId,
@@ -37,5 +40,9 @@ public class IConnectController {
     @GetMapping("/company/list")
     public ResponseEntity<ApiResponseDTO<Object>> getCompanyList() throws JsonProcessingException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, companyListService.getCompanyList());
+    }
+    @PostMapping("/company/create-credential")
+    public ResponseEntity<ApiResponseDTO<Object>> registerUserCompany(@RequestBody CreateCompanyCredentialKeyInput input) throws JsonProcessingException {
+        return ApiResponseDTO.toResponseEntity(HttpStatus.CREATED, createCompanyCredentialKeyService.create(input));
     }
 }
