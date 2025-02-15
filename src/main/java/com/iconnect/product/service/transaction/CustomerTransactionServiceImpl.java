@@ -7,7 +7,6 @@ import com.iconnect.product.dto.transaction.CustomerTransactionDataInput;
 import com.iconnect.product.dto.transaction.CustomerTransactionDataOutput;
 import com.iconnect.product.entity.integration.CompanyCustomer;
 import com.iconnect.product.entity.integration.CustomerSiteProduct;
-import com.iconnect.product.entity.product.SiteBaseProductSettingData;
 import com.iconnect.product.entity.transaction.customer.CustomerTransaction;
 import com.iconnect.product.entity.transaction.customer.CustomerTransactionMapping;
 import com.iconnect.product.repository.integration.CustomerSiteProductRepository;
@@ -46,6 +45,9 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
         SiteProductTemplateOutput templateOutput = templateDetailService.getProductTemplate(siteProductId);
         CustomerTransactionMapping transactionMapping = customerTransactionMappingRepository.
                 findByCustomerIdAndCompanyId(entityUserCompany.getCustomerId(), entityUserCompany.getCompanyId()).orElse(null);
+        if (templateOutput == null) {
+            throw new IllegalStateException("Product template not found for siteProductId: " + siteProductId);
+        }
         BeanUtils.copyProperties(templateOutput, result);
 //        result.getStructures().forEach(structure ->
 //                structure.getCardTemplate().forEach(cardTemplate -> {
