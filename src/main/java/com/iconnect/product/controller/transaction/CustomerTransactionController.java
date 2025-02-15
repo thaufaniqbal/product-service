@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -23,7 +24,7 @@ public class CustomerTransactionController {
     }
     @GetMapping("/get-data/{siteProductId}")
     public ResponseEntity<ApiResponseDTO<Object>> getData(@PathVariable UUID siteProductId,
-                                                          @RequestHeader("user-id") UUID userId) throws JsonProcessingException {
+                                                          @RequestHeader("user-id") UUID userId) throws IOException {
         return ApiResponseDTO.toResponseEntity(HttpStatus.OK, customerTransactionService.getData(userId, siteProductId));
     }
     @PostMapping("/save/{siteProductId}")

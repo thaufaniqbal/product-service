@@ -31,10 +31,6 @@ public class SiteProductTemplateOutput {
             private int seq;
             private String componentValue;
             private String settingCode;
-            //remove
-            private String value = "%s";
-            private String upperBond = "%s";
-            private String lowerBond = "%s";
         }
     }
 }

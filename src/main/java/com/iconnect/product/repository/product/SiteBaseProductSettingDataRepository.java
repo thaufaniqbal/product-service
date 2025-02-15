@@ -8,4 +8,5 @@ import java.util.UUID;
 
 public interface SiteBaseProductSettingDataRepository extends JpaRepository <SiteBaseProductSettingData, UUID> {
     List<SiteBaseProductSettingData> findAllBySiteBaseProductSettingId(UUID siteBaseProductSettingId);
+    SiteBaseProductSettingData findBySettingCodeIgnoreCase(String settingCode);
 }

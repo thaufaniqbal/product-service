@@ -34,6 +34,7 @@ public class CustomerTransactionDataOutput {
             private String value;
             private String upperBond;
             private String lowerBond;
+            private String description;
         }
     }
 }
