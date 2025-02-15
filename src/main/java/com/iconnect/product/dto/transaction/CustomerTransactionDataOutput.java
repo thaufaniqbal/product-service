@@ -1,5 +1,6 @@
 package com.iconnect.product.dto.transaction;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import java.util.UUID;
 @Setter
 @Getter
 public class CustomerTransactionDataOutput {
+    @JsonDeserialize(using = com.fasterxml.jackson.databind.deser.std.UUIDDeserializer.class)
     private UUID siteProductId;
     private List<StructureDTO> structures;
     @AllArgsConstructor
