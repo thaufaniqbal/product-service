@@ -62,7 +62,8 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
             return setTransactionData(result, templateOutput, transactionMapping);
         }catch (Exception e){
             HashMap<Object, Object> outputFromHashmap = new HashMap<>();
-            outputFromHashmap.put("result", result);
+            outputFromHashmap.put("siteProductId", result.getSiteProductId());
+            outputFromHashmap.put("structures", result.getStructures());
             outputFromHashmap.put("errorMsg", e.getMessage());
             log.error(e.getLocalizedMessage());
             e.printStackTrace();
