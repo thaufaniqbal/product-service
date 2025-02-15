@@ -7,6 +7,7 @@ import com.iconnect.product.dto.transaction.CustomerTransactionDataInput;
 import com.iconnect.product.dto.transaction.CustomerTransactionDataOutput;
 import com.iconnect.product.entity.integration.CompanyCustomer;
 import com.iconnect.product.entity.integration.CustomerSiteProduct;
+import com.iconnect.product.entity.product.SiteBaseProductSettingData;
 import com.iconnect.product.entity.transaction.customer.CustomerTransaction;
 import com.iconnect.product.entity.transaction.customer.CustomerTransactionMapping;
 import com.iconnect.product.repository.integration.CustomerSiteProductRepository;
@@ -49,13 +50,13 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
         }
         CustomerTransactionDataOutput result = mapper.convertValue(templateOutput, CustomerTransactionDataOutput.class);
 
-//        result.getStructures().forEach(structure ->
-//                structure.getCardTemplate().forEach(cardTemplate -> {
-//                    SiteBaseProductSettingData settingData = settingDataRepository
-//                            .findBySettingCodeIgnoreCase(cardTemplate.getSettingCode());
-//                    cardTemplate.setDescription(settingData.getObjectName());
-//                })
-//        );
+        result.getStructures().forEach(structure ->
+                structure.getCardTemplate().forEach(cardTemplate -> {
+                    SiteBaseProductSettingData settingData = settingDataRepository
+                            .findBySettingCodeIgnoreCase(cardTemplate.getSettingCode());
+                    cardTemplate.setDescription(settingData.getObjectName());
+                })
+        );
         if (Objects.isNull(transactionMapping)){
             return result;
         }
