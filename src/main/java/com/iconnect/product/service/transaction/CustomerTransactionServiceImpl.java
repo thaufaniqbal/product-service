@@ -109,7 +109,7 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
 
         CustomerTransaction data = customerTransactionRepository
                 .findTopByCustomerTransactionMappingIdOrderByCreatedDateDesc(
-                        transactionMapping.getCustomerTransactionMappingId());
+                        transactionMapping.getCustomerTransactionMappingId()).orElse(null);
 
         if (Objects.isNull(data)) {
             return result;

@@ -1,9 +1,6 @@
 package com.iconnect.product.entity.transaction.customer;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +24,7 @@ public class CustomerTransaction {
     private UUID customerTransactionMappingId;
 
     @Column(name = "data")
+    @Lob
     private byte[] data;
 
     @Column(name = "created_date")
