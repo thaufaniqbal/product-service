@@ -73,7 +73,7 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
         output.setPage(resultsPage.getNumber());
         output.setResultPerPage(resultsPage.getSize());
         output.setTotalResult(resultsPage.getTotalElements());
-        return resultsPage.getContent();
+        return output;
     }
 
     @Override
