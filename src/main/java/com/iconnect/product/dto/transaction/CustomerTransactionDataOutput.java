@@ -1,6 +1,9 @@
 package com.iconnect.product.dto.transaction;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.deser.std.UUIDDeserializer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,14 +12,25 @@ import lombok.Setter;
 import java.util.List;
 import java.util.UUID;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
 public class CustomerTransactionDataOutput {
-    @JsonDeserialize(using = com.fasterxml.jackson.databind.deser.std.UUIDDeserializer.class)
+
+    @JsonDeserialize(using = UUIDDeserializer.class)
     private UUID siteProductId;
+
     private List<StructureDTO> structures;
+
+    @JsonCreator
+    public CustomerTransactionDataOutput(
+            @JsonProperty("siteProductId") UUID siteProductId,
+            @JsonProperty("structures") List<StructureDTO> structures
+    ) {
+        this.siteProductId = siteProductId;
+        this.structures = structures;
+    }
+
     @AllArgsConstructor
     @NoArgsConstructor
     @Setter
@@ -25,6 +39,7 @@ public class CustomerTransactionDataOutput {
         private int seq;
         private String siteBaseProductStructureName;
         private List<CardTemplateDTO> cardTemplate;
+
         @AllArgsConstructor
         @NoArgsConstructor
         @Setter
