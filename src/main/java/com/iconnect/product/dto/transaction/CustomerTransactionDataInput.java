@@ -10,5 +10,5 @@ import lombok.Setter;
 @Setter
 @Getter
 public class CustomerTransactionDataInput {
-    private byte[] data;
+    private String data;
 }
