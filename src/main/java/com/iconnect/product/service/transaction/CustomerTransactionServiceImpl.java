@@ -106,13 +106,14 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
         }
         String savedData = mapper.writeValueAsString(input.getData());
         String cleanedData = savedData.replace("\\r\\n", "").replace("\\\"", "\"");
+        String cleanedData2 = cleanedData.substring(1, cleanedData.length() - 1);
         CustomerTransaction data = new CustomerTransaction();
         data.setCustomerTransactionId(UUID.randomUUID());
         data.setCustomerTransactionMappingId(transactionMapping.getCustomerTransactionMappingId());
         data.setCreatedDate(LocalDateTime.now());
-        data.setData(cleanedData.getBytes());
+        data.setData(cleanedData2.getBytes());
         customerTransactionRepository.save(data);
-        return cleanedData;
+        return cleanedData2;
     }
     private CustomerTransactionDataOutput setTransactionData(
             CustomerTransactionDataOutput result,
