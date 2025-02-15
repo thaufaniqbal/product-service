@@ -1,7 +1,6 @@
 package com.iconnect.product.service.transaction;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iconnect.product.dto.integration.IntCompanyCustomerProductMappingOutput;
 import com.iconnect.product.dto.product.site.template.SiteProductTemplateOutput;
@@ -23,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -127,10 +127,11 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
         if (Objects.isNull(data)) {
             return result;
         }
-
+        String rawJson = new String(data.getData(), StandardCharsets.UTF_8);
+        String cleanedJson = rawJson.replace("\\r\\n", "").replace("\\\"", "\"");
         CustomerTransactionDataOutput newResult = new CustomerTransactionDataOutput();
         CustomerTransactionDataOutput transactionDataOutput =
-                mapper.readValue(data.getData(), CustomerTransactionDataOutput.class);
+                mapper.readValue(cleanedJson, CustomerTransactionDataOutput.class);
 
 
         newResult.setSiteProductId(templateOutput.getSiteProductId());
