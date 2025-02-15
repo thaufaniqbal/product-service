@@ -59,7 +59,7 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
         if (Objects.isNull(transactionMapping)){
             return result;
         }
-        setTransactionData(result, templateOutput, transactionMapping);
+//        setTransactionData(result, templateOutput, transactionMapping);
         return result;
     }
 
