@@ -47,13 +47,13 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
         CustomerTransactionMapping transactionMapping = customerTransactionMappingRepository.
                 findByCustomerIdAndCompanyId(entityUserCompany.getCustomerId(), entityUserCompany.getCompanyId()).orElse(null);
         BeanUtils.copyProperties(templateOutput, result);
-        result.getStructures().forEach(structure ->
-                structure.getCardTemplate().forEach(cardTemplate -> {
-                    SiteBaseProductSettingData settingData = settingDataRepository
-                            .findBySettingCodeIgnoreCase(cardTemplate.getSettingCode());
-                    cardTemplate.setDescription(settingData.getObjectName());
-                })
-        );
+//        result.getStructures().forEach(structure ->
+//                structure.getCardTemplate().forEach(cardTemplate -> {
+//                    SiteBaseProductSettingData settingData = settingDataRepository
+//                            .findBySettingCodeIgnoreCase(cardTemplate.getSettingCode());
+//                    cardTemplate.setDescription(settingData.getObjectName());
+//                })
+//        );
         if (Objects.isNull(transactionMapping)){
             return result;
         }
