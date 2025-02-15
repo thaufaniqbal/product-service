@@ -10,5 +10,5 @@ import lombok.Setter;
 @Setter
 @Getter
 public class CustomerTransactionDataInput {
-    private String data;
+    private Object data;
 }

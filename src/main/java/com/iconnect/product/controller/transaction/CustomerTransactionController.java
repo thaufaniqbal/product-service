@@ -30,8 +30,10 @@ public class CustomerTransactionController {
     @PostMapping("/save/{siteProductId}")
     public ResponseEntity<ApiResponseDTO<Object>> saveData(@PathVariable UUID siteProductId,
                                                            @RequestHeader("user-id") UUID userId,
-                                                           @RequestBody CustomerTransactionDataInput input) throws JsonProcessingException {
-        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, customerTransactionService.saveData(userId, siteProductId, input));
+                                                           @RequestBody String input) throws JsonProcessingException {
+        CustomerTransactionDataInput input1 = new CustomerTransactionDataInput();
+        input1.setData(input);
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, customerTransactionService.saveData(userId, siteProductId, input1));
     }
 
 }

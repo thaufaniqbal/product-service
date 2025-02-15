@@ -1,5 +1,6 @@
 package com.iconnect.product.service.transaction;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iconnect.product.dto.integration.IntCompanyCustomerProductMappingOutput;
 import com.iconnect.product.dto.product.site.template.SiteProductTemplateOutput;
@@ -92,7 +93,7 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
     }
 
     @Override
-    public Object saveData(UUID userId, UUID siteProductId, CustomerTransactionDataInput input) {
+    public Object saveData(UUID userId, UUID siteProductId, CustomerTransactionDataInput input) throws JsonProcessingException {
         CompanyCustomer entityUserCompany = integrationUtil.getOrCheckCompanyCustomer(userId);
         CustomerTransactionMapping transactionMapping = customerTransactionMappingRepository.
                 findByCustomerIdAndCompanyId(entityUserCompany.getCustomerId(), entityUserCompany.getCompanyId()).orElse(null);
@@ -103,11 +104,13 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
             transactionMapping.setCustomerId(entityUserCompany.getCustomerId());
             customerTransactionMappingRepository.save(transactionMapping);
         }
+        String savedData = mapper.writeValueAsString(input.getData());
+
         CustomerTransaction data = new CustomerTransaction();
         data.setCustomerTransactionId(UUID.randomUUID());
         data.setCustomerTransactionMappingId(transactionMapping.getCustomerTransactionMappingId());
         data.setCreatedDate(LocalDateTime.now());
-        data.setData(input.getData());
+        data.setData(savedData);
         customerTransactionRepository.save(data);
         return data;
     }
