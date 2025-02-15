@@ -12,7 +12,7 @@ import java.util.UUID;
 @Setter
 @Getter
 @Entity
-@Table(name = "mst_company_customer")
+@Table(name = "trx_customer_transaction")
 @AllArgsConstructor
 @NoArgsConstructor
 public class CustomerTransaction {
