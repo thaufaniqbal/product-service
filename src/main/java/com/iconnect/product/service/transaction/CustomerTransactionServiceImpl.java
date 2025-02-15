@@ -41,14 +41,14 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
     @Override
     public Object getData(UUID userId, UUID siteProductId) throws IOException {
         CompanyCustomer entityUserCompany = integrationUtil.getOrCheckCompanyCustomer(userId);
-        CustomerTransactionDataOutput result = new CustomerTransactionDataOutput();
         SiteProductTemplateOutput templateOutput = templateDetailService.getProductTemplate(siteProductId);
         CustomerTransactionMapping transactionMapping = customerTransactionMappingRepository.
                 findByCustomerIdAndCompanyId(entityUserCompany.getCustomerId(), entityUserCompany.getCompanyId()).orElse(null);
         if (templateOutput == null) {
             throw new IllegalStateException("Product template not found for siteProductId: " + siteProductId);
         }
-        BeanUtils.copyProperties(templateOutput, result);
+        CustomerTransactionDataOutput result = mapper.convertValue(templateOutput, CustomerTransactionDataOutput.class);
+
 //        result.getStructures().forEach(structure ->
 //                structure.getCardTemplate().forEach(cardTemplate -> {
 //                    SiteBaseProductSettingData settingData = settingDataRepository
