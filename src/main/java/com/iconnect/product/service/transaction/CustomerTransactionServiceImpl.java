@@ -22,7 +22,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -106,14 +105,14 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
             customerTransactionMappingRepository.save(transactionMapping);
         }
         String savedData = mapper.writeValueAsString(input.getData());
-
+        String cleanedData = savedData.replace("\\r\\n", "").replace("\\\"", "\"");
         CustomerTransaction data = new CustomerTransaction();
         data.setCustomerTransactionId(UUID.randomUUID());
         data.setCustomerTransactionMappingId(transactionMapping.getCustomerTransactionMappingId());
         data.setCreatedDate(LocalDateTime.now());
-        data.setData(savedData.getBytes());
+        data.setData(cleanedData.getBytes());
         customerTransactionRepository.save(data);
-        return data;
+        return cleanedData;
     }
     private CustomerTransactionDataOutput setTransactionData(
             CustomerTransactionDataOutput result,
@@ -127,11 +126,10 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
         if (Objects.isNull(data)) {
             return result;
         }
-        String rawJson = new String(data.getData(), StandardCharsets.UTF_8);
-        String cleanedJson = rawJson.replace("\\r\\n", "").replace("\\\"", "\"");
+
         CustomerTransactionDataOutput newResult = new CustomerTransactionDataOutput();
         CustomerTransactionDataOutput transactionDataOutput =
-                mapper.readValue(cleanedJson, CustomerTransactionDataOutput.class);
+                mapper.readValue(data.getData(), CustomerTransactionDataOutput.class);
 
 
         newResult.setSiteProductId(templateOutput.getSiteProductId());
