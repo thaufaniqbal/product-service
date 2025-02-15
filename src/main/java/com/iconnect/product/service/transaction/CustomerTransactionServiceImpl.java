@@ -111,7 +111,7 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
         data.setCustomerTransactionId(UUID.randomUUID());
         data.setCustomerTransactionMappingId(transactionMapping.getCustomerTransactionMappingId());
         data.setCreatedDate(LocalDateTime.now());
-        data.setData(savedData);
+        data.setData(savedData.getBytes());
         customerTransactionRepository.save(data);
         return data;
     }
@@ -128,10 +128,9 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
             return result;
         }
 
-        JsonNode jsonNode = mapper.readTree(data.getData());
         CustomerTransactionDataOutput newResult = new CustomerTransactionDataOutput();
         CustomerTransactionDataOutput transactionDataOutput =
-                mapper.treeToValue(jsonNode, CustomerTransactionDataOutput.class);
+                mapper.readValue(data.getData(), CustomerTransactionDataOutput.class);
 
 
         newResult.setSiteProductId(templateOutput.getSiteProductId());

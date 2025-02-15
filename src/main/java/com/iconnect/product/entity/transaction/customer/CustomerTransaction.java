@@ -25,7 +25,7 @@ public class CustomerTransaction {
 
     @Column(name = "data")
     @Lob
-    private String data;
+    private byte[] data;
 
     @Column(name = "created_date")
     private LocalDateTime createdDate;
