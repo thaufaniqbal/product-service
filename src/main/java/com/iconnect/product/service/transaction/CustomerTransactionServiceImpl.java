@@ -146,11 +146,13 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
         List<CustomerTransactionDataOutput.StructureDTO> newStructures = new ArrayList<>();
 
         templateOutput.getStructures().forEach(structureTemplate -> {
-            CustomerTransactionDataOutput.StructureDTO newStructure = createStructure(structureTemplate);
-            newStructure.setCardTemplate(
-                    processCardTemplates(structureTemplate, transactionDataOutput)
-            );
-            newStructures.add(newStructure);
+            if (!structureTemplate.getCardTemplate().isEmpty()){
+                CustomerTransactionDataOutput.StructureDTO newStructure = createStructure(structureTemplate);
+                newStructure.setCardTemplate(
+                        processCardTemplates(structureTemplate, transactionDataOutput)
+                );
+                newStructures.add(newStructure);
+            }
         });
 
         return newStructures;
