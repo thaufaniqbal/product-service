@@ -1,6 +1,7 @@
 package com.iconnect.product.service.transaction;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iconnect.product.dto.integration.IntCompanyCustomerProductMappingOutput;
 import com.iconnect.product.dto.product.site.template.SiteProductTemplateOutput;
@@ -127,11 +128,11 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
             return result;
         }
 
+        JsonNode jsonNode = mapper.readTree(data.getData());
         CustomerTransactionDataOutput newResult = new CustomerTransactionDataOutput();
-        CustomerTransactionDataOutput transactionDataOutput = mapper.readValue(
-                data.getData(),
-                CustomerTransactionDataOutput.class
-        );
+        CustomerTransactionDataOutput transactionDataOutput =
+                mapper.treeToValue(jsonNode, CustomerTransactionDataOutput.class);
+
 
         newResult.setSiteProductId(templateOutput.getSiteProductId());
         newResult.setStructures(processStructures(templateOutput, transactionDataOutput));
