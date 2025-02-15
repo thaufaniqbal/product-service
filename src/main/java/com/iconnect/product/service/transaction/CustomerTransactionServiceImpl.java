@@ -67,7 +67,7 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
             outputFromHashmap.put("errorMsg", e.getMessage());
             log.error(e.getLocalizedMessage());
             e.printStackTrace();
-            return result ;
+            return outputFromHashmap ;
         }
     }
 
