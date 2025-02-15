@@ -17,17 +17,16 @@ import com.iconnect.product.repository.transaction.customer.CustomerTransactionR
 import com.iconnect.product.service.integration.validator.IntegrationUtil;
 import com.iconnect.product.service.product.product.site.template.detail.SiteProductTemplateDetailService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CustomerTransactionServiceImpl implements CustomerTransactionService {
     private final CustomerSiteProductRepository customerSiteProductRepository;
     private final CustomerTransactionMappingRepository customerTransactionMappingRepository;
@@ -59,7 +58,16 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
         if (Objects.isNull(transactionMapping)){
             return result;
         }
-        return setTransactionData(result, templateOutput, transactionMapping);
+        try {
+            return setTransactionData(result, templateOutput, transactionMapping);
+        }catch (Exception e){
+            HashMap<Object, Object> outputFromHashmap = new HashMap<>();
+            outputFromHashmap.put("result", result);
+            outputFromHashmap.put("errorMsg", e.getMessage());
+            log.error(e.getLocalizedMessage());
+            e.printStackTrace();
+            return result ;
+        }
     }
 
     @Override
