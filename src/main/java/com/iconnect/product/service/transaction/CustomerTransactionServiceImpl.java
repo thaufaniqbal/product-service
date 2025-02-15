@@ -124,7 +124,7 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
         newResult.setSiteProductId(templateOutput.getSiteProductId());
         newResult.setStructures(processStructures(templateOutput, transactionDataOutput));
 
-        return mapper.convertValue(newResult, CustomerTransactionDataOutput.class);
+        return newResult;
     }
 
     private List<CustomerTransactionDataOutput.StructureDTO> processStructures(
