@@ -31,7 +31,7 @@ public class CustomerTransactionController {
     public ResponseEntity<ApiResponseDTO<Object>> saveData(@PathVariable UUID siteProductId,
                                                            @RequestHeader("user-id") UUID userId,
                                                            @RequestBody CustomerTransactionDataInput input) throws JsonProcessingException {
-        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, customerTransactionService.saveData(siteProductId, userId, input));
+        return ApiResponseDTO.toResponseEntity(HttpStatus.OK, customerTransactionService.saveData(userId, siteProductId, input));
     }
 
 }
