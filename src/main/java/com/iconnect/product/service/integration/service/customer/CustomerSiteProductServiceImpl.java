@@ -39,7 +39,6 @@ public class CustomerSiteProductServiceImpl implements CustomerSiteProductServic
     private void customerSiteProductExistCheck (UUID customerId, UUID siteProductId) throws JsonProcessingException {
         CustomerSiteProduct customerSiteProduct = customerSiteProductRepository.
                 findByCustomerIdAndSiteProductId(customerId, siteProductId).orElse(null);
-        log.info(customerSiteProduct.getSiteProductId()+" " +customerSiteProduct.getCompanyId());
         if (Objects.nonNull(customerSiteProduct)){
             SiteProductDetailOutput siteProduct = siteProductDetailService.getSiteProductDetail(siteProductId);
             throw new HttpStatusException(HttpStatusCode.INTEGRATION_DATA_ALREADY_EXIST, siteProduct.getSiteProductName());
