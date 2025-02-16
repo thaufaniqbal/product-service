@@ -11,4 +11,6 @@ import lombok.Setter;
 @Getter
 public class IntCompanyCustomerSearchInput {
     private String customerName;
+    private Integer offsite;
+    private Integer size;
 }

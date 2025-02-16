@@ -71,7 +71,11 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
     public Object searchCustomer(UUID userId, IntCompanyCustomerSearchInput input) {
         EntityUserCompany entityUserCompany = integrationUtil.getOrCheckCompanyUser(userId);
         Page<IntCompanyCustomerSearchOutput> resultsPage = integrationGateway.
-                getSearchCustomer(entityUserCompany.getCompanyId(), input, PageRequest.of(0, 999));
+                getSearchCustomer(entityUserCompany.getCompanyId(), input, PageRequest.of(
+                        Objects.isNull(input.getOffsite()) ? 0 : input.getOffsite(),
+                        Objects.isNull(input.getSize()) ? 999 : input.getSize())
+                );
+
         ResponsePageDTO output = new ResponsePageDTO<>();
         output.setList(resultsPage.getContent());
         output.setPage(resultsPage.getNumber());
