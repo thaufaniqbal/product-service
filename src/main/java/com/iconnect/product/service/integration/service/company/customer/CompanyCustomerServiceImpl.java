@@ -1,9 +1,11 @@
 package com.iconnect.product.service.integration.service.company.customer;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.iconnect.product.dto.ResponsePageDTO;
 import com.iconnect.product.dto.auth.register.AuthRegisterInput;
 import com.iconnect.product.dto.customer.create.CustomerCreateInput;
 import com.iconnect.product.dto.integration.*;
+import com.iconnect.product.dto.product.site.product.SiteProductDetailOutput;
 import com.iconnect.product.entity.auth.EntityCredential;
 import com.iconnect.product.entity.auth.EntityUserCompany;
 import com.iconnect.product.entity.integration.CompanyCustomer;
@@ -16,6 +18,7 @@ import com.iconnect.product.repository.integration.CustomerSiteProductRepository
 import com.iconnect.product.service.auth.register.AuthRegisterService;
 import com.iconnect.product.service.customer.create.CustomerCreateService;
 import com.iconnect.product.service.integration.validator.IntegrationUtil;
+import com.iconnect.product.service.product.product.site.product.detail.SiteProductDetailService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -36,6 +39,7 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
     private final IntegrationGateway integrationGateway;
     private final CustomerCreateService customerCreateService;
     private final AuthRegisterService authRegisterService;
+    private final SiteProductDetailService siteProductDetailService;
     private final IntegrationUtil integrationUtil;
     @Override
     @Transactional
@@ -96,7 +100,7 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
     }
 
     @Override
-    public Object getCustomerProductMapping(UUID userId, UUID customerId) {
+    public Object getCustomerProductMapping(UUID userId, UUID customerId) throws JsonProcessingException {
         EntityUserCompany entityUserCompany = integrationUtil.getOrCheckCompanyUser(userId);
         List<IntCompanyCustomerProductMappingOutput> results = new ArrayList<>();
         List<CustomerSiteProduct> customerSiteProducts = customerSiteProductRepository.findAllByCompanyId(entityUserCompany.getCompanyId());
@@ -105,10 +109,11 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
             for (var customerSiteProduct : customerSiteProducts){
                 if (customerSiteProduct.getCustomerId().equals(customerId)){
                     IntCompanyCustomerProductMappingOutput result = new IntCompanyCustomerProductMappingOutput();
+                    SiteProductDetailOutput siteProduct = siteProductDetailService.getSiteProductDetail(customerSiteProduct.getSiteProductId());
                     result.setSiteProductId(customerSiteProduct.getSiteProductId());
                     result.setCustomerId(customerSiteProduct.getCustomerId());
-                    result.setProductType(null);
-                    result.setProductName(null);
+                    result.setProductType(siteProduct.getProductTypeCode());
+                    result.setProductName(siteProduct.getSiteProductName());
                     results.add(result);
                 }
             }

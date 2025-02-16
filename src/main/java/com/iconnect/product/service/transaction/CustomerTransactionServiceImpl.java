@@ -3,6 +3,7 @@ package com.iconnect.product.service.transaction;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iconnect.product.dto.integration.IntCompanyCustomerProductMappingOutput;
+import com.iconnect.product.dto.product.site.product.SiteProductDetailOutput;
 import com.iconnect.product.dto.product.site.template.SiteProductTemplateOutput;
 import com.iconnect.product.dto.transaction.CustomerTransactionDataInput;
 import com.iconnect.product.dto.transaction.CustomerTransactionDataOutput;
@@ -16,6 +17,7 @@ import com.iconnect.product.repository.product.SiteBaseProductSettingDataReposit
 import com.iconnect.product.repository.transaction.customer.CustomerTransactionMappingRepository;
 import com.iconnect.product.repository.transaction.customer.CustomerTransactionRepository;
 import com.iconnect.product.service.integration.validator.IntegrationUtil;
+import com.iconnect.product.service.product.product.site.product.detail.SiteProductDetailService;
 import com.iconnect.product.service.product.product.site.template.detail.SiteProductTemplateDetailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +37,7 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
     private final CustomerTransactionRepository customerTransactionRepository;
 
     private final SiteProductTemplateDetailService templateDetailService;
+    private final SiteProductDetailService siteProductDetailService;
     private final IntegrationUtil integrationUtil;
     private final ObjectMapper mapper;
 
@@ -73,18 +76,19 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
     }
 
     @Override
-    public Object getProductList(UUID userId) {
+    public Object getProductList(UUID userId) throws JsonProcessingException {
         CompanyCustomer entityUserCompany = integrationUtil.getOrCheckCompanyCustomer(userId);
         List<IntCompanyCustomerProductMappingOutput> results = new ArrayList<>();
         List<CustomerSiteProduct> customerSiteProducts = customerSiteProductRepository.findAllByCompanyId(entityUserCompany.getCompanyId());
         if (!customerSiteProducts.isEmpty()){
             for (var customerSiteProduct : customerSiteProducts){
                 if (customerSiteProduct.getCustomerId().equals(userId)){
+                    SiteProductDetailOutput siteProduct = siteProductDetailService.getSiteProductDetail(customerSiteProduct.getSiteProductId());
                     IntCompanyCustomerProductMappingOutput result = new IntCompanyCustomerProductMappingOutput();
                     result.setSiteProductId(customerSiteProduct.getSiteProductId());
                     result.setCustomerId(customerSiteProduct.getCustomerId());
-                    result.setProductType(null);
-                    result.setProductName(null);
+                    result.setProductType(siteProduct.getProductTypeCode());
+                    result.setProductName(siteProduct.getSiteProductName());
                     results.add(result);
                 }
             }

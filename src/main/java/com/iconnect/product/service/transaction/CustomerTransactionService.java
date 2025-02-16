@@ -8,6 +8,6 @@ import java.util.UUID;
 
 public interface CustomerTransactionService {
     Object getData (UUID userId, UUID siteProductId) throws IOException;
-    Object getProductList (UUID userId);
+    Object getProductList (UUID userId) throws JsonProcessingException;
     Object saveData (UUID userId, UUID siteProductId, CustomerTransactionDataInput input) throws JsonProcessingException;
 }
