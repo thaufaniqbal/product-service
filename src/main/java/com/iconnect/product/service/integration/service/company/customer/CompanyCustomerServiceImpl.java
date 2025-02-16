@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -75,9 +76,12 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
                         Objects.isNull(input.getOffsite()) ? 0 : input.getOffsite(),
                         Objects.isNull(input.getSize()) ? 999 : input.getSize())
                 );
+        var content = resultsPage.getContent().stream()
+                .peek(c -> c.setStatus(BooleanStatus.YES.getCode()))
+                .collect(Collectors.toList());
 
         ResponsePageDTO output = new ResponsePageDTO<>();
-        output.setList(resultsPage.getContent());
+        output.setList(content);
         output.setPage(resultsPage.getNumber());
         output.setResultPerPage(resultsPage.getSize());
         output.setTotalResult(resultsPage.getTotalElements());
