@@ -19,6 +19,7 @@ import com.iconnect.product.repository.transaction.customer.CustomerTransactionR
 import com.iconnect.product.service.integration.validator.IntegrationUtil;
 import com.iconnect.product.service.product.product.site.product.detail.SiteProductDetailService;
 import com.iconnect.product.service.product.product.site.template.detail.SiteProductTemplateDetailService;
+import com.iconnect.product.util.StringUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -108,16 +109,13 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
             transactionMapping.setCustomerId(entityUserCompany.getCustomerId());
             customerTransactionMappingRepository.save(transactionMapping);
         }
-        String savedData = mapper.writeValueAsString(input.getData());
-        String cleanedData = savedData.replace("\\r\\n", "").replace("\\\"", "\"");
-        String cleanedData2 = cleanedData.substring(1, cleanedData.length() - 1);
         CustomerTransaction data = new CustomerTransaction();
         data.setCustomerTransactionId(UUID.randomUUID());
         data.setCustomerTransactionMappingId(transactionMapping.getCustomerTransactionMappingId());
         data.setCreatedDate(LocalDateTime.now());
-        data.setData(cleanedData2.getBytes());
+        data.setData(StringUtil.byteConvert(input.getData()));
         customerTransactionRepository.save(data);
-        return cleanedData2;
+        return data;
     }
     private CustomerTransactionDataOutput setTransactionData(
             CustomerTransactionDataOutput result,
