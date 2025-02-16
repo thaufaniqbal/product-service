@@ -11,12 +11,14 @@ import com.iconnect.product.repository.integration.CustomerSiteProductRepository
 import com.iconnect.product.service.integration.validator.IntegrationUtil;
 import com.iconnect.product.service.product.product.site.product.detail.SiteProductDetailService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 import java.util.UUID;
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CustomerSiteProductServiceImpl implements CustomerSiteProductService {
     private final CustomerSiteProductRepository customerSiteProductRepository;
     private final SiteProductDetailService siteProductDetailService;
@@ -25,7 +27,7 @@ public class CustomerSiteProductServiceImpl implements CustomerSiteProductServic
     @Override
     public Object customerSiteProductMapping(UUID userId, IntCompanyCustomerProductMappingInput input) throws JsonProcessingException {
         EntityUserCompany entityUserCompany = integrationUtil.getOrCheckCompanyUser(userId);
-        customerSiteProductExistCheck(input.getCustomerId(), input.getCustomerId());
+        customerSiteProductExistCheck(input.getCustomerId(), input.getSiteProductId());
         CustomerSiteProduct customerSiteProduct = new CustomerSiteProduct();
         customerSiteProduct.setCustomerSiteProductId(UUID.randomUUID());
         customerSiteProduct.setSiteProductId(input.getSiteProductId());
@@ -37,6 +39,7 @@ public class CustomerSiteProductServiceImpl implements CustomerSiteProductServic
     private void customerSiteProductExistCheck (UUID customerId, UUID siteProductId) throws JsonProcessingException {
         CustomerSiteProduct customerSiteProduct = customerSiteProductRepository.
                 findByCustomerIdAndSiteProductId(customerId, siteProductId).orElse(null);
+        log.info(customerSiteProduct.getSiteProductId()+" " +customerSiteProduct.getCompanyId());
         if (Objects.nonNull(customerSiteProduct)){
             SiteProductDetailOutput siteProduct = siteProductDetailService.getSiteProductDetail(siteProductId);
             throw new HttpStatusException(HttpStatusCode.INTEGRATION_DATA_ALREADY_EXIST, siteProduct.getSiteProductName());
