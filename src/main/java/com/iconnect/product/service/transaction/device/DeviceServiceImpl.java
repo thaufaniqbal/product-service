@@ -97,7 +97,7 @@ public class DeviceServiceImpl implements DeviceService {
 
         DeviceTransactionInputOutput result = new DeviceTransactionInputOutput();
         result.setSiteProductId(structureDetails.getSiteProductId());
-        result.setData(resultMap);
+        result.setData(resultData);
 
         return result;
     }
