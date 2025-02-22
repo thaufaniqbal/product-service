@@ -88,7 +88,7 @@ public class DeviceServiceImpl implements DeviceService {
                         data.setValue(transactionSetting.getValue());
                         data.setLowerBond(transactionSetting.getLowerBond());
                         data.setUpperBond(transactionSetting.getUpperBond());
-                        resultMap.put(settingCode, data);
+                        resultMap.put("settingCode: " +settingCode , data);
                     }
                 });
 
