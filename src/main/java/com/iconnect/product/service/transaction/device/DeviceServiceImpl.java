@@ -66,7 +66,7 @@ public class DeviceServiceImpl implements DeviceService {
             SiteProductDetailStructureOutput structureDetails,
             CustomerTransactionDataOutput transactionData
     ) {
-        HashMap<String, DeviceTransactionInputOutput.Data> resultMap = new HashMap<>();
+        List<DeviceTransactionInputOutput.Data> resultData = new ArrayList<>();
 
         Map<String, List<CustomerTransactionDataOutput.StructureDTO.CardTemplateDTO>> transactionSettingsMap = transactionData.getStructures().stream()
                 .flatMap(structure -> structure.getCardTemplate().stream())
@@ -85,16 +85,19 @@ public class DeviceServiceImpl implements DeviceService {
                     if (matchingTemplates != null && !matchingTemplates.isEmpty()) {
                         var transactionSetting = matchingTemplates.get(0);
                         DeviceTransactionInputOutput.Data data = new DeviceTransactionInputOutput.Data();
-                        data.setValue(transactionSetting.getValue());
-                        data.setLowerBond(transactionSetting.getLowerBond());
-                        data.setUpperBond(transactionSetting.getUpperBond());
-                        resultMap.put("settingCode: " +settingCode , data);
+                        DeviceTransactionInputOutput.Data.DataValue dataValue = new DeviceTransactionInputOutput.Data.DataValue();
+                        dataValue.setValue(transactionSetting.getValue());
+                        dataValue.setLowerBond(transactionSetting.getLowerBond());
+                        dataValue.setUpperBond(transactionSetting.getUpperBond());
+                        data.setSettingCode(settingCode);
+                        data.setDataValue(dataValue);
+                        resultData.add(data);
                     }
                 });
 
         DeviceTransactionInputOutput result = new DeviceTransactionInputOutput();
         result.setSiteProductId(structureDetails.getSiteProductId());
-        result.setValue(resultMap);
+        result.setData(resultMap);
 
         return result;
     }
