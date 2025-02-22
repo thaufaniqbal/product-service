@@ -15,7 +15,7 @@ import java.util.UUID;
 public class DeviceTransactionMappingIds implements Serializable {
     @Id
     @Column(name = "device_transaction_mapping_id")
-    private UUID customerTransactionMappingId;
+    private UUID deviceTransactionMappingId;
 
     @Id
     @Column(name = "company_id")
