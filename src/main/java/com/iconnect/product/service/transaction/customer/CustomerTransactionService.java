@@ -1,4 +1,4 @@
-package com.iconnect.product.service.transaction;
+package com.iconnect.product.service.transaction.customer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.iconnect.product.dto.transaction.CustomerTransactionDataInput;

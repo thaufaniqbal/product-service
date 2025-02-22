@@ -3,7 +3,7 @@ package com.iconnect.product.controller.transaction;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.iconnect.product.dto.ApiResponseDTO;
 import com.iconnect.product.dto.transaction.CustomerTransactionDataInput;
-import com.iconnect.product.service.transaction.CustomerTransactionService;
+import com.iconnect.product.service.transaction.customer.CustomerTransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

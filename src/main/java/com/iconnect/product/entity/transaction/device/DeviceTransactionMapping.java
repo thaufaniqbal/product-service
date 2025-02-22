@@ -1,31 +1,31 @@
 package com.iconnect.product.entity.transaction.device;
 
+import com.iconnect.product.entity.transaction.customer.ids.CustomerTransactionMappingIds;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
+
 @Setter
 @Getter
 @Entity
-@Table(name = "trx_device_transaction")
+@Table(name = "trx_device_transaction_mapping")
 @AllArgsConstructor
 @NoArgsConstructor
-public class DeviceTransaction {
+@IdClass(CustomerTransactionMappingIds.class)
+public class DeviceTransactionMapping {
     @Id
-    @Column(name = "device_transaction_id")
-    private UUID deviceTransactionId;
-
     @Column(name = "device_transaction_mapping_id")
     private UUID deviceTransactionMappingId;
 
-    @Column(name = "data")
-    @Lob
-    private byte[] data;
+    @Id
+    @Column(name = "company_id")
+    private UUID companyId;
 
-    @Column(name = "created_date")
-    private LocalDateTime createdDate;
+    @Id
+    @Column(name = "customer_id")
+    private UUID customerId;
 }
