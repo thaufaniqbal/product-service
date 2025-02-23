@@ -199,7 +199,7 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
                 structure.getCardTemplate().forEach(cardTemplate -> {
                     if (cardTemplate.getSettingCode()
                             .equalsIgnoreCase(structureCardTemplate.getSettingCode())) {
-                        mapCardTemplateData(newCardTemplate, cardTemplate);
+                        mapCardTemplateData(newCardTemplate, cardTemplate, structureCardTemplate);
                     }
                 })
         );
@@ -209,7 +209,8 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
 
     private void mapCardTemplateData(
             CustomerTransactionDataOutput.StructureDTO.CardTemplateDTO target,
-            CustomerTransactionDataOutput.StructureDTO.CardTemplateDTO source) {
+            CustomerTransactionDataOutput.StructureDTO.CardTemplateDTO source,
+            SiteProductTemplateOutput.StructureDTO.CardTemplateDTO cardTemplateDTO) {
 
         target.setSeq(source.getSeq());
         target.setSettingCode(source.getSettingCode());
@@ -217,7 +218,7 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
         target.setValue(source.getValue());
         target.setLowerBond(source.getLowerBond());
         target.setUpperBond(source.getUpperBond());
-        target.setInputType(source.getInputType());
+        target.setInputType(cardTemplateDTO.getInputType());
         SiteBaseProductSettingData settingData = settingDataRepository
                 .findBySettingCodeIgnoreCase(source.getSettingCode());
         target.setDescription(settingData.getObjectName());
