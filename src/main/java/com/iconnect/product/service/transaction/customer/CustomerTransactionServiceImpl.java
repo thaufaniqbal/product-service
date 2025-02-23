@@ -217,7 +217,7 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
         target.setValue(source.getValue());
         target.setLowerBond(source.getLowerBond());
         target.setUpperBond(source.getUpperBond());
-
+        target.setInputType(source.getInputType());
         SiteBaseProductSettingData settingData = settingDataRepository
                 .findBySettingCodeIgnoreCase(source.getSettingCode());
         target.setDescription(settingData.getObjectName());

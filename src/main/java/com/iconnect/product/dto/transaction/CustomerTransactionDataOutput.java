@@ -52,6 +52,7 @@ public class CustomerTransactionDataOutput {
             private String upperBond;
             private String lowerBond;
             private String description;
+            private Integer inputType;
         }
     }
 }
