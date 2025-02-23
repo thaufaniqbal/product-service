@@ -212,9 +212,9 @@ public class CustomerTransactionServiceImpl implements CustomerTransactionServic
             CustomerTransactionDataOutput.StructureDTO.CardTemplateDTO source,
             SiteProductTemplateOutput.StructureDTO.CardTemplateDTO cardTemplateDTO) {
 
-        target.setSeq(source.getSeq());
-        target.setSettingCode(source.getSettingCode());
-        target.setComponentValue(source.getComponentValue());
+        target.setSeq(cardTemplateDTO.getSeq());
+        target.setSettingCode(cardTemplateDTO.getSettingCode());
+        target.setComponentValue(cardTemplateDTO.getComponentValue());
         target.setValue(source.getValue());
         target.setLowerBond(source.getLowerBond());
         target.setUpperBond(source.getUpperBond());
