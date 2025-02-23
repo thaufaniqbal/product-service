@@ -53,6 +53,7 @@ public class SiteProductTemplateDetailServiceImpl implements SiteProductTemplate
                 cartTemplate.setSeq(productTemplateMapping.getSeq());
                 cartTemplate.setSettingCode(productTemplateMapping.getSettingDataCode());
                 cartTemplate.setComponentValue(productTemplateMapping.getComponentValue());
+                cartTemplate.setInputType(productTemplateMapping.getInputType());
                 results.add(cartTemplate);
             }
         }

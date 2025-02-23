@@ -29,4 +29,7 @@ public class ProductTemplateMapping {
 
     @Column(name = "setting_data_code")
     private String settingDataCode;
+
+    @Column(name = "input_type")
+    private Integer inputType;
 }

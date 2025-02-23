@@ -31,6 +31,7 @@ public class SiteProductTemplateOutput {
             private int seq;
             private String componentValue;
             private String settingCode;
+            private Integer inputType;
         }
     }
 }

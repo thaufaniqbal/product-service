@@ -28,6 +28,7 @@ public class SiteProductTemplateInput {
             private int seq;
             private String componentValue;
             private String settingCode;
+            private Integer inputType;
         }
     }
 }

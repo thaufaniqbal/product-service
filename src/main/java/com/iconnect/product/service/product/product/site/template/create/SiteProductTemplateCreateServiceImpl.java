@@ -37,6 +37,7 @@ public class SiteProductTemplateCreateServiceImpl implements SiteProductTemplate
                 ProductTemplateMapping productTemplateMapping = getOrNew(productTemplateMappingsFromRepo, cardTemplate.getSettingCode(), productTemplate);
                 productTemplateMapping.setSeq(cardTemplate.getSeq());
                 productTemplateMapping.setComponentValue(cardTemplate.getComponentValue());
+                productTemplateMapping.setInputType(cardTemplate.getInputType());
                 productTemplateMappingsSaved.add(productTemplateMapping);
             }
         }
