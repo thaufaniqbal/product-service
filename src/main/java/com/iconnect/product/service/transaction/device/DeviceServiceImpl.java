@@ -76,7 +76,7 @@ public class DeviceServiceImpl implements DeviceService {
         data.setDeviceTransactionId(UUID.randomUUID());
         data.setDeviceTransactionMappingId(transactionMapping.getDeviceTransactionMappingId());
         data.setCreatedDate(LocalDateTime.now());
-        data.setData(StringUtil.byteConvert(input));
+        data.setData(objectMapper.writeValueAsBytes(input));
         deviceTransactionRepository.save(data);
         return data;
     }
